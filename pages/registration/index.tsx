@@ -1,13 +1,11 @@
 // import ServiceRegistrationForm from '../components/molecules/ServiceRegistrationForm';
-import { motion } from 'framer-motion';
 import { useState } from 'react';
-import ConsumerRegistrationForm from '../../components/molecules/registration/ConsumerRegistrationForm';
 import RegistrationConfirmation from '../../components/molecules/registration/RegistrationConfirmation';
 import RegistrationModal from '../../components/molecules/registration/RegistrationModal';
-import { variants } from '../../utils/animationUtils';
+import UserRegistrationForm from '../../components/molecules/registration/UserRegistrationForm';
 
 const RegistrationPage = () => {
-  const [registerConsumer, setRegisterConsumer] = useState(false);
+  const [registerUser, setRegisterUser] = useState(false);
 
   const [registerService, setRegisterService] = useState(false);
 
@@ -20,21 +18,21 @@ const RegistrationPage = () => {
   function handleRegister(e: Event) {
     e.preventDefault();
     setConfirmation(true);
-    setRegisterConsumer(false);
+    setRegisterUser(false);
   }
 
   return (
     <div className="relative height-[100vh]">
       {showModal && (
         <RegistrationModal
-          setRegisterConsumer={setRegisterConsumer}
+          setRegisterUser={setRegisterUser}
           setShowModal={setShowModal}
         />
       )}
 
-      {registerConsumer && (
-        <ConsumerRegistrationForm
-          setRegisterConsumer={setRegisterConsumer}
+      {registerUser && (
+        <UserRegistrationForm
+          setRegisterUser={setRegisterUser}
           setShowModal={setShowModal}
           handleRegister={handleRegister}
         />

@@ -2,9 +2,10 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
 import { variants } from '../../../utils/animationUtils';
+import GoBackIcon from '../../atoms/icons/GoBackIcon';
 
-const ConsumerRegistrationForm = (props: {
-  setRegisterConsumer: Dispatch<SetStateAction<boolean>>;
+const UserRegistrationForm = (props: {
+  setRegisterUser: Dispatch<SetStateAction<boolean>>;
   setShowModal: Dispatch<SetStateAction<boolean>>;
   handleRegister: any;
 }) => {
@@ -21,16 +22,16 @@ const ConsumerRegistrationForm = (props: {
     >
       <form
         onSubmit={props.handleRegister}
-        className="relative consumer__registration bg-[#564787] h-[100vh] flex flex-col pt-20 px-10"
+        className="relative user__registration bg-[#564787] h-[100vh] flex flex-col pt-20 px-10"
       >
         <button
           onClick={() => {
-            props.setRegisterConsumer(false);
+            props.setRegisterUser(false);
             props.setShowModal(true);
           }}
-          className="flex items-center justify-center pl-2 bg-[#f2fdff] rounded-full h-14 w-14 absolute top-2 left-2"
+          className="absolute top-2 left-2"
         >
-          <Image src="/images/arrow-left.svg" width={30} height={30} />
+          <GoBackIcon />
         </button>
         <div className="relative flex items-center mb-6 input-wrapper">
           <input
@@ -98,4 +99,4 @@ const ConsumerRegistrationForm = (props: {
   );
 };
 
-export default ConsumerRegistrationForm;
+export default UserRegistrationForm;

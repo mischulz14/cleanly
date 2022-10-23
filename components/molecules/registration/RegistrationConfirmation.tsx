@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { variants } from '../../../utils/animationUtils';
 
 const RegistrationConfirmation = () => {
@@ -12,7 +13,7 @@ const RegistrationConfirmation = () => {
         x: { type: 'spring', stiffness: 250, damping: 30 },
         opacity: { duration: 0.6 },
       }}
-      className="wrapper"
+      className="flex flex-col items-center justify-center text-center wrapper "
     >
       <svg
         version="1.1"
@@ -35,6 +36,9 @@ const RegistrationConfirmation = () => {
         />
       </svg>
       <span className="block pt-8 text-white">Thanks for registering!</span>
+      <Link href="/user">
+        <button className="mt-8  btn-primary">Get started</button>
+      </Link>
     </motion.div>
   );
 };

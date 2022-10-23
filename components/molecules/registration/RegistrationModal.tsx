@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 function RegistrationModal(props: {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setRegisterConsumer: React.Dispatch<React.SetStateAction<boolean>>;
+  setRegisterUser: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
     <motion.div
@@ -15,7 +15,7 @@ function RegistrationModal(props: {
       <button
         onClick={() => {
           props.setShowModal(false);
-          props.setRegisterConsumer(true);
+          props.setRegisterUser(true);
         }}
         className="mb-4 btn-primary"
       >
