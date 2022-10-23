@@ -1,6 +1,19 @@
+import { motion } from 'framer-motion';
+import { variants } from '../../../utils/animationUtils';
+
 const RegistrationConfirmation = () => {
   return (
-    <>
+    <motion.div
+      variants={variants}
+      initial="enter"
+      animate="center"
+      exit="exit"
+      transition={{
+        x: { type: 'spring', stiffness: 250, damping: 30 },
+        opacity: { duration: 0.6 },
+      }}
+      className="wrapper"
+    >
       <svg
         version="1.1"
         id="Layer_1"
@@ -22,7 +35,7 @@ const RegistrationConfirmation = () => {
         />
       </svg>
       <span className="block pt-8 text-white">Thanks for registering!</span>
-    </>
+    </motion.div>
   );
 };
 

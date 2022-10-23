@@ -26,52 +26,22 @@ const RegistrationPage = () => {
   return (
     <div className="relative height-[100vh]">
       {showModal && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="absolute  top-0 left-0 w-full text-white flex flex-col items-center justify-center bg-[#564787] h-[100vh]"
-        >
-          <RegistrationModal
-            setRegisterConsumer={setRegisterConsumer}
-            setShowModal={setShowModal}
-          />
-        </motion.div>
+        <RegistrationModal
+          setRegisterConsumer={setRegisterConsumer}
+          setShowModal={setShowModal}
+        />
       )}
 
       {registerConsumer && (
-        <motion.div
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            x: { type: 'spring', stiffness: 250, damping: 30 },
-            opacity: { duration: 0.6 },
-          }}
-        >
-          <ConsumerRegistrationForm
-            setRegisterConsumer={setRegisterConsumer}
-            setShowModal={setShowModal}
-            handleRegister={handleRegister}
-          />
-        </motion.div>
+        <ConsumerRegistrationForm
+          setRegisterConsumer={setRegisterConsumer}
+          setShowModal={setShowModal}
+          handleRegister={handleRegister}
+        />
       )}
       {confirmation && (
         <div className="flex items-center justify-center bg-[#564787] h-[100vh]">
-          <motion.div
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: 'spring', stiffness: 250, damping: 30 },
-              opacity: { duration: 0.6 },
-            }}
-            className="wrapper"
-          >
-            <RegistrationConfirmation />
-          </motion.div>
+          <RegistrationConfirmation />
         </div>
       )}
     </div>

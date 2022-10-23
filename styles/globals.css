@@ -12,28 +12,9 @@ azure = #F2FDFF
 powder blue = #9AD4D6
 oxford blue = #101935 */
 
-.checkmark {
-  stroke: #f2fdff;
-  width: 100px;
-  height: 100px;
-  stroke-dashoffset: 745.74853515625;
-  stroke-dasharray: 745.74853515625;
-  animation: dash 2s ease-out forwards infinite;
-}
-
-.wrapper {
-  width: 100px;
-}
-
-@keyframes dash {
-  0% {
-    stroke-dashoffset: 745.74853515625;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
+/* =======================
+SECTION === 'GLOBAL' === SECTION
+======================= */
 html,
 body {
   height: 100vh;
@@ -41,6 +22,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #564787;
 }
 
 a {
@@ -53,13 +35,17 @@ a {
   font-family: 'Dosis', sans-serif;
 }
 
-/* utility classes */
+/* =======================
+SECTION === 'UTILITY CLASSES' === SECTION
+======================= */
 
 .text-shadow {
   text-shadow: 2px 2px 1px #dbcbd8;
 }
 
-/* Buttons */
+/* =======================
+SECTION === 'BUTTONS' === SECTION
+======================= */
 @layer components {
   .btn-primary {
     @apply px-6 py-2 bg-[#F2FDFF] rounded-[26px] text-[#564787]  w-[180px]  shadow-btn active:shadow-none active:translate-y-2 font-semibold transition-all duration-300 relative;
@@ -106,4 +92,30 @@ button[class*='btn']:hover::before {
 
 button[class*='btn']:hover::after {
   transform: rotate(15deg) translateX(300px);
+}
+
+/* =======================
+SECTION === 'CHECKMARK' === SECTION
+======================= */
+
+.checkmark {
+  stroke: #f2fdff;
+  width: 100px;
+  height: 100px;
+  stroke-dashoffset: 745.74853515625;
+  stroke-dasharray: 745.74853515625;
+  animation: dash 2s ease-out forwards infinite;
+}
+
+.wrapper {
+  width: 100px;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 745.74853515625;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
