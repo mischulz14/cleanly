@@ -1,25 +1,30 @@
 import { useState } from 'react';
 import MobileNav from '../../components/organisms/navbar/MobileNav';
-import UserFeed from '../../components/organisms/UserFeed';
+import UserFeed from '../../components/organisms/user/UserFeed';
+import UserProfile from '../../components/organisms/user/UserProfile';
+import { cleaningData } from '../../dummydata/cleaning';
 
 const UserHomepage = () => {
-  const [activeCleaning, setActiveCleaning] = useState(false);
-  const [activeHome, setActiveHome] = useState(false);
-  const [activeProfile, setActiveProfile] = useState(false);
+  const [clickedSideNavIcon, setClickedSideNavIcon] = useState(2);
 
   return (
     <div className="h-[100vh]">
-      {activeHome && <UserFeed />}
+      {clickedSideNavIcon === 2 && <UserFeed cleaningData={cleaningData} />}
+      {clickedSideNavIcon === 3 && <UserProfile />}
       <MobileNav
-        activeCleaning={activeCleaning}
-        setActiveCleaning={setActiveCleaning}
-        activeHome={activeHome}
-        setActiveHome={setActiveHome}
-        activeProfile={activeProfile}
-        setActiveProfile={setActiveProfile}
+        clickedSideNavIcon={clickedSideNavIcon}
+        setClickedSideNavIcon={setClickedSideNavIcon}
       />
     </div>
   );
 };
 
 export default UserHomepage;
+
+export function getServerSideProps(context: any) {
+  const cleaningArr = cleaningData;
+
+  return {
+    props: { cleaningData: cleaningArr },
+  };
+}

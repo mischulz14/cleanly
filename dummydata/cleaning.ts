@@ -12,7 +12,21 @@ export const cleaningData = [
     price: 10,
   },
   {
-    id: 2,
+    id: 3,
+    name: 'Anna',
+    description: 'Cleaning lady',
+    price: 10,
+  },
+
+  {
+    id: 4,
+    name: 'Anna',
+    description: 'Cleaning lady',
+    price: 10,
+  },
+
+  {
+    id: 5,
     name: 'Anna',
     description: 'Cleaning lady',
     price: 10,

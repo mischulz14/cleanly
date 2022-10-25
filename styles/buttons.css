@@ -7,7 +7,7 @@ SECTION === 'PRIMARY BUTTONS' === SECTION
 ======================= */
 @layer components {
   .btn-primary {
-    @apply px-6 py-2 bg-[#F2FDFF] rounded-[26px] text-[#564787]  w-[180px]  shadow-btn active:shadow-none active:translate-y-2 font-semibold transition-all duration-300 relative;
+    @apply px-6 py-2 bg-[#F2FDFF] rounded-[26px] text-[#564787]  w-[180px]  shadow-primary active:shadow-none active:translate-y-2 font-semibold transition-all duration-300 relative;
   }
 }
 
@@ -19,7 +19,7 @@ button:hover {
   scale: 1.03;
 }
 
-button[class*='btn']::before {
+.btn-primary::before {
   content: '';
   position: absolute;
   background-color: rgba(255, 255, 255, 0.872);
@@ -27,12 +27,11 @@ button[class*='btn']::before {
   left: -20%;
   width: 40px;
   height: 400%;
-  z-index: 99;
   transform: rotate(15deg);
   transition: all 0.8s ease;
 }
 
-button[class*='btn']::after {
+.btn-primary::after {
   content: '';
   position: absolute;
   background-color: rgba(255, 255, 255, 0.858);
@@ -40,7 +39,6 @@ button[class*='btn']::after {
   left: -20%;
   width: 40px;
   height: 400%;
-  z-index: 99;
   transform: rotate(15deg);
   transition: all 1.5s ease;
 }
@@ -54,6 +52,16 @@ button[class*='btn']:hover::after {
 }
 
 /* =======================
+SECTION === 'SECONDARY BUTTONS' === SECTION
+======================= */
+
+@layer components {
+  .btn-secondary {
+    @apply px-6 py-2 bg-[#101935] rounded-[26px] text-[#F2FDFF] w-[180px] shadow-secondary active:shadow-none active:translate-y-2 font-semibold transition-all duration-300 relative;
+  }
+}
+
+/* =======================
 SECTION === 'MOBILE NAV BUTTONS' === SECTION
 ======================= */
 
@@ -62,5 +70,5 @@ SECTION === 'MOBILE NAV BUTTONS' === SECTION
 }
 
 .mobile-nav__button.active {
-  @apply -translate-y-4 shadow-md;
+  @apply -translate-y-4 border-2 shadow-xl border-[#56478784];
 }

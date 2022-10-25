@@ -3,15 +3,13 @@ const CleaningMop = () => {
     <svg
       fill="none"
       strokeWidth={2}
-      stroke="#000"
+      stroke="#564787"
       width={40}
       height={40}
       version="1.1"
       id="Icons"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      x="0px"
-      y="0px"
       viewBox="0 0 32 32"
       xmlSpace="preserve"
     >

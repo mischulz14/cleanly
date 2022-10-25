@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
 import { variants } from '../../../utils/animationUtils';
+import SlideInFromLeft from '../../animation/SlideInFromLeft';
 import GoBackIcon from '../../atoms/icons/GoBackIcon';
 
 const UserRegistrationForm = (props: {
@@ -10,16 +11,7 @@ const UserRegistrationForm = (props: {
   handleRegister: any;
 }) => {
   return (
-    <motion.div
-      variants={variants}
-      initial="enter"
-      animate="center"
-      exit="exit"
-      transition={{
-        x: { type: 'spring', stiffness: 250, damping: 30 },
-        opacity: { duration: 0.6 },
-      }}
-    >
+    <SlideInFromLeft>
       <form
         onSubmit={props.handleRegister}
         className="relative user__registration bg-[#564787] h-[100vh] flex flex-col pt-20 px-10"
@@ -95,7 +87,7 @@ const UserRegistrationForm = (props: {
           Register
         </button>
       </form>
-    </motion.div>
+    </SlideInFromLeft>
   );
 };
 
