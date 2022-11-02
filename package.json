@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "migrate": "dotenv ley",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -10,9 +11,13 @@
   },
   "dependencies": {
     "@types/react-calendar": "^3.5.3",
+    "dotenv-cli": "^6.0.0",
+    "dotenv-safe": "^8.2.0",
     "framer-motion": "^7.6.1",
+    "ley": "^0.8.1",
     "next": "12.3.1",
     "next-pwa": "^5.6.0",
+    "postgres": "^3.3.1",
     "react": "18.2.0",
     "react-calendar": "^3.9.0",
     "react-dom": "18.2.0",
@@ -22,6 +27,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "7.19.1",
     "@next/eslint-plugin-next": "12.3.1",
+    "@types/dotenv-safe": "^8.1.2",
     "@types/eslint": "8.4.6",
     "@types/node": "18.8.5",
     "@types/react": "18.0.21",

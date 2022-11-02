@@ -5,7 +5,7 @@ import AvailabilityComponent from '../../components/organisms/Availability';
 import { serviceData } from '../../data/service';
 import { colors } from '../../utils/colors';
 
-const ServiceDetailsPage = (props: any) => {
+const ServiceDetailsPage = () => {
   return (
     <SlideInFromLeft>
       <div

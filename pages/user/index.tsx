@@ -21,7 +21,7 @@ const UserHomepage = () => {
 
 export default UserHomepage;
 
-export function getServerSideProps(context: any) {
+export function getServerSideProps() {
   const serviceArr = serviceData;
 
   return {
