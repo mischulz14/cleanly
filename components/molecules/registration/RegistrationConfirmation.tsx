@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import SlideInFromLeft from '../../animation/SlideInFromLeft';
 
-const RegistrationConfirmation = () => {
+const RegistrationConfirmation = (props: { role: string }) => {
   return (
     <SlideInFromLeft>
       <div className="flex flex-col items-center justify-center text-center wrapper ">
@@ -28,7 +28,7 @@ const RegistrationConfirmation = () => {
           />
         </svg>
         <span className="block pt-8 text-white">Thanks for registering!</span>
-        <Link href="/user">
+        <Link href={props.role === 'service' ? '/service' : '/user'}>
           <button className="mt-8 btn-primary">Get started</button>
         </Link>
       </div>

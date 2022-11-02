@@ -11,18 +11,18 @@ import PasswordInput from '../../atoms/inputs/PasswordInput';
 import RepeatPasswordInput from '../../atoms/inputs/RepeatPasswordInput';
 import RegistrationConfirmation from './RegistrationConfirmation';
 
-const UserRegistrationForm = () => {
-  const [confirmation, setConfirmation] = useState(false);
+const ServiceRegistrationForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  const role = 'user';
+  const [confirmation, setConfirmation] = useState(false);
+  const role = 'service';
 
   async function registerHandler() {
-    const res = await fetch('/api/registration/user', {
+    const res = await fetch('/api/registration/service', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -64,10 +64,7 @@ const UserRegistrationForm = () => {
               repeatPassword={repeatPassword}
               setRepeatPassword={setRepeatPassword}
             />
-            <RegisterButton
-              registerHandler={registerHandler}
-              setConfirmation={setConfirmation}
-            />
+            <RegisterButton registerHandler={registerHandler} setConfirmation={setConfirmation} />
           </form>
         </SlideInFromLeft>
       )}
@@ -81,4 +78,4 @@ const UserRegistrationForm = () => {
   );
 };
 
-export default UserRegistrationForm;
+export default ServiceRegistrationForm;

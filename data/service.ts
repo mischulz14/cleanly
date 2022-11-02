@@ -1,4 +1,4 @@
-export const cleaningData = [
+export const serviceData = [
   {
     id: 1,
     name: 'Anna',

@@ -1,6 +1,4 @@
-import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { cleaningData } from '../../../dummydata/cleaning';
 import Appear from '../../animation/Appear';
 import PersonIcon from '../../atoms/icons/PersonIcon';
 
@@ -12,21 +10,21 @@ const UserFeed = (props: any) => {
           <div className="fixed flex justify-center items-center top-0 z-20 pt-4 pb-6 w-full bg-[#101935]">
             <button className="btn-primary">Filter</button>
           </div>
-          {props.cleaningData.map((cleaning: any) => {
+          {props.serviceData.map((service: any) => {
             return (
               <li
-                key={cleaning.id}
+                key={service.id}
                 className="relative flex flex-col items-center w-full gap-4 p-4 text-center bg-white shadow-lg rounded-xl"
               >
                 <div className="absolute p-6 bg-white border-2 rounded-full -top-8 left-2 ">
                   <PersonIcon />
-                  {/* picture of cleaning service */}
+                  {/* picture of service */}
                 </div>
-                <span className="block pt-2 text-xl">{cleaning.name}</span>
+                <span className="block pt-2 text-xl">{service.name}</span>
                 <span className="block text-lg font-bold">
-                  {cleaning.price}€/h
+                  {service.price}€/h
                 </span>
-                <Link href={`cleaning/${cleaning.id}`}>
+                <Link href={`service/${service.id}`}>
                   <button className="my-2 btn-secondary">
                     Check availability
                   </button>

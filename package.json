@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/react-calendar": "^3.5.3",
     "framer-motion": "^7.6.1",
     "next": "12.3.1",
+    "next-pwa": "^5.6.0",
     "react": "18.2.0",
+    "react-calendar": "^3.9.0",
     "react-dom": "18.2.0",
+    "react-timeslot-calendar": "^0.2.0",
     "sharp": "^0.31.1"
   },
   "devDependencies": {
