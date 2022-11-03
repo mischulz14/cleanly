@@ -5,7 +5,7 @@ CREATE TABLE sessions (
   user_id integer,
   FOREIGN KEY (user_id) REFERENCES users(id),
   token varchar(50),
-  created_at timestamp
+  created_at timestamp,
   expires_at timestamp
 );
 `;
