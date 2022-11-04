@@ -7,7 +7,7 @@ CREATE TABLE services (
   price integer,
   role varchar(50),
   created_at timestamp,
-  district integer
+  district varchar(5)
 );
 `;
 };

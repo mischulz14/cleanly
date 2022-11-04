@@ -4,8 +4,8 @@ exports.up = async (sql) => {
   id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   first_name varchar(50),
   last_name varchar(50),
-  email varchar(50),
-  password_hash varchar(50),
+  email varchar(50) UNIQUE,
+  password_hash varchar(500) UNIQUE,
   created_at timestamp,
   role varchar(50)
     );

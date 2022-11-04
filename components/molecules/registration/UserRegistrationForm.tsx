@@ -58,7 +58,7 @@ const UserRegistrationForm = () => {
             <FirstNameInput firstName={firstName} setFirstName={setFirstName} />
             <LastNameInput lastName={lastName} setLastName={setLastName} />
             <EmailInput email={email} setEmail={setEmail} />
-            <BirthdayInput birthday={birthday} setBirthday={setBirthday} />
+            {/* <BirthdayInput birthday={birthday} setBirthday={setBirthday} /> */}
             <PasswordInput password={password} setPassword={setPassword} />
             <RepeatPasswordInput
               repeatPassword={repeatPassword}
