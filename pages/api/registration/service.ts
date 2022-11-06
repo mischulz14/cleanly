@@ -1,7 +1,10 @@
 import bcrypt from 'bcrypt';
 import { request } from 'http';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createService } from '../../../data/services';
+import {
+  createService,
+  createServiceUserRelation,
+} from '../../../data/services';
 import { createUser, getUserByEmail } from '../../../data/users';
 
 export type RegisterResponseBody =
@@ -45,13 +48,12 @@ export default async function handler(
       req.body.lastName,
       req.body.email,
       passwordHash,
-      'user',
+      'service',
       new Date(),
     );
 
     // sql query to insert the service
     const createdService = await createService(
-      req.body.Id,
       req.body.companyName,
       req.body.description,
       req.body.price,
@@ -59,12 +61,14 @@ export default async function handler(
       req.body.district,
     );
 
-    // TODO create a relationship between the user and the service
-    // const createdServiceUserRelation = await createServiceUserRelation(
-    //   req.body.Id,
+    const createdServiceUserRelationship = await createServiceUserRelation(
+      createdUser.id,
+      createdService.id,
+    );
 
     console.log(createdUser);
     console.log(createdService);
+    console.log(createdServiceUserRelationship);
 
     res.status(200).json({
       user: {

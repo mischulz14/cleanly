@@ -1,9 +1,7 @@
 import { sql } from './connect';
-import { User } from './users';
 
 export type Service = {
   id: number;
-  userId: number;
   companyName: string;
   description: string;
   price: number;
@@ -34,22 +32,21 @@ export async function getServicesByUserId(userId: number) {
 }
 
 export async function createService(
-  userId: number,
   companyName: string,
   description: string,
   price: number,
   picture: string,
   district: string,
 ) {
-  const service = await sql<Service[]>`
-    INSERT INTO services (user_id, company_name, description, price, picture, district)
-    VALUES (${userId}, ${companyName}, ${description}, ${price}, ${picture}, ${district})
+  const [service] = await sql<Service[]>`
+    INSERT INTO services (company_name, description, price, picture, district)
+    VALUES (${companyName}, ${description}, ${price}, ${picture}, ${district})
     RETURNING *
   `;
-  return service;
+  return service!;
 }
 
-export async function createServicesUsersRelations(
+export async function createServiceUserRelation(
   userId: number,
   serviceId: number,
 ) {

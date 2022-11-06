@@ -1,15 +1,15 @@
 import bcrypt from 'bcrypt';
-import { request } from 'http';
+// login api route
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createUser, getUserByEmail } from '../../../data/users';
+import { getUserByEmail } from '../../data/users';
 
-export type RegisterResponseBody =
+export type LoginResponseBody =
   | { errors: { message: string }[] }
   | { user: any };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<RegisterResponseBody>,
+  res: NextApiResponse<LoginResponseBody>,
 ) {
   if (req.method === 'POST') {
     // Process a POST request
@@ -28,31 +28,26 @@ export default async function handler(
     const userExists = await getUserByEmail(req.body.email);
     console.log(userExists);
 
-    // if the user exists, return an error
-    if (userExists) {
+    // if the user doesn't exists, return an error
+    if (!userExists) {
       return res.status(401).json({
         errors: [
-          { message: 'User already exists or email address is already in use' },
+          {
+            message: 'User does not exist',
+          },
         ],
       });
     }
-    // 3. hash the password
-    const passwordHash = await bcrypt.hash(req.body.passwordHash, 10);
-    // 4. sql query to insert the user
-    const createdUser = await createUser(
-      req.body.firstName,
-      req.body.lastName,
-      req.body.email,
-      passwordHash,
-      'user',
-      new Date(),
-    );
 
-    console.log(createdUser);
+    // 3. compare the password
+    const passwordMatch = await bcrypt.compare(
+      req.body.password,
+      userExists.passwordHash,
+    );
 
     res.status(200).json({
       user: {
-        name: createdUser.email,
+        name: 'hi',
       },
     });
   } else {

@@ -6,7 +6,7 @@ const RegisterButton = (props: {
 }) => {
   return (
     <button
-      onClick={() => {
+      onClick={async () => {
         props.setConfirmation(true);
         props.registerHandler();
       }}

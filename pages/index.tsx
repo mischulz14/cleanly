@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import LoginOrRegisterScreen from '../components/molecules/registration/LoginOrRegister';
-import { test } from '../data/connect';
+import Appear from '../components/animation/Appear';
+import LoginOrRegisterScreen from '../components/molecules/LoginOrRegister';
 
 export default function LoginAndRegisterPage(props: any) {
   // const { login } = useAuth();
@@ -9,19 +9,11 @@ export default function LoginAndRegisterPage(props: any) {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Homepage</title>
       </Head>
-
-      {/* <LoginForm onSubmit={login} /> */}
-      <LoginOrRegisterScreen />
+      <Appear>
+        <LoginOrRegisterScreen />
+      </Appear>
     </>
   );
-}
-
-export async function getServerSideProps(context: any) {
-  const testing = await test();
-  console.log(testing);
-  return {
-    props: { testing }, // will be passed to the page component as props
-  };
 }

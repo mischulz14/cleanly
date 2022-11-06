@@ -37,3 +37,14 @@ export async function createUser(
   // exclamation mark is used to tell typescript that we are sure that the user exists
   return user!;
 }
+
+export async function getUserByPasswordHashAndEmail(
+  passwordHash: string,
+  email: string,
+) {
+  const [user] = await sql<User[]>`
+    SELECT * FROM users
+    WHERE users.password_hash = ${passwordHash} AND users.email = ${email}
+  `;
+  return user;
+}

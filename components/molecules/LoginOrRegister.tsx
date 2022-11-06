@@ -10,7 +10,9 @@ const LoginOrRegisterScreen = () => {
       <Image src="/images/cleaning-mop-colored.svg" width={100} height="100" />
       {/* <div>Logo</div> */}
       <div className="flex flex-col gap-4 mt-5 btn-wrapper">
-        <button className="relative login-btn btn-primary">Log in</button>
+        <Link href="/login">
+          <button className="relative login-btn btn-primary">Log in</button>
+        </Link>
         <Link href="/registration">
           <button className="relative register-btn btn-primary">
             Register

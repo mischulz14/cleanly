@@ -2,11 +2,10 @@ exports.up = async (sql) => {
   await sql`
 CREATE TABLE services (
  id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  name varchar(50),
+  company_name varchar(50),
   description varchar(50),
+  picture varchar(50),
   price integer,
-  role varchar(50),
-  created_at timestamp,
   district varchar(5)
 );
 `;

@@ -31,9 +31,7 @@ const UserRegistrationForm = () => {
         firstName,
         lastName,
         email,
-        birthday,
         password,
-        repeatPassword,
       }),
     });
     const data = await res.json();
