@@ -1,7 +1,10 @@
 import Link from 'next/link';
+import Router from 'next/router';
 import SlideInFromLeft from '../../animation/SlideInFromLeft';
 
-const RegistrationConfirmation = (props: { role: string }) => {
+const RegistrationConfirmation = (props: { role: string; id: string }) => {
+  console.log(props.id);
+
   return (
     <SlideInFromLeft>
       <div className="flex flex-col items-center justify-center text-center wrapper ">
@@ -28,9 +31,21 @@ const RegistrationConfirmation = (props: { role: string }) => {
           />
         </svg>
         <span className="block pt-8 text-white">Thanks for registering!</span>
-        <Link href={props.role === 'service' ? '/service' : '/user'}>
-          <button className="mt-8 btn-primary">Get started</button>
-        </Link>
+
+        <button
+          onClick={() => {
+            if (props.role === 'user') {
+              Router.push(`/user/${props.id}`);
+            }
+
+            if (props.role === 'service') {
+              Router.push(`/service/${props.id}`);
+            }
+          }}
+          className="mt-8 btn-primary"
+        >
+          Get started
+        </button>
       </div>
     </SlideInFromLeft>
   );

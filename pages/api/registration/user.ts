@@ -37,7 +37,7 @@ export default async function handler(
       });
     }
     // 3. hash the password
-    const passwordHash = await bcrypt.hash(req.body.passwordHash, 10);
+    const passwordHash = await bcrypt.hash(req.body.password, 10);
     // 4. sql query to insert the user
     const createdUser = await createUser(
       req.body.firstName,
@@ -45,7 +45,6 @@ export default async function handler(
       req.body.email,
       passwordHash,
       'user',
-      new Date(),
     );
 
     console.log(createdUser);
@@ -53,6 +52,7 @@ export default async function handler(
     res.status(200).json({
       user: {
         name: createdUser.email,
+        id: createdUser.id,
       },
     });
   } else {

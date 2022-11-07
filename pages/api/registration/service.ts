@@ -49,7 +49,6 @@ export default async function handler(
       req.body.email,
       passwordHash,
       'service',
-      new Date(),
     );
 
     // sql query to insert the service
@@ -73,6 +72,8 @@ export default async function handler(
     res.status(200).json({
       user: {
         name: createdUser.email,
+        id: createdUser.id,
+        serviceId: createdService.id,
       },
     });
   } else {

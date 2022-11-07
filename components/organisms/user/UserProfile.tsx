@@ -1,34 +1,29 @@
-import { motion } from 'framer-motion';
+import { User } from '../../../pages/user/[userId]';
+import Appear from '../../animation/Appear';
 import PersonIcon from '../../atoms/icons/PersonIcon';
 
-const UserProfile = () => {
+const UserProfile = (props: { user: User }) => {
   return (
-    <motion.div
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-        transition: {
-          duration: 0.5,
-        },
-      }}
-      exit={{
-        opacity: 0,
-        transition: {
-          duration: 0.5,
-        },
-      }}
-      className="flex flex-col items-center h-full gap-8 py-16 bg-white"
-    >
+    <Appear>
       {/* <UserAvatar />
     <UserDetails /> */}
-      <PersonIcon />
-      <div>Name</div>
-      <div>Description</div>
-      <div>Location</div>
-      <div>Settings</div>
-    </motion.div>
+      <div className="flex flex-col h-[100vh] items-center pt-14">
+        <div className="p-4 mb-4 border-2 rounded-full">
+          <PersonIcon />
+        </div>
+        <ul className="flex flex-col items-center justify-center gap-8 pt-8 user__info">
+          <li className="text-xl">
+            Hello, {props.user.firstName} {props.user.lastName}!
+          </li>
+
+          <li>{props.user.email}</li>
+          {/* <div>Description</div> */}
+          {/* <div>Location</div> */}
+          <li>General Settings</li>
+          <li>Logout</li>
+        </ul>
+      </div>
+    </Appear>
   );
 };
 

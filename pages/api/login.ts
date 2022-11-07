@@ -33,7 +33,7 @@ export default async function handler(
       return res.status(401).json({
         errors: [
           {
-            message: 'User does not exist',
+            message: 'User not found',
           },
         ],
       });
@@ -45,9 +45,25 @@ export default async function handler(
       userExists.passwordHash,
     );
 
+    // if the password doesn't match, return an error
+    if (!passwordMatch) {
+      return res.status(401).json({
+        errors: [
+          {
+            message: 'Password is incorrect',
+          },
+        ],
+      });
+    }
+
+    // 4. create a session
+    // 5. return the user
+
     res.status(200).json({
       user: {
-        name: 'hi',
+        name: userExists.email,
+        role: userExists.role,
+        id: userExists.id,
       },
     });
   } else {

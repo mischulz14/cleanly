@@ -14,7 +14,7 @@ const DistrictInput = (props: {
         className="text-center grow p-4 rounded-[26px] stretch bg-[#F2FDFF]"
       />
       <div className="absolute top-2 left-3">
-        <Image src="/images/id.svg" height="40" width="40" />
+        <Image src="/images/map.svg" height="40" width="40" />
       </div>
     </div>
   );

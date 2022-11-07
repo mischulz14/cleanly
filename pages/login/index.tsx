@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Router from 'next/router';
 import { useState } from 'react';
 import SlideInFromLeft from '../../components/animation/SlideInFromLeft';
 import GoBackIcon from '../../components/atoms/icons/GoBackIcon';
@@ -9,6 +10,7 @@ import PasswordInput from '../../components/atoms/inputs/PasswordInput';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState<{ message: string }[]>([]);
 
   async function loginHandler() {
     const res = await fetch('/api/login', {
@@ -23,6 +25,26 @@ const Login = () => {
     });
     const data = await res.json();
     console.log(data);
+
+    if ('errors' in data) {
+      setErrors(data.errors);
+      return console.log(data.errors);
+    }
+
+    const returnTo = Router.query.returnTo as string;
+
+    if (returnTo && /^\/[a-zA-Z0-9\-_]+$/.test(returnTo)) {
+      Router.push(returnTo);
+      return;
+    }
+
+    if (data.user.role === 'user') {
+      await Router.push(`/user/${data.user.id}`);
+    }
+
+    if (data.user.role === 'service') {
+      await Router.push(`/service/${data.user.id}`);
+    }
   }
 
   return (
@@ -33,21 +55,28 @@ const Login = () => {
         </button>
       </Link>
       <form
-        className="flex flex-col items-center justify-center h-[100vh] gap-6"
+        className="flex flex-col items-center justify-center h-[100vh] gap-1"
         onSubmit={(e) => {
           e.preventDefault();
         }}
       >
         <EmailInput email={email} setEmail={setEmail} />
         <PasswordInput password={password} setPassword={setPassword} />
-        <Link href="/registration">
-          <button
-            onClick={async () => await loginHandler()}
-            className="relative login-btn btn-primary"
-          >
-            Log in
-          </button>
-        </Link>
+        {errors &&
+          errors.map((error) => {
+            return (
+              <p key={error.message} className="mb-4 text-red-500">
+                {error.message}
+              </p>
+            );
+          })}
+
+        <button
+          onClick={loginHandler}
+          className="relative login-btn btn-primary"
+        >
+          Log in
+        </button>
       </form>
     </SlideInFromLeft>
   );

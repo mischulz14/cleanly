@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Router from 'next/router';
 import { Dispatch, SetStateAction, useState } from 'react';
 import SlideInFromLeft from '../../animation/SlideInFromLeft';
 import RegisterButton from '../../atoms/buttons/RegisterButton';
@@ -16,9 +17,11 @@ const UserRegistrationForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [errors, setErrors] = useState([]);
   const [birthday, setBirthday] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [id, setId] = useState('');
   const role = 'user';
 
   async function registerHandler() {
@@ -36,6 +39,28 @@ const UserRegistrationForm = () => {
     });
     const data = await res.json();
     console.log(data);
+
+    if ('errors' in data) {
+      setErrors(data.errors);
+      return console.log(data.errors);
+    }
+
+    const returnTo = Router.query.returnTo as string;
+
+    if (returnTo && /^\/[a-zA-Z0-9\-_]+$/.test(returnTo)) {
+      Router.push(returnTo);
+      return;
+    }
+
+    if (data.user.role === 'user') {
+      await Router.push(`/user/${data.user.id}`);
+    }
+
+    if (data.user.role === 'service') {
+      await Router.push(`/service/${data.user.id}`);
+    }
+    setId(data.user.id);
+    setConfirmation(true);
   }
 
   return (
@@ -72,7 +97,7 @@ const UserRegistrationForm = () => {
 
       {confirmation && (
         <div className="flex items-center justify-center bg-[#564787] h-[100vh]">
-          <RegistrationConfirmation role={role} />
+          <RegistrationConfirmation role={role} id={id} />
         </div>
       )}
     </>

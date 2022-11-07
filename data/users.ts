@@ -18,7 +18,18 @@ export async function getUserByEmail(email: string) {
     SELECT * FROM users
     WHERE users.email = ${email}
   `;
-  return user;
+  return user!;
+}
+
+export async function getUserById(id: number) {
+  if (!id) {
+    return null;
+  }
+  const [user] = await sql<User[]>`
+    SELECT * FROM users
+    WHERE users.id = ${id}
+  `;
+  return user!;
 }
 
 export async function createUser(
@@ -27,11 +38,10 @@ export async function createUser(
   email: string,
   passwordHash: string,
   role: string,
-  createdAt: Date,
 ) {
   const [user] = await sql<User[]>`
-    INSERT INTO users (first_name, last_name, email, password_hash, role, created_at)
-    VALUES (${firstName}, ${lastName}, ${email}, ${passwordHash}, ${role}, ${createdAt})
+    INSERT INTO users (first_name, last_name, email, password_hash, role)
+    VALUES (${firstName}, ${lastName}, ${email}, ${passwordHash}, ${role})
     RETURNING *
   `;
   // exclamation mark is used to tell typescript that we are sure that the user exists
