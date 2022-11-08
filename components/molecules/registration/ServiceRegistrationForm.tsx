@@ -2,8 +2,9 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { useState } from 'react';
 import SlideInFromLeft from '../../animation/SlideInFromLeft';
+import GoBackButton from '../../atoms/buttons/GoBackButton';
+import GoBackIcon from '../../atoms/buttons/GoBackButton';
 import RegisterButton from '../../atoms/buttons/RegisterButton';
-import GoBackIcon from '../../atoms/icons/GoBackIcon';
 import BirthdayInput from '../../atoms/inputs/BirthdayInput';
 import CompanyNameInput from '../../atoms/inputs/CompanyNameInput';
 import DistrictInput from '../../atoms/inputs/DistrictInput';
@@ -84,11 +85,7 @@ const ServiceRegistrationForm = () => {
             className="relative user__registration bg-[#564787] flex flex-col py-20 px-10 overflow-y-scroll
           scrollbar-hide"
           >
-            <Link href="/registration">
-              <button className="absolute top-2 left-2">
-                <GoBackIcon />
-              </button>
-            </Link>
+            <GoBackButton />
             <FirstNameInput firstName={firstName} setFirstName={setFirstName} />
             <LastNameInput lastName={lastName} setLastName={setLastName} />
             <CompanyNameInput

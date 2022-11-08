@@ -1,17 +1,14 @@
 import Link from 'next/link';
 import Appear from '../../animation/Appear';
 import SlideInFromLeft from '../../animation/SlideInFromLeft';
-import GoBackIcon from '../../atoms/icons/GoBackIcon';
+import GoBackButton from '../../atoms/buttons/GoBackButton';
+import GoBackIcon from '../../atoms/buttons/GoBackButton';
 
 function RegistrationModal() {
   return (
     <SlideInFromLeft>
       <div className="relative">
-        <Link href="/">
-          <button className="absolute top-2 left-2 z-[99999999]">
-            <GoBackIcon />
-          </button>
-        </Link>
+        <GoBackButton />
         <div className="absolute  top-0 left-0 w-full text-white flex flex-col items-center justify-center bg-[#564787] h-[100vh]">
           <span className="mb-6 text-lg">Register as:</span>
           <Link href="/registration/user">

@@ -7,10 +7,10 @@ const ServiceHomepage = (props: any) => {
   return (
     <>
       <div>{}</div>
-      <MobileNav
+      {/* <MobileNav
         clickedSideNavIcon={clickedSideNavIcon}
         setClickedSideNavIcon={setClickedSideNavIcon}
-      />
+      /> */}
     </>
   );
 };

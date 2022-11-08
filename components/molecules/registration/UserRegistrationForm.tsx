@@ -2,8 +2,9 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { Dispatch, SetStateAction, useState } from 'react';
 import SlideInFromLeft from '../../animation/SlideInFromLeft';
+import GoBackButton from '../../atoms/buttons/GoBackButton';
+import GoBackIcon from '../../atoms/buttons/GoBackButton';
 import RegisterButton from '../../atoms/buttons/RegisterButton';
-import GoBackIcon from '../../atoms/icons/GoBackIcon';
 import BirthdayInput from '../../atoms/inputs/BirthdayInput';
 import EmailInput from '../../atoms/inputs/EmailInput';
 import FirstNameInput from '../../atoms/inputs/FirstNameInput';
@@ -73,11 +74,7 @@ const UserRegistrationForm = () => {
             }}
             className="relative user__registration bg-[#564787] h-[100vh] flex flex-col pt-20 px-10"
           >
-            <Link href="/registration">
-              <button className="absolute top-2 left-2">
-                <GoBackIcon />
-              </button>
-            </Link>
+            <GoBackButton />
             <FirstNameInput firstName={firstName} setFirstName={setFirstName} />
             <LastNameInput lastName={lastName} setLastName={setLastName} />
             <EmailInput email={email} setEmail={setEmail} />

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import MobileNav from '../../components/organisms/navbar/MobileNav';
 import UserFeed from '../../components/organisms/user/UserFeed';
 import UserProfile from '../../components/organisms/user/UserProfile';
+import { serviceData } from '../../data/service';
 import { getUserById } from '../../data/users';
 import { selectAllServices } from '../../data/usersServicesRelations';
 
@@ -16,7 +17,8 @@ export type User = {
 };
 
 const UserHomePage = (props: any) => {
-  const [clickedSideNavIcon, setClickedSideNavIcon] = useState(2);
+  const [page, setPage] = useState('home');
+  const [serviceData, setServiceData] = useState(props.serviceArr);
 
   if (!props.foundUser) {
     return <div>404</div>;
@@ -24,14 +26,11 @@ const UserHomePage = (props: any) => {
 
   return (
     <div className="h-[100vh]">
-      {clickedSideNavIcon === 2 && (
-        <UserFeed serviceData={props.serviceArr} user={props.foundUser} />
+      {page === 'home' && (
+        <UserFeed serviceData={serviceData} user={props.foundUser} />
       )}
-      {clickedSideNavIcon === 3 && <UserProfile user={props.foundUser} />}
-      <MobileNav
-        clickedSideNavIcon={clickedSideNavIcon}
-        setClickedSideNavIcon={setClickedSideNavIcon}
-      />
+      {page === 'profile' && <UserProfile user={props.foundUser} />}
+      <MobileNav page={page} setPage={setPage} />
     </div>
   );
 };

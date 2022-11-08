@@ -2,7 +2,8 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { useState } from 'react';
 import SlideInFromLeft from '../../components/animation/SlideInFromLeft';
-import GoBackIcon from '../../components/atoms/icons/GoBackIcon';
+import GoBackButton from '../../components/atoms/buttons/GoBackButton';
+import GoBackIcon from '../../components/atoms/buttons/GoBackButton';
 // import GoBackIcon from '../../components/atoms/icons/GoBackIcon';
 import EmailInput from '../../components/atoms/inputs/EmailInput';
 import PasswordInput from '../../components/atoms/inputs/PasswordInput';
@@ -49,13 +50,9 @@ const Login = () => {
 
   return (
     <SlideInFromLeft>
-      <Link href="/">
-        <button className="absolute z-50 top-2 left-2">
-          <GoBackIcon />
-        </button>
-      </Link>
+      <GoBackButton />
       <form
-        className="flex flex-col items-center justify-center h-[100vh] gap-1"
+        className="flex flex-col items-center justify-center h-[100vh] gap-1 bg-[#564787]"
         onSubmit={(e) => {
           e.preventDefault();
         }}

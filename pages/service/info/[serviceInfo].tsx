@@ -1,14 +1,14 @@
 import { filterProps } from 'framer-motion';
 import Link from 'next/link';
 import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
-import GoBackIcon from '../../../components/atoms/icons/GoBackIcon';
+import GoBackButton from '../../../components/atoms/buttons/GoBackButton';
+import GoBackIcon from '../../../components/atoms/buttons/GoBackButton';
 import AvailabilityComponent from '../../../components/organisms/Availability';
 import { serviceData } from '../../../data/service';
 import { getServiceById } from '../../../data/services';
 import { colors } from '../../../utils/colors';
 
 const ServiceInfo = (props: any) => {
-  console.log(props.serviceId);
   return (
     <SlideInFromLeft>
       <div
@@ -18,11 +18,8 @@ const ServiceInfo = (props: any) => {
         {/* <div>{props.foundService.price}</div> */}
         <AvailabilityComponent />
         {/* <div>{props.foundService.price}</div> */}
-        <Link href="/user">
-          <div className="absolute top-2 left-2">
-            <GoBackIcon />
-          </div>
-        </Link>
+
+        <GoBackButton />
       </div>
     </SlideInFromLeft>
   );

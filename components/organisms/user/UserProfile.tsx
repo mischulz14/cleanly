@@ -20,7 +20,9 @@ const UserProfile = (props: { user: User }) => {
           {/* <div>Description</div> */}
           {/* <div>Location</div> */}
           <li>General Settings</li>
-          <li>Logout</li>
+          <li>
+            <button className="btn-secondary">Logout</button>
+          </li>
         </ul>
       </div>
     </Appear>

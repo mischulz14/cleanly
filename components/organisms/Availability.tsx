@@ -1,3 +1,5 @@
+// @ts-ignore
+import DayTimePicker from '@mooncake-dev/react-day-time-picker';
 import { days } from '../../data/days';
 import { timeslots } from '../../data/timeslots';
 import { groupObjectByProperties } from '../../utils/groupObjects';
@@ -9,7 +11,7 @@ const AvailabilityComponent = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="mb-4 text-center">Availability</div>
-      <ul className="flex overflow-x-scroll w-[300px] gap-2 border-2 p-2 rounded-xl">
+      {/* <ul className="flex overflow-x-scroll w-[300px] gap-2 border-2 p-2 rounded-xl">
         {days.map((day) => (
           <li key={Math.random()}>
             <ul className="w-[180px] h-[400px] overflow-y-scroll flex flex-col gap-1 pt-4 relative px-4">
@@ -26,12 +28,13 @@ const AvailabilityComponent = () => {
             </ul>
           </li>
         ))}
-      </ul>
+      </ul> */}
+      <DayTimePicker timeSlotSizeMinutes={60} />
       <button
         onClick={() => {
           console.log(groupObjectByProperties(requestedTimeslots, 'day'));
         }}
-        className="mx-auto mt-6 shadow-none btn-secondary"
+        className="mx-auto mt-6 btn-secondary"
       >
         Request Service
       </button>
