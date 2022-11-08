@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 // login api route
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -56,7 +57,13 @@ export default async function handler(
       });
     }
 
-    // 4. create a session
+    // 4. CREATE A SESSION
+
+    // 4.1 create a session token
+    const token = crypto.randomBytes(80).toString('base64');
+
+    // 4.2 store the session token in the database
+
     // 5. return the user
 
     res.status(200).json({
