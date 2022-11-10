@@ -19,10 +19,10 @@ const TimeSlotListItem = (props: any) => {
   }
 
   return (
-    <li className="mt-3">
+    <li className="mt-3 bg-white text-md rounded-xl">
       <button
         onClick={(e) => {
-          e.currentTarget.classList.toggle('bg-violet-500');
+          e.currentTarget.classList.toggle('bg-slate-500');
           e.currentTarget.classList.toggle('text-white');
           if (props.requestedTimeslots.includes(requestedTimeslot)) {
             props.requestedTimeslots.splice(
@@ -35,7 +35,7 @@ const TimeSlotListItem = (props: any) => {
           console.log(props.requestedTimeslots);
           // props.groupedTimeslots = myFunc(props.requestedTimeslots, 'day');
         }}
-        className="px-4 py-2 bg-white text-md rounded-xl"
+        className=" px-4 py-2 text-md rounded-xl w-full h-full"
       >
         {props.timeslot.start} - {props.timeslot.end}
       </button>

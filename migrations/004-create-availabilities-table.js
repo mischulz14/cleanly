@@ -4,8 +4,8 @@ exports.up = async (sql) => {
   id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   service_id integer,
   FOREIGN KEY (service_id) REFERENCES services(id),
-  starts DATE NOT NULL,
-  ends DATE NOT NULL
+  day varchar(255),
+  timeslot_id integer
 )`;
 };
 

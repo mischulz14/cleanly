@@ -1,13 +1,24 @@
-export function groupObjectByProperties(obj: any, prop: string) {
-  return obj.reduce(function (acc: any, item: any) {
-    const key = item[prop];
+export function groupObjectByProperties(object: any, property: string) {
+  const reducedObject = object.reduce(function (
+    accumulatedObject: any,
+    itemThatGetsAddedToTheObject: any,
+  ) {
+    const reduceToThisPropertyKey = itemThatGetsAddedToTheObject[property];
 
-    if (!acc[key]) {
-      acc[key] = [];
+    if (!accumulatedObject[reduceToThisPropertyKey]) {
+      accumulatedObject[reduceToThisPropertyKey] = [];
     }
 
-    acc[key].push({ ...item });
+    accumulatedObject[reduceToThisPropertyKey].push(
+      itemThatGetsAddedToTheObject.timeslot,
+    );
 
-    return acc;
-  }, {});
+    return accumulatedObject;
+  },
+  {});
+
+  return Object.keys(reducedObject).map((key) => ({
+    [property]: key,
+    timeslots: reducedObject[key],
+  }));
 }

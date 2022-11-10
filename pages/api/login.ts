@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import bcrypt from 'bcrypt';
 // login api route
 import { NextApiRequest, NextApiResponse } from 'next';
+import { createSession } from '../../data/sessions';
 import { getUserByEmail } from '../../data/users';
 
 export type LoginResponseBody =
@@ -26,11 +27,11 @@ export default async function handler(
       });
     }
     // 2. check if the user exists
-    const userExists = await getUserByEmail(req.body.email);
-    console.log(userExists);
+    const user = await getUserByEmail(req.body.email);
+    console.log(user);
 
     // if the user doesn't exists, return an error
-    if (!userExists) {
+    if (!user) {
       return res.status(401).json({
         errors: [
           {
@@ -43,7 +44,7 @@ export default async function handler(
     // 3. compare the password
     const passwordMatch = await bcrypt.compare(
       req.body.password,
-      userExists.passwordHash,
+      user.passwordHash,
     );
 
     // if the password doesn't match, return an error
@@ -63,14 +64,14 @@ export default async function handler(
     const token = crypto.randomBytes(80).toString('base64');
 
     // 4.2 store the session token in the database
-
+    const session = await createSession(user.id, token);
     // 5. return the user
 
     res.status(200).json({
       user: {
-        name: userExists.email,
-        role: userExists.role,
-        id: userExists.id,
+        name: user.email,
+        role: user.role,
+        id: user.id,
       },
     });
   } else {

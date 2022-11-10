@@ -1,17 +1,20 @@
 import { useState } from 'react';
-import MobileNav from '../../components/organisms/navbar/MobileNav';
+import MobileNavService from '../../components/organisms/navbar/MobileNavService';
+import AvailabilityComponent from '../../components/organisms/service/Availability';
 import { getServiceById } from '../../data/services';
+import { handleSetNewAvailabilities } from '../../utils/availabilities';
 
 const ServiceHomepage = (props: any) => {
-  const [clickedSideNavIcon, setClickedSideNavIcon] = useState(2);
+  const [page, setPage] = useState('home');
+
   return (
-    <>
-      <div>{}</div>
-      {/* <MobileNav
-        clickedSideNavIcon={clickedSideNavIcon}
-        setClickedSideNavIcon={setClickedSideNavIcon}
-      /> */}
-    </>
+    <div className="bg-[#DBCBD8] pt-8">
+      {page === 'availability' && (
+        <AvailabilityComponent
+        />
+      )}
+      <MobileNavService page={page} setPage={setPage} />
+    </div>
   );
 };
 

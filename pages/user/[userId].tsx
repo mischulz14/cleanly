@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import MobileNav from '../../components/organisms/navbar/MobileNav';
+import MobileNav from '../../components/organisms/navbar/MobileNavUser';
 import UserFeed from '../../components/organisms/user/UserFeed';
 import UserProfile from '../../components/organisms/user/UserProfile';
 import { serviceData } from '../../data/service';
