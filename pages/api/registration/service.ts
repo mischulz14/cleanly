@@ -30,7 +30,6 @@ export default async function handler(
     }
     // 2. check if the user exists
     const userExists = await getUserByEmail(req.body.email);
-    console.log(userExists);
 
     // if the user exists, return an error
     if (userExists) {

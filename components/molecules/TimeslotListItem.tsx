@@ -1,43 +1,41 @@
+import ClickAnimation from '../animation/ClickAnimation';
+
 const TimeSlotListItem = (props: any) => {
   const requestedTimeslot = {
-    day: props.day.day,
+    day: props.day,
     timeslot: props.timeslot,
   };
 
-  function myFunc(obj: any, prop: any) {
-    return obj.reduce(function (acc: any, item: any) {
-      const key = item[prop];
-
-      if (!acc[key]) {
-        acc[key] = [];
-      }
-
-      acc[key].push({ ...item });
-
-      return acc;
-    }, {});
-  }
-
   return (
-    <li className="mt-3 bg-white text-md rounded-xl">
+    <li className="mt-3 bg-white text-md rounded-xl relative">
       <button
         onClick={(e) => {
+          if (!props.chosenTimeslotsArray) {
+            return;
+          }
           e.currentTarget.classList.toggle('bg-slate-500');
           e.currentTarget.classList.toggle('text-white');
-          if (props.requestedTimeslots.includes(requestedTimeslot)) {
-            props.requestedTimeslots.splice(
-              props.requestedTimeslots.indexOf(requestedTimeslot),
+          if (props.chosenTimeslotsArray.includes(requestedTimeslot)) {
+            props.chosenTimeslotsArray.splice(
+              props.chosenTimeslotsArray.indexOf(requestedTimeslot),
               1,
             );
           } else {
-            props.requestedTimeslots.push(requestedTimeslot);
+            props.chosenTimeslotsArray.push(requestedTimeslot);
           }
-          console.log(props.requestedTimeslots);
+          console.log(props.chosenTimeslotsArray);
           // props.groupedTimeslots = myFunc(props.requestedTimeslots, 'day');
         }}
-        className=" px-4 py-2 text-md rounded-xl w-full h-full"
+        className="px-4 py-2 text-md rounded-xl relative overflow-visible w-full"
       >
-        {props.timeslot.start} - {props.timeslot.end}
+        <div>
+          {props.timeslot.start} - {props.timeslot.end}
+        </div>
+        {props.toDelete && (
+          <div className="btn-secondary  p-2 absolute top-[-10px] right-[-15px] w-7 h-7 flex justify-center items-center rounded-full hover:scale-105 active:scale-95">
+            X
+          </div>
+        )}
       </button>
     </li>
   );

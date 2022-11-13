@@ -3,7 +3,7 @@ import Link from 'next/link';
 import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
 import GoBackButton from '../../../components/atoms/buttons/GoBackButton';
 import GoBackIcon from '../../../components/atoms/buttons/GoBackButton';
-import AvailabilityComponent from '../../../components/organisms/service/Availability';
+import AvailabilityComponent from '../../../components/organisms/service/AvailabilityPage';
 import { serviceData } from '../../../data/service';
 import { getServiceById } from '../../../data/services';
 import { colors } from '../../../utils/colors';
