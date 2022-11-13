@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import TimeSlotListItem from '../TimeslotListItem';
+import TimeSlotListItem from './TimeslotListItem';
 
 const CurrentAvailabilities = (props: any) => {
   const [availabilities, setAvailabilities] = useState([]);

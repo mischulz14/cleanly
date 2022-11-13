@@ -76,34 +76,26 @@ WHERE day = ${day} AND service_id = ${id} AND timeslots = ${timeslots}
   }
 }
 
+//=============================
+//SECTION === 'PROCESS A USER REQUEST TO DELETE AN AVAILABILITY' === SECTION
+//=============================
+
 export async function findTimeslotToDelete(
   id: string,
   day: string,
   timeslot: any,
 ) {
-  // 1. find the availability
+  // 1. find the availability on a given day and service in the database
   const availability = await sql`
 SELECT * FROM availabilities
 WHERE service_id = ${id} AND day = ${day}
 `;
 
-  // const availabilityArrayCopy = availability[0]?.timeslots;
-  // console.log('availabilityArrayCopy at first', availabilityArrayCopy);
-
-  console.log(
-    '!!!!!!!!!!!!!!!!!!!! FIND TIMESLOT TO DELETE !!!!!!!!!!!!!!!!!!!!!!!!!!!!',
-  );
-  // console.log('timeslot from request:', timeslot);
-  // console.log('timeslots from db:', availability[0]?.timeslots);
-  // console.log('timeslot from request:', timeslots);
+  // 2. find the timeslot
   if (availability[0]?.timeslots.find((t: any) => t.id === timeslot.id)) {
-    console.log('FOUND MATCH');
+    // 2.1 if the timeslot is found return it
     const timeslotToDelete = timeslot;
     return { day: day, timeslot: { ...timeslotToDelete } };
-    // const index = availabilityArrayCopy.indexOf(timeslot);
-    // console.log('index', index);
-    // availabilityArrayCopy.splice(index, 1);
-    // console.log('availabilityArrayCopy', availabilityArrayCopy);
   } else {
     console.log('NO MATCH');
   }
@@ -114,35 +106,32 @@ export async function updateAvailabilities(
   day: string,
   timeslotsToDelete: any,
 ) {
-  console.log('!!!!!!!!!!!!!!UPDATE AVAILABILITIES!!!!!!!!!!!!!!!!!!!!');
-  // console.log('timeslotToDelete', timeslotsToDeleteArr);
-  // console.log('availabilities in db', availability[0]?.timeslots);
-
+  // 1. find the availability on a given day and service in the database
   const availability = await sql`
   SELECT * FROM availabilities
   WHERE service_id = ${id} AND day = ${day}
   `;
 
-  console.log('availability timeslots', availability[0]?.timeslots);
-
+  // 2. iterate over the timeslots to delete
   timeslotsToDelete.forEach((timeslotToDelete: any) => {
-    //  find the index of the timeslot to delete
+    //2.1  find the index of the timeslot to delete
     const index = availability[0]?.timeslots.findIndex((timeslot: any) => {
       return timeslotToDelete.id === timeslot.id;
     });
-    console.log('timeslot found at index', index);
-    const splicedAvailabilities = availability[0]?.timeslots.splice(index, 1);
-    console.log(splicedAvailabilities);
+    // 2.2 remove the timeslot from the array
+    availability[0]?.timeslots.splice(index, 1);
   });
 
+  // 3. update the availability
   const updatedAvailability = await sql`
   UPDATE availabilities SET timeslots = ${availability[0]?.timeslots} WHERE service_id = ${id} AND day = ${day}
   `;
 
-  // if the timeslots array is empty, delete the availability
+  //4. if the timeslots array is empty, delete the availability
   if (availability[0]?.timeslots.length === 0) {
     const deletedAvailability = await sql`
   DELETE FROM availabilities WHERE service_id = ${id} AND day = ${day}
   `;
+    return deletedAvailability;
   }
 }

@@ -34,27 +34,22 @@ export default async function handler(
     const timeSlotsToDeleteArray: any = [];
 
     req.body.chosenAvailabilities.forEach(async (availability: any) => {
-      const availabilities = await getAvailabilitiesByDay(
-        req.body.serviceId,
-        availability.day,
-      );
-
-      // 1. find the timeslot to delete only if the database has updated availabilities
+      // 1. find the timeslot to delete on a specific day for a specific service
       const timeslotToDelete = await findTimeslotToDelete(
         req.query.serviceId as string,
         availability.day,
         availability.timeslot,
       );
+      // timeslotToDelete example: {day: "Mon 12 Nov", timeslot: {id: 1, start: "09:00", end: "10:00"}}
 
-      // 2. if the timeslot to delete exists, add it to the array
+      // 2. if the timeslot to delete exists, add it to the timeslots to delete array
       timeSlotsToDeleteArray.push(timeslotToDelete);
-      console.log('timeslotsToDeleteArr:', timeSlotsToDeleteArray);
 
-      // 3. if the length of the array is equal to the length of the chosen availabilities, delete the timeslots
+      // 3. if the length of the timeSlotsToDeleteArray is equal to the amount of the chosen availabilities by the user (which means that every chosen timeslot has been processed in the forEach loop) update the timeslots in the database
       if (
         timeSlotsToDeleteArray.length === req.body.chosenAvailabilities.length
       ) {
-        // 4. update the availabilities
+        // 4. update the availabilities by deleting the timeslots
         // 4.1 group the availabilities by day
         const groupedArray = groupObjectByProperties(
           timeSlotsToDeleteArray,
@@ -67,6 +62,9 @@ export default async function handler(
             groupedObject.day,
             groupedObject.timeslots,
           );
+
+          // 5. return the updated availabilities
+          return updatedAvailabilities;
         });
       }
     });

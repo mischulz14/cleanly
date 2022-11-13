@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import TimeSlotListItem from '../../../components/molecules/TimeslotListItem';
+import TimeSlotListItem from '../../../components/molecules/availability/TimeslotListItem';
 import MobileNavService from '../../../components/organisms/navbar/MobileNavService';
 import AvailabilityComponent from '../../../components/organisms/service/AvailabilityPage';
 import { getAllAvailabilitiesById } from '../../../data/availabilities';

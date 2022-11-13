@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { handleDeleteAvailabilities } from '../../../utils/availabilities';
 import { groupObjectByProperties } from '../../../utils/groupObjects';
 import ClickAnimation from '../../animation/ClickAnimation';
-import TimeSlotListItem from '../TimeslotListItem';
+import TimeSlotListItem from './TimeslotListItem';
 
 const CurrentAvailabilities = (props: any) => {
   const [availabilities, setAvailabilities] = useState([]);

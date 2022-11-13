@@ -1,4 +1,4 @@
-import ClickAnimation from '../animation/ClickAnimation';
+import ClickAnimation from '../../animation/ClickAnimation';
 
 const TimeSlotListItem = (props: any) => {
   const requestedTimeslot = {
