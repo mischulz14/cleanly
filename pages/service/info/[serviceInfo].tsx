@@ -22,29 +22,32 @@ const ServiceInfo = (props: any) => {
   return (
     <SlideInFromLeft>
       <div
-        className={`flex flex-col bg-[${colors.secondary}] relative py-10 h-[100vh]`}
+        className={`flex  items-center flex-col bg-[${colors.secondary}] relative py-20  h-[100vh]`}
       >
+        <GoBackButton />
         {/* <div>{props.serviceId}</div> */}
         {/* <div>{props.foundService.price}</div> */}
-        <ClickAnimation>
-          <button
-            onClick={() => {
-              setCurrentAvailabilities((prevState) => !prevState);
-            }}
-            className="bg-[#564787] text-white px-8 py-6 rounded-lg w-full text-center cursor-pointer z-[99] shadow-secondary"
-          >
-            See Current Availabilities
-          </button>
-        </ClickAnimation>
-        {currentAvailabilities && (
-          <SlideInFromTop>
-            <CurrentAvailabilities
-              availabilities={props.availabilities}
-              serviceId={props.serviceId}
-              toDelete={toDelete}
-            />
-          </SlideInFromTop>
-        )}
+        <div className="w-full px-4 flex flex-col items-center">
+          <ClickAnimation>
+            <button
+              onClick={() => {
+                setCurrentAvailabilities((prevState) => !prevState);
+              }}
+              className="bg-[#564787] text-white px-8 py-6 rounded-lg w-full text-center cursor-pointer z-[99] shadow-secondary"
+            >
+              See Current Availabilities
+            </button>
+          </ClickAnimation>
+          {currentAvailabilities && (
+            <SlideInFromTop>
+              <CurrentAvailabilities
+                availabilities={props.availabilities}
+                serviceId={props.serviceId}
+                toDelete={toDelete}
+              />
+            </SlideInFromTop>
+          )}
+        </div>
         {/* <div>{props.foundService.price}</div> */}
 
         {/* <GoBackButton /> */}
