@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { serviceData } from '../../../data/service';
 import Appear from '../../animation/Appear';
 import PersonIcon from '../../atoms/icons/PersonIcon';
+import FilterForm from '../../molecules/FilterForm';
 
 const UserFeed = (props: any) => {
   return (
@@ -9,7 +10,23 @@ const UserFeed = (props: any) => {
       <div className="flex bg-[#DBCBD8] h-[100vh]">
         <ul className="flex flex-col items-center justify-center w-full gap-12 px-8 mx-auto mt-32 mb-28">
           <div className="fixed flex justify-center items-center top-0 z-20 pt-4 pb-6 w-full bg-[#101935]">
-            <button className="btn-primary">Filter</button>
+            <button
+              onClick={() => props.setShowFilter(true)}
+              className="btn-primary"
+            >
+              Filter
+            </button>
+            {props.showFilter && (
+              <FilterForm
+                price={props.price}
+                district={props.district}
+                setPrice={props.setPrice}
+                showFilter={props.showFilter}
+                serviceData={props.serviceData}
+                setServiceData={props.setServiceData}
+                setShowFilter={props.setShowFilter}
+              />
+            )}
           </div>
           {props.serviceData &&
             props.serviceData.map((service: any) => {

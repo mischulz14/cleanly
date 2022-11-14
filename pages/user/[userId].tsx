@@ -19,6 +19,11 @@ export type User = {
 const UserHomePage = (props: any) => {
   const [page, setPage] = useState('home');
   const [serviceData, setServiceData] = useState(props.serviceArr);
+  const [showFilter, setShowFilter] = useState(false);
+  const [district, setDistrict] = useState('');
+  const [price, setPrice] = useState('15');
+
+  // console.log('serviceData', serviceData);
 
   if (!props.foundUser) {
     return <div>404</div>;
@@ -27,7 +32,17 @@ const UserHomePage = (props: any) => {
   return (
     <div className="h-[100vh]">
       {page === 'home' && (
-        <UserFeed serviceData={serviceData} user={props.foundUser} />
+        <UserFeed
+          serviceData={serviceData}
+          user={props.foundUser}
+          setShowFilter={setShowFilter}
+          showFilter={showFilter}
+          setServiceData={setServiceData}
+          price={price}
+          setPrice={setPrice}
+          district={district}
+          setDistrict={setDistrict}
+        />
       )}
       {page === 'profile' && <UserProfile user={props.foundUser} />}
       <MobileNav page={page} setPage={setPage} />
