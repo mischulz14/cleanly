@@ -13,10 +13,12 @@ export async function getServiceById(id: number) {
   if (!id) {
     return null;
   }
-  const service = await sql<Service[]>`
-    SELECT * FROM services
-    WHERE services.id = ${id}
+  // join the users table with the services_users_relations table to get the service id
+  const service = await sql`
+  SELECT * FROM services
+  WHERE id = ${id}
   `;
+
   return service;
 }
 
@@ -24,9 +26,12 @@ export async function getServicesByUserId(userId: number) {
   if (!userId) {
     return null;
   }
-  const services = await sql<Service[]>`
-    SELECT * FROM services
-    WHERE services.user_id = ${userId}
+  // join the users table with the services_users_relations table to get the service id
+  const services = await sql`
+  SELECT * FROM services
+  JOIN services_users_relations ON services.id = services_users_relations.service_id
+  JOIN users ON users.id = services_users_relations.user_id
+  WHERE users.id = ${userId}
   `;
   return services;
 }

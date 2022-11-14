@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { serviceData } from '../../data/service';
 import SlideInFromLeft from '../animation/SlideInFromLeft';
 import SlideInFromTop from '../animation/SlideInFromTop';
+import CloseButton from '../atoms/buttons/CloseBtn';
 
 export default function FilterForm(props: any) {
   function handleFilter() {
@@ -11,9 +12,7 @@ export default function FilterForm(props: any) {
       if (props.district !== '') {
         const priceAndDistrictFilteredArray = service
           .filter((service: any) => service.price <= parseInt(props.price))
-          .filter(
-            (service: any) => service.district <= parseInt(props.district),
-          );
+          .filter((service: any) => service.district == props.district);
 
         props.setServiceData(priceAndDistrictFilteredArray);
         return priceAndDistrictFilteredArray;
@@ -34,73 +33,85 @@ export default function FilterForm(props: any) {
     props.setServiceData(arrayCopy);
   }
 
+  function handleGoBackAction() {
+    props.setShowFilter(false);
+  }
+
   return (
-    <form className="p-10 filter-form flex flex-col gap-8  h-[100vh] w-full bg-white z-[1000000000000000000000000000000000000000] absolute left-0 top-0">
-      <div className="">
-        <label
-          htmlFor="price"
-          className="block mb-2 font-semibold text-[#564787] text-center relative"
-        >
-          <div className=" flex justify-between items-center ">
-            <Image src="/images/euro.svg" height="30" width="30" />
-            <span>Price/h: {props.price}</span>
+    <form className="px-10 pt-16 filter-form flex flex-col gap-8  h-[100vh] w-full bg-white z-[1000000000000000000000000000000000000000] absolute left-0 top-0">
+      <div className="relative px-8 py-10 rounded-lg border-[1px] flex flex-col justify-center gap-10 border-[#564787] ">
+        <CloseButton handleGoBackAction={handleGoBackAction} />
+        <div className="">
+          <label
+            htmlFor="price"
+            className="block mb-2 font-semibold text-[#564787] text-center relative"
+          >
+            <div className=" flex gap-3 items-center ">
+              <Image src="/images/euro.svg" height="30" width="30" />
+              <span>Price/h: {props.price}</span>
+            </div>
+          </label>
+          <input
+            className="mb-8 w-[250px]"
+            id="price"
+            type="range"
+            min="0"
+            max="30"
+            onChange={(event) => {
+              props.setPrice(event.currentTarget.value);
+            }}
+            value={props.price}
+          />
+        </div>
+        <div className="flex flex-col">
+          <div className="flex gap-3  pb-4 items-end">
+            <Image src="/images/location.svg" height="30" width="30" />
+            <label htmlFor="district" className=" text-[#564787] font-bold">
+              District
+            </label>
           </div>
-        </label>
-        <input
-          className="mb-8 w-[250px]"
-          id="price"
-          type="range"
-          min="0"
-          max="30"
-          onChange={(event) => {
-            props.setPrice(event.currentTarget.value);
+          <select
+            id="district"
+            value={props.district}
+            onChange={(event) => props.setDistrict(event.target.value)}
+          >
+            <option value="all">All</option>
+            <option value="1010">1010</option>
+            <option value="1020">1020</option>
+            <option value="1030">1030</option>
+            <option value="1040">1040</option>
+            <option value="1050">1050</option>
+            <option value="1060">1060</option>
+            <option value="1070">1070</option>
+            <option value="1080">1080</option>
+            <option value="1090">1090</option>
+            <option value="1100">1100</option>
+            <option value="1110">1110</option>
+            <option value="1120">1120</option>
+            <option value="1130">1130</option>
+            <option value="1140">1140</option>
+            <option value="1150">1150</option>
+            <option value="1160">1160</option>
+            <option value="1170">1170</option>
+            <option value="1180">1180</option>
+            <option value="1190">1190</option>
+            <option value="1200">1200</option>
+            <option value="1210">1210</option>
+            <option value="1220">1220</option>
+            <option value="1230">1230</option>
+          </select>
+        </div>
+        <button
+          className="btn-secondary mx-auto"
+          onClick={(event) => {
+            event.preventDefault();
+            props.setShowFilter(false);
+            handleFilter();
           }}
-          value={props.price}
-        />
-      </div>
-      <div>
-        <label htmlFor="district">District</label>
-        <select
-          id="district"
-          value={props.district}
-          onChange={(event) => props.setDistrict(event.target.value)}
         >
-          <option value="all">All</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-          <option value="13">13</option>
-          <option value="14">14</option>
-          <option value="15">15</option>
-          <option value="16">16</option>
-          <option value="17">17</option>
-          <option value="18">18</option>
-          <option value="19">19</option>
-          <option value="20">20</option>
-          <option value="21">21</option>
-          <option value="22">22</option>
-          <option value="23">23</option>
-        </select>
+          Apply Filters
+        </button>
       </div>
-      <button
-        className="btn-primary"
-        onClick={(event) => {
-          event.preventDefault();
-          props.setShowFilter(false);
-          handleFilter();
-        }}
-      >
-        Apply Filters
-      </button>
     </form>
   );
 }

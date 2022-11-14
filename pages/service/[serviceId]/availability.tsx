@@ -2,7 +2,7 @@ import { useState } from 'react';
 import MobileNav from '../../../components/organisms/navbar/MobileNavService';
 import AvailabilityPage from '../../../components/organisms/service/AvailabilityPage';
 import { getAllAvailabilitiesById } from '../../../data/availabilities';
-import { getServiceById } from '../../../data/services';
+import { getServiceById, getServicesByUserId } from '../../../data/services';
 
 const AvailabilityServicePage = (props: any) => {
   const [page, setPage] = useState('availability');
@@ -12,7 +12,7 @@ const AvailabilityServicePage = (props: any) => {
     <>
       <div className="bg-[#DBCBD8] pt-8 pb-24 overflow-y-scroll h-[100vh]">
         <AvailabilityPage
-          serviceId={props.serviceId}
+          serviceId={props.foundService[0]?.serviceId}
           availabilities={props.availabilities}
         />
       </div>
@@ -28,7 +28,7 @@ export async function getServerSideProps(context: any) {
 
   const availabilities = await getAllAvailabilitiesById(serviceId);
 
-  // const foundService = JSON.stringify(await getServiceById(serviceId));
+  const foundService = JSON.stringify(await getServicesByUserId(serviceId));
 
   // console.log(foundService);
 
@@ -43,6 +43,7 @@ export async function getServerSideProps(context: any) {
     props: {
       serviceId,
       availabilities: availabilities,
+      foundService: JSON.parse(foundService),
     },
   };
 }

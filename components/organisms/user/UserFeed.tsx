@@ -21,6 +21,7 @@ const UserFeed = (props: any) => {
               <FilterForm
                 price={props.price}
                 district={props.district}
+                setDistrict={props.setDistrict}
                 setPrice={props.setPrice}
                 showFilter={props.showFilter}
                 serviceData={props.serviceData}
@@ -35,9 +36,9 @@ const UserFeed = (props: any) => {
               return (
                 <li
                   key={service[0].id}
-                  className="relative flex flex-col items-center w-full gap-6 p-4 text-[#564787] text-center bg-white  rounded-xl shadow-secondary"
+                  className="relative flex flex-col items-center w-full gap-6 p-4 text-[#564787] text-center bg-white  rounded-xl shadow-secondaryModified"
                 >
-                  <div className="absolute p-6 bg-white border-2 rounded-full -top-8 left-2 ">
+                  <div className="absolute p-6 bg-white  rounded-full shadow-secondaryModified -top-8 left-2 ">
                     <PersonIcon />
                   </div>
                   <div className="flex flex-col gap-1">
@@ -48,15 +49,21 @@ const UserFeed = (props: any) => {
                       {service[0].firstName}
                     </span>
                   </div>
-                  <div className="px-14 w-full text-lg  flex justify-between items-end gap-10 ">
-                    <Image src="/images/euro.svg" height="30" width="30" />
-                    <span>{service[0].price}€/h</span>
+                  <div className="flex flex-col gap-6 my-2 border-2 py-6 rounded-xl shadow-secondaryModified">
+                    <div className="px-14 w-full text-lg  flex gap-3 items-end ">
+                      <Image src="/images/euro.svg" height="30" width="30" />
+                      <span>{service[0].price}€/h</span>
+                    </div>
+                    <div className="px-14 w-full text-lg flex  items-end gap-3">
+                      <Image
+                        src="/images/location.svg"
+                        height="30"
+                        width="30"
+                      />
+                      <span>{service[0].district}</span>
+                    </div>
                   </div>
-                  <div className="px-14 w-full text-lg flex justify-between items-end gap-12">
-                    <Image src="/images/location.svg" height="30" width="30" />
-                    <span>{service[0].district}</span>
-                  </div>
-                  <Link href={`/service/info/${service[0].id}`}>
+                  <Link href={`/service/info/${service[0].serviceId}`}>
                     <button className="my-2 btn-secondary">
                       Check availability
                     </button>

@@ -3,7 +3,7 @@ import TimeSlotListItem from '../../../components/molecules/availability/Timeslo
 import MobileNavService from '../../../components/organisms/navbar/MobileNavService';
 import AvailabilityComponent from '../../../components/organisms/service/AvailabilityPage';
 import { getAllAvailabilitiesById } from '../../../data/availabilities';
-import { getServiceById } from '../../../data/services';
+import { getServiceById, getServicesByUserId } from '../../../data/services';
 import { handleSetNewAvailabilities } from '../../../utils/availabilities';
 
 const ServiceHomepage = (props: any) => {
@@ -11,15 +11,17 @@ const ServiceHomepage = (props: any) => {
   const [availabilities, setAvailabilities] = useState([]);
   const [render, setRender] = useState(false);
 
+  console.log(props.foundService[0]?.serviceId);
+
   useEffect(() => {
-    setAvailabilities(props.availabilities);
+    setAvailabilities(props.foundService[0]?.serviceId);
   }, [render]);
 
   return (
     <div className="bg-[#DBCBD8] pt-8 h-[100vh] overflow-y-scroll">
       {page === 'availability' && (
         <AvailabilityComponent
-          serviceId={props.serviceId}
+          serviceId={props.foundService[0]?.serviceId}
           setRender={setRender}
           availabilities={props.availabilities}
         />
@@ -39,9 +41,9 @@ export default ServiceHomepage;
 export async function getServerSideProps(context: any) {
   const serviceId = context.query.serviceId;
 
-  const availabilities = await getAllAvailabilitiesById(2);
+  const availabilities = await getAllAvailabilitiesById(serviceId);
 
-  // const foundService = JSON.stringify(await getServiceById(serviceId));
+  const foundService = JSON.stringify(await getServicesByUserId(serviceId));
 
   // console.log(foundService);
 
@@ -56,6 +58,7 @@ export async function getServerSideProps(context: any) {
     props: {
       serviceId,
       availabilities: availabilities,
+      foundService: JSON.parse(foundService),
     },
   };
 }

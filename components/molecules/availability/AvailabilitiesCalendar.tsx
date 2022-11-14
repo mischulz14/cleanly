@@ -13,6 +13,7 @@ const AvailabilitiesCalendar = (props: {
   setNewAvailabilities: Dispatch<SetStateAction<boolean>>;
   setChosenTimeslotsArray: Dispatch<SetStateAction<any>>;
 }) => {
+  console.log(props.serviceId);
   return (
     <div className="flex flex-col items-center justify-center mt-2 availabilities-calendar">
       <ul className="flex overflow-x-scroll w-[95vw] gap-2 border-2 p-2 rounded-xl mx-auto mt-4">

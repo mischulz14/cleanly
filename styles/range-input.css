@@ -13,6 +13,7 @@ input[type='range']::-webkit-slider-runnable-track {
   background: #fff;
   background-color: #564787;
   border-radius: 10px;
+  color: rgba(153, 170, 221, 0.514);
   border: 0.2px solid #dbcbd8;
 }
 input[type='range']::-webkit-slider-thumb {

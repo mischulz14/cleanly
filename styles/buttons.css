@@ -7,7 +7,7 @@ SECTION === 'PRIMARY BUTTONS' === SECTION
 ======================= */
 @layer components {
   .btn-primary {
-    @apply px-6 py-2 bg-[#F2FDFF] rounded-[26px] text-[#564787]  w-[180px]  shadow-primary active:shadow-none active:translate-y-2 font-semibold transition-all duration-300 relative;
+    @apply px-6 py-2 bg-[#F2FDFF] rounded-[26px] text-[#564787]  w-[180px]  shadow-primary active:shadow-none active:translate-y-2 font-semibold transition-all duration-300 relative hover:scale-105;
   }
 }
 
@@ -53,8 +53,32 @@ SECTION === 'SECONDARY BUTTONS' === SECTION
 
 @layer components {
   .btn-secondary {
-    @apply px-6 py-2 bg-[#101935] rounded-[26px] text-[#F2FDFF] w-[180px] shadow-secondary active:shadow-none active:translate-y-2 font-semibold transition-all duration-300 relative;
+    @apply px-6 py-2 bg-[#101935] rounded-[26px] text-[#F2FDFF] w-[180px] shadow-secondary active:shadow-none active:translate-y-2 font-semibold transition-all duration-300 relative hover:scale-105;
   }
+}
+
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.112);
+  top: -80px;
+  left: -30%;
+  width: 40px;
+  height: 400%;
+  transform: rotate(15deg);
+  transition: all 0.4s ease;
+}
+
+.btn-secondary::after {
+  content: '';
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.196);
+  top: -80px;
+  left: -30%;
+  width: 40px;
+  height: 400%;
+  transform: rotate(15deg);
+  transition: all 0.8s ease;
 }
 
 /* =======================
