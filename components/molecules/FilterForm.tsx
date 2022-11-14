@@ -5,17 +5,33 @@ import SlideInFromLeft from '../animation/SlideInFromLeft';
 import SlideInFromTop from '../animation/SlideInFromTop';
 
 export default function FilterForm(props: any) {
-  function handleFilter(event: any) {
-    event.preventDefault();
+  function handleFilter() {
+    const arrayCopy = [...props.serviceDataFromDB].map((service: any) => {
+      console.log('service', service);
+      if (props.district !== '') {
+        const priceAndDistrictFilteredArray = service
+          .filter((service: any) => service.price <= parseInt(props.price))
+          .filter(
+            (service: any) => service.district <= parseInt(props.district),
+          );
 
-    const arrayCopy = [...props.serviceData];
+        props.setServiceData(priceAndDistrictFilteredArray);
+        return priceAndDistrictFilteredArray;
+      } else {
+        console.log('price', props.price);
+        console.log('service price', service[0].price);
+        const priceFilteredArray = service.filter(
+          (service: any) => service.price <= parseInt(props.price),
+        );
 
-    const difficultyAndDistrictFilteredArray = arrayCopy
-      .filter((service) => service.price <= parseInt(props.price))
-      .filter((service) => service.district <= parseInt(props.district));
+        console.log('priceFilteredArray', priceFilteredArray);
 
-    props.setServiceData(difficultyAndDistrictFilteredArray);
+        return priceFilteredArray;
+      }
+    });
+
     props.setShowFilter(false);
+    props.setServiceData(arrayCopy);
   }
 
   return (
@@ -78,8 +94,9 @@ export default function FilterForm(props: any) {
       <button
         className="btn-primary"
         onClick={(event) => {
-          handleFilter(event);
+          event.preventDefault();
           props.setShowFilter(false);
+          handleFilter();
         }}
       >
         Apply Filters

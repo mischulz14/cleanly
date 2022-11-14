@@ -25,11 +25,12 @@ const UserFeed = (props: any) => {
                 serviceData={props.serviceData}
                 setServiceData={props.setServiceData}
                 setShowFilter={props.setShowFilter}
+                serviceDataFromDB={props.serviceDataFromDB}
               />
             )}
           </div>
-          {props.serviceData &&
-            props.serviceData.map((service: any) => {
+          {props.serviceData[0].length !== 0 &&
+            props.serviceData?.map((service: any) => {
               return (
                 <li
                   key={service[0].id}

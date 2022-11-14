@@ -23,7 +23,7 @@ const UserHomePage = (props: any) => {
   const [district, setDistrict] = useState('');
   const [price, setPrice] = useState('15');
 
-  // console.log('serviceData', serviceData);
+  console.log('serviceData', serviceData);
 
   if (!props.foundUser) {
     return <div>404</div>;
@@ -34,6 +34,7 @@ const UserHomePage = (props: any) => {
       {page === 'home' && (
         <UserFeed
           serviceData={serviceData}
+          serviceDataFromDB={props.serviceArr}
           user={props.foundUser}
           setShowFilter={setShowFilter}
           showFilter={showFilter}
