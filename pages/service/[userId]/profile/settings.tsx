@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import { useState } from 'react';
 import SlideInFromLeft from '../../../../components/animation/SlideInFromLeft';
+import SlideInFromTop from '../../../../components/animation/SlideInFromTop';
 import GoBackButton from '../../../../components/atoms/buttons/GoBackButton';
 import MobileNavService from '../../../../components/organisms/navbar/MobileNavService';
 import { getServicesByUserId } from '../../../../data/services';
@@ -8,75 +10,214 @@ import { getUserById } from '../../../../data/users';
 const ProfileSettings = (props: any) => {
   const [page, setPage] = useState('settings');
   const [email, setEmail] = useState(props.user.email);
-  const [firstName, setFirstName] = useState(props.user.firstName);
   const [lastName, setLastName] = useState(props.user.lastName);
   const [district, setDistrict] = useState(props.foundService.district);
   const [price, setPrice] = useState(props.foundService.price);
-  const [description, setDescription] = useState(
-    props.foundService.description,
-  );
+  const [description, setDescription] = useState('');
+  const [showEmail, setShowEmail] = useState(false);
+  const [showLastName, setShowLastName] = useState(false);
+  const [showDistrict, setShowDistrict] = useState(false);
+  const [showPrice, setShowPrice] = useState(false);
+  const [showDescription, setShowDescription] = useState(false);
 
-  console.log('user ', props.user);
-  console.log(props.foundService);
+  function handleServiceChange(e: any) {
+    e.preventDefault();
+
+    fetch('/api/service/update', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        serviceId: props.foundService.serviceId,
+        userId: props.user.id,
+        lastName: lastName,
+        email: email,
+        district: district,
+        price: price,
+        description: description,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('data', data);
+      });
+
+    setShowDistrict(false);
+    setShowPrice(false);
+    setShowDescription(false);
+  }
 
   return (
-    <div className="h-[100vh] overflow-hidden bg-[#DBCBD8]">
+    <div className=" bg-[#DBCBD8] pb-10">
       <SlideInFromLeft>
         <GoBackButton />
-        <form>
-          <div className="flex flex-col items-center">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <label htmlFor="firstName">First Name</label>
-            <input
-              type="text"
-              name="firstName"
-              id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <label htmlFor="lastName">Last Name</label>
-            {props.user.role === 'service' && (
-              <>
-                <input
-                  type="text"
-                  name="lastName"
-                  id="lastName"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-                <label htmlFor="district">District</label>
-                <input
-                  type="text"
-                  name="district"
-                  id="district"
-                  value={district}
-                  onChange={(e) => setDistrict(e.target.value)}
-                />
-                <label htmlFor="price">Price</label>
-                <input
-                  type="number"
-                  name="price"
-                  id="price"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-                <label htmlFor="description">Description</label>
-                <input
-                  type="text"
-                  name="description"
-                  id="description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </>
-            )}
+
+        <form className="px-10 pt-20 ">
+          <div className="flex flex-col items-center gap-6">
+            <div className="flex items-center">
+              <div className="flex flex-col items-center justify-center gap-2">
+                <div className="flex items-center justify-between w-[70vw] gap-20 p-4 border-2 rounded-xl">
+                  <div>Email</div>
+                  <button
+                    className="flex items-center justify-center p-4 transition-all duration-300 border-2 rounded-full hover:scale-105 active:scale-95"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowEmail((prev) => !prev);
+                    }}
+                  >
+                    <Image src="/images/edit.svg" width={20} height={20} />
+                  </button>
+                </div>
+                {showEmail && (
+                  <SlideInFromTop>
+                    <div className="flex flex-col items-center w-full gap-4 pt-4">
+                      <label htmlFor="email">New Email</label>
+                      <input
+                        className="p-2 rounded-xl"
+                        type="email"
+                        name="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </div>
+                  </SlideInFromTop>
+                )}
+              </div>
+            </div>
+            <div className="flex items-center">
+              <div className="flex flex-col items-center justify-center gap-2">
+                <div className="flex items-center justify-between w-[70vw] gap-20 p-4 border-2 rounded-xl">
+                  <div>Last Name</div>
+                  <button
+                    className="flex items-center justify-center p-4 transition-all duration-300 border-2 rounded-full hover:scale-105 active:scale-95"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowLastName((prev) => !prev);
+                    }}
+                  >
+                    <Image src="/images/edit.svg" width={20} height={20} />
+                  </button>
+                </div>
+                {showLastName && (
+                  <SlideInFromTop>
+                    <div className="flex flex-col items-center justify-center w-full gap-4 pt-4">
+                      <label htmlFor="lastName">New Last Name</label>
+                      <input
+                        className="p-2 rounded-xl"
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                      />
+                    </div>
+                  </SlideInFromTop>
+                )}
+              </div>
+            </div>
+            <div className="flex items-center">
+              <div className="flex flex-col items-center justify-center gap-2">
+                <div className="flex items-center justify-between w-[70vw] gap-20 p-4 border-2 rounded-xl">
+                  <div>Price</div>
+                  <button
+                    className="flex items-center justify-center p-4 transition-all duration-300 border-2 rounded-full hover:scale-105 active:scale-95"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowPrice((prev) => !prev);
+                    }}
+                  >
+                    <Image src="/images/edit.svg" width={20} height={20} />
+                  </button>
+                </div>
+                {showPrice && (
+                  <SlideInFromTop>
+                    <div className="flex flex-col items-center justify-center w-full gap-4 pt-4">
+                      <label htmlFor="price">New Price</label>
+                      <input
+                        className="p-2 rounded-xl"
+                        type="text"
+                        name="price"
+                        id="price"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                      />
+                    </div>
+                  </SlideInFromTop>
+                )}
+              </div>
+            </div>
+            <div className="flex items-center">
+              <div className="flex flex-col items-center justify-center gap-2">
+                <div className="flex items-center justify-between w-[70vw] gap-20 p-4 border-2 rounded-xl">
+                  <div>Description</div>
+                  <button
+                    className="flex items-center justify-center p-4 transition-all duration-300 border-2 rounded-full hover:scale-105 active:scale-95"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowDescription((prev: boolean) => !prev);
+                    }}
+                  >
+                    <Image src="/images/edit.svg" width={20} height={20} />
+                  </button>
+                </div>
+                {showDescription && (
+                  <SlideInFromTop>
+                    <div className="flex flex-col items-center justify-center w-full gap-4 pt-4">
+                      <label htmlFor="description">New Description</label>
+                      <input
+                        className="h-32 p-2 rounded-xl"
+                        type="text"
+                        name="description"
+                        id="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                      />
+                    </div>
+                  </SlideInFromTop>
+                )}
+              </div>
+            </div>
+            <div className="flex items-center">
+              <div className="flex flex-col items-center justify-center gap-2">
+                <div className="flex items-center justify-between w-[70vw] gap-20 p-4 border-2 rounded-xl">
+                  <div>District</div>
+                  <button
+                    className="flex items-center justify-center p-4 transition-all duration-300 border-2 rounded-full hover:scale-105 active:scale-95"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowDistrict((prev) => !prev);
+                    }}
+                  >
+                    <Image src="/images/edit.svg" width={20} height={20} />
+                  </button>
+                </div>
+                {showDistrict && (
+                  <SlideInFromTop>
+                    <div className="flex flex-col items-center justify-center w-full gap-4 pt-4">
+                      <label htmlFor="district">New District</label>
+                      <input
+                        className="p-2 rounded-xl"
+                        type="text"
+                        name="district"
+                        id="district"
+                        value={district}
+                        onChange={(e) => setDistrict(e.target.value)}
+                      />
+                    </div>
+                  </SlideInFromTop>
+                )}
+              </div>
+            </div>
+            <button
+              onClick={(e) => {
+                handleServiceChange(e);
+              }}
+              className="btn-secondary"
+            >
+              Save Changes
+            </button>
           </div>
         </form>
       </SlideInFromLeft>

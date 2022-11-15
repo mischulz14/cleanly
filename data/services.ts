@@ -70,3 +70,18 @@ export async function filterServices(district: string, price: number) {
   `;
   return services;
 }
+
+export async function updateService(
+  serviceId: string,
+  price: string,
+  description: string,
+  district: string,
+) {
+  const [service] = await sql<Service[]>`
+    UPDATE services
+    SET  price = ${price}, district = ${district}, description = ${description}
+    WHERE services.id = ${serviceId}
+    RETURNING *
+  `;
+  return service!;
+}

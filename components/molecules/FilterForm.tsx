@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { serviceData } from '../../data/service';
 import SlideInFromLeft from '../animation/SlideInFromLeft';
 import SlideInFromTop from '../animation/SlideInFromTop';
 import CloseButton from '../atoms/buttons/CloseBtn';
@@ -46,7 +45,7 @@ export default function FilterForm(props: any) {
             htmlFor="price"
             className="block mb-2 font-semibold text-[#564787] text-center relative"
           >
-            <div className=" flex gap-3 items-center ">
+            <div className="flex items-center gap-3 ">
               <Image src="/images/euro.svg" height="30" width="30" />
               <span>Price/h: {props.price}</span>
             </div>
@@ -64,14 +63,14 @@ export default function FilterForm(props: any) {
           />
         </div>
         <div className="flex flex-col">
-          <div className="flex gap-3  pb-4 items-end">
+          <div className="flex items-end gap-3 pb-4">
             <Image src="/images/location.svg" height="30" width="30" />
             <label htmlFor="district" className=" text-[#564787] font-bold">
               District
             </label>
           </div>
           <select
-            id="district"
+            className="district-select"
             value={props.district}
             onChange={(event) => props.setDistrict(event.target.value)}
           >
@@ -102,7 +101,7 @@ export default function FilterForm(props: any) {
           </select>
         </div>
         <button
-          className="btn-secondary mx-auto"
+          className="mx-auto btn-secondary"
           onClick={(event) => {
             event.preventDefault();
             props.setShowFilter(false);

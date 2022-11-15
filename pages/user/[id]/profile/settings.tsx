@@ -3,8 +3,6 @@ import { useState } from 'react';
 import SlideInFromLeft from '../../../../components/animation/SlideInFromLeft';
 import SlideInFromTop from '../../../../components/animation/SlideInFromTop';
 import GoBackButton from '../../../../components/atoms/buttons/GoBackButton';
-import EditIcon from '../../../../components/atoms/icons/EditIcon';
-import MobileNavService from '../../../../components/organisms/navbar/MobileNavService';
 import { getServicesByUserId } from '../../../../data/services';
 import { getUserById } from '../../../../data/users';
 
@@ -50,7 +48,7 @@ const UserProfileSettings = (props: any) => {
                 <div className="flex items-center justify-between w-[70vw] gap-20 p-4 border-2 rounded-xl">
                   <div>Email</div>
                   <button
-                    className="flex items-center justify-center p-4 border-2 rounded-full"
+                    className="flex items-center justify-center p-4 transition-all duration-300 border-2 rounded-full hover:scale-105 active:scale-95"
                     onClick={(e) => {
                       e.preventDefault();
                       setShowEmail((prev) => !prev);
@@ -78,10 +76,10 @@ const UserProfileSettings = (props: any) => {
             </div>
             <div className="flex items-center">
               <div className="flex flex-col items-center justify-center gap-2">
-                <div className="flex items-center justify-center w-[70vw] gap-20 p-4 border-2 rounded-xl">
+                <div className="flex items-center justify-between w-[70vw] gap-20 p-4 border-2 rounded-xl">
                   <div>Last Name</div>
                   <button
-                    className="flex items-center justify-center p-4 border-2 rounded-full"
+                    className="flex items-center justify-center p-4 transition-all duration-300 border-2 rounded-full hover:scale-105 active:scale-95"
                     onClick={(e) => {
                       e.preventDefault();
                       setShowLastName((prev) => !prev);
@@ -92,7 +90,7 @@ const UserProfileSettings = (props: any) => {
                 </div>
                 {showLastName && (
                   <SlideInFromTop>
-                    <div className="flex flex-col items-center w-full gap-4 pt-4">
+                    <div className="flex flex-col items-center justify-center w-full gap-4 pt-4">
                       <label htmlFor="lastName">New Last Name</label>
                       <input
                         className="p-2 rounded-xl"

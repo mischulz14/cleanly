@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { updateService } from '../../../data/services';
 import { updateUser } from '../../../data/users';
 
 export type RegisterResponseBody =
@@ -17,12 +18,23 @@ export default async function handler(
     } else {
       // update the user
       const updatedUser = await updateUser(
-        req.body.id,
+        req.body.userId,
         req.body.lastName,
         req.body.email,
       );
 
-      return res.status(200).json({ user: updatedUser });
+      console.log(req.body.serviceId, 'serviceId');
+
+      const updatedService = await updateService(
+        req.body.serviceId,
+        req.body.price,
+        req.body.description,
+        req.body.district,
+      );
+
+      console.log(updatedService, 'updatedService');
+
+      return res.status(200).json({ user: updatedService });
     }
   }
 }

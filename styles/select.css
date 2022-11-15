@@ -13,7 +13,7 @@ select {
   line-height: inherit;
 }
 
-#district {
+.district-select {
   width: 100%;
   text-align: center;
   color: #564787;
