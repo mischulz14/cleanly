@@ -7,7 +7,7 @@ import PersonIcon from '../../atoms/icons/PersonIcon';
 const MobileNavUser = (props: any) => {
   return (
     <nav className="fixed bottom-0 left-0 flex items-center justify-between w-full px-10 pb-2 bg-white mobile-nav border-t-[1px] border-[rgba(0,0,0,0.1)]">
-      <Link href={`/user/${props.userId}/settings`}>
+      <Link href={`/user/${props.userId}`}>
         <button
           onClick={() => {
             props.setPage('requests');

@@ -4,6 +4,10 @@ import bcrypt from 'bcrypt';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { createSession } from '../../data/sessions';
 import { getUserByEmail } from '../../data/users';
+import {
+  createSerializedRegisterSessionTokenCookie,
+  createUserIdCookie,
+} from '../../utils/cookies';
 
 export type LoginResponseBody =
   | { errors: { message: string }[] }
@@ -28,7 +32,7 @@ export default async function handler(
     }
     // 2. check if the user exists
     const user = await getUserByEmail(req.body.email);
-    console.log(user);
+    // console.log(user);
 
     // if the user doesn't exists, return an error
     if (!user) {
@@ -65,15 +69,23 @@ export default async function handler(
 
     // 4.2 store the session token in the database
     const session = await createSession(user.id, token);
-    // 5. return the user
+    // 4.3 set cookie
+    const serializedCookie = createSerializedRegisterSessionTokenCookie(
+      session.token,
+    );
 
-    res.status(200).json({
-      user: {
-        name: user.email,
-        role: user.role,
-        id: user.id,
-      },
-    });
+    const userIdCookie = createUserIdCookie(user.id.toString());
+
+    res
+      .status(200)
+      .setHeader('Set-Cookie', [serializedCookie, userIdCookie])
+      .json({
+        user: {
+          name: user.email,
+          role: user.role,
+          id: user.id,
+        },
+      });
   } else {
     // Handle any other HTTP method
     res.status(401).json({ errors: [{ message: 'Method not allowed' }] });

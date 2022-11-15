@@ -8,7 +8,7 @@ const GoBackButton = () => {
         onClick={() => {
           goBack();
         }}
-        className="flex items-center justify-center pl-2 bg-[#f2fdff] rounded-full h-14 w-14"
+        className="flex items-center justify-center pl-2 bg-white border-2 border-gray-300 rounded-full h-14 w-14"
       >
         <Image src="/images/arrow-left.svg" width={30} height={30} />
       </button>

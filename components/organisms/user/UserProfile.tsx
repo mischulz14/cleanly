@@ -22,14 +22,16 @@ const UserProfile = (props: any) => {
           {/* <div>Description</div> */}
           {/* <div>Location</div> */}
           <Link href={props.settingsLink}>
-            <li className="flex gap-14 items-center rounded-xl border-2 py-2 px-3">
+            <li className="flex items-center px-3 py-2 border-2 gap-14 rounded-xl">
               <span className="block">Settings</span>
               <Image src="/images/settings.svg" height="30" width="30" />
             </li>
           </Link>
-          <li>
-            <button className="btn-secondary">Logout</button>
-          </li>
+          <Link href="/logout">
+            <li>
+              <button className="btn-secondary">Logout</button>
+            </li>
+          </Link>
         </ul>
       </div>
     </SlideInFromLeft>

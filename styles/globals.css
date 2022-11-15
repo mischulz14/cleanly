@@ -39,6 +39,10 @@ a {
   font-family: 'Dosis', sans-serif;
 }
 
+input {
+  border: 1px solid rgba(0, 0, 0, 0.373);
+}
+
 /* =======================
 SECTION === 'UTILITY CLASSES' === SECTION
 ======================= */

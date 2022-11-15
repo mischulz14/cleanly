@@ -38,7 +38,7 @@ export default function FilterForm(props: any) {
 
   return (
     <form className="px-10 pt-16 filter-form flex flex-col gap-8  h-[100vh] w-full bg-white z-[1000000000000000000000000000000000000000] absolute left-0 top-0">
-      <div className="relative px-8 py-10 rounded-lg border-[1px] flex flex-col justify-center gap-10 border-[#564787] ">
+      <div className="relative flex flex-col justify-center gap-10 px-8 py-10 border-2 rounded-lg shadow-secondaryModified">
         <CloseButton handleGoBackAction={handleGoBackAction} />
         <div className="">
           <label
@@ -101,7 +101,7 @@ export default function FilterForm(props: any) {
           </select>
         </div>
         <button
-          className="mx-auto btn-secondary"
+          className="mx-auto btn-secondary bg-[#564787]"
           onClick={(event) => {
             event.preventDefault();
             props.setShowFilter(false);
