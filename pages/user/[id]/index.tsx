@@ -2,7 +2,6 @@ import { useState } from 'react';
 import MobileNavUser from '../../../components/organisms/navbar/MobileNavUser';
 import UserFeed from '../../../components/organisms/user/UserFeed';
 import UserProfile from '../../../components/organisms/user/UserProfile';
-import { serviceData } from '../../../data/service';
 import { getUserById } from '../../../data/users';
 import { selectAllServices } from '../../../data/usersServicesRelations';
 

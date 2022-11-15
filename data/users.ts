@@ -58,3 +58,13 @@ export async function getUserByPasswordHashAndEmail(
   `;
   return user;
 }
+
+export async function updateUser(id: number, lastName: string, email: string) {
+  const [user] = await sql<User[]>`
+    UPDATE users
+    SET last_name = ${lastName}, email = ${email}
+    WHERE users.id = ${id}
+    RETURNING *
+  `;
+  return user!;
+}
