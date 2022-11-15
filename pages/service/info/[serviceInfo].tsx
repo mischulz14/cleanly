@@ -1,6 +1,6 @@
 import { filterProps } from 'framer-motion';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ClickAnimation from '../../../components/animation/ClickAnimation';
 import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
 import SlideInFromTop from '../../../components/animation/SlideInFromTop';
@@ -16,8 +16,18 @@ import { colors } from '../../../utils/colors';
 
 const ServiceInfo = (props: any) => {
   const [currentAvailabilities, setCurrentAvailabilities] = useState(false);
-  console.log(props.foundAvailabilities);
   const [toDelete, setToDelete] = useState(false);
+  const [availabilities, setAvailabilities] = useState([]);
+  const chosenTimeslotsArray: any = [];
+
+  useEffect(() => {
+    fetch(`/api/availabilities/${props.serviceId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAvailabilities(data.availabilities);
+        // console.log(data);
+      });
+  }, []);
 
   return (
     <SlideInFromLeft>
@@ -35,22 +45,25 @@ const ServiceInfo = (props: any) => {
               }}
               className="bg-[#564787] text-white px-8 py-6 rounded-lg w-full text-center cursor-pointer z-[99] shadow-secondary"
             >
-              See Current Availabilities
+              See/Request Availabilities
             </button>
           </ClickAnimation>
           {currentAvailabilities && (
             <SlideInFromTop>
-              <CurrentAvailabilities
-                availabilities={props.availabilities}
-                serviceId={props.serviceId}
-                toDelete={toDelete}
-              />
+              <div className="flex flex-col items-center justify-center">
+                <CurrentAvailabilities
+                  availabilities={availabilities}
+                  serviceId={props.serviceId}
+                  toDelete={toDelete}
+                  chosenTimeslotsArray={chosenTimeslotsArray}
+                />
+                <button className="btn-secondary mt-4 mx-auto">
+                  Request Availabilities
+                </button>
+              </div>
             </SlideInFromTop>
           )}
         </div>
-        {/* <div>{props.foundService.price}</div> */}
-
-        {/* <GoBackButton /> */}
       </div>
     </SlideInFromLeft>
   );
@@ -63,12 +76,10 @@ export async function getServerSideProps(context: any) {
 
   const foundService = await getServiceById(serviceId);
 
-  const foundAvailabilities = JSON.stringify(
-    // @ts-ignore
-    await getAllAvailabilitiesById(foundService[0]?.id),
-  );
-
-  console.log(foundAvailabilities);
+  // const foundAvailabilities = JSON.stringify(
+  //   // @ts-ignore
+  //   await getAllAvailabilitiesById(foundService.id),
+  // );
 
   if (!(await getServiceById(serviceId))) {
     context.res.statusCode = 404;
@@ -81,7 +92,7 @@ export async function getServerSideProps(context: any) {
     props: {
       foundService,
       serviceId,
-      foundAvailabilities: JSON.parse(foundAvailabilities),
+      // foundAvailabilities: JSON.parse(foundAvailabilities),
     },
   };
 }

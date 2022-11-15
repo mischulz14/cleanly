@@ -93,6 +93,7 @@ const AvailabilityPage = (props: any) => {
                 <CurrentAvailabilities
                   availabilities={props.availabilities}
                   serviceId={props.serviceId}
+                  chosenTimeslotsArray={undefined}
                 />
               </SlideInFromTop>
             )}

@@ -11,26 +11,18 @@ const ServiceHomepage = (props: any) => {
   const [availabilities, setAvailabilities] = useState([]);
   const [render, setRender] = useState(false);
 
-  console.log(props.foundService[0]?.serviceId);
+  console.log(props.userId);
 
   useEffect(() => {
-    setAvailabilities(props.foundService[0]?.serviceId);
+    setAvailabilities(props.availabilities);
   }, [render]);
 
   return (
     <div className="bg-[#DBCBD8] pt-8 h-[100vh] overflow-y-scroll">
-      {page === 'availability' && (
-        <AvailabilityComponent
-          serviceId={props.foundService[0]?.serviceId}
-          setRender={setRender}
-          availabilities={props.availabilities}
-        />
-      )}
-
       <MobileNavService
         page={page}
         setPage={setPage}
-        serviceId={props.serviceId}
+        serviceId={props.userId}
       />
     </div>
   );
@@ -39,26 +31,18 @@ const ServiceHomepage = (props: any) => {
 export default ServiceHomepage;
 
 export async function getServerSideProps(context: any) {
-  const serviceId = context.query.serviceId;
+  const userId = context.query.userId;
 
-  const availabilities = await getAllAvailabilitiesById(serviceId);
+  console.log(userId);
 
-  const foundService = JSON.stringify(await getServicesByUserId(serviceId));
-
-  // console.log(foundService);
-
-  if (!(await getServiceById(serviceId))) {
-    context.res.statusCode = 404;
-    return {
-      props: {},
-    };
-  }
+  const foundService = JSON.parse(
+    JSON.stringify(await getServicesByUserId(userId)),
+  );
 
   return {
     props: {
-      serviceId,
-      availabilities: availabilities,
-      foundService: JSON.parse(foundService),
+      userId: userId,
+      foundService,
     },
   };
 }

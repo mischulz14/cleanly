@@ -5,7 +5,7 @@ import CleaningMop from '../../atoms/icons/CleaningMop';
 import HomeIcon from '../../atoms/icons/HomeIcon';
 import PersonIcon from '../../atoms/icons/PersonIcon';
 
-const MobileNav = (props: {
+const MobileNavService = (props: {
   page: string;
   setPage: Dispatch<SetStateAction<string>>;
   serviceId: number;
@@ -38,19 +38,21 @@ const MobileNav = (props: {
           <CleaningMop />
         </button>
       </Link>
-      <button
-        onClick={() => {
-          props.setPage('profile');
-        }}
-        className={`
+      <Link href={`/service/${props.serviceId}/profile`}>
+        <button
+          onClick={() => {
+            props.setPage('profile');
+          }}
+          className={`
           ${props.page === 'profile' ? 'active' : ''}
              mobile-nav__button
         `}
-      >
-        <PersonIcon />
-      </button>
+        >
+          <PersonIcon />
+        </button>
+      </Link>
     </nav>
   );
 };
 
-export default MobileNav;
+export default MobileNavService;

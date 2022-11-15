@@ -1,10 +1,12 @@
-import { User } from '../../../pages/user/[userId]';
+import Image from 'next/image';
+import Link from 'next/link';
 import Appear from '../../animation/Appear';
+import SlideInFromLeft from '../../animation/SlideInFromLeft';
 import PersonIcon from '../../atoms/icons/PersonIcon';
 
-const UserProfile = (props: { user: User }) => {
+const UserProfile = (props: any) => {
   return (
-    <Appear>
+    <SlideInFromLeft>
       {/* <UserAvatar />
     <UserDetails /> */}
       <div className="flex flex-col h-[100vh] items-center pt-14">
@@ -19,13 +21,18 @@ const UserProfile = (props: { user: User }) => {
           <li>{props.user.email}</li>
           {/* <div>Description</div> */}
           {/* <div>Location</div> */}
-          <li>General Settings</li>
+          <Link href={props.settingsLink}>
+            <li className="flex gap-14 items-center rounded-xl border-2 py-2 px-3">
+              <span className="block">Settings</span>
+              <Image src="/images/settings.svg" height="30" width="30" />
+            </li>
+          </Link>
           <li>
             <button className="btn-secondary">Logout</button>
           </li>
         </ul>
       </div>
-    </Appear>
+    </SlideInFromLeft>
   );
 };
 

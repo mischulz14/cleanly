@@ -57,7 +57,7 @@ SECTION === 'SECONDARY BUTTONS' === SECTION
   }
 }
 
-.btn-secondary::before {
+/* .btn-secondary::before {
   content: '';
   position: absolute;
   background-color: rgba(255, 255, 255, 0.112);
@@ -79,7 +79,7 @@ SECTION === 'SECONDARY BUTTONS' === SECTION
   height: 400%;
   transform: rotate(15deg);
   transition: all 0.8s ease;
-}
+} */
 
 /* =======================
 SECTION === 'MOBILE NAV BUTTONS' === SECTION

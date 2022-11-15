@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import MobileNav from '../../components/organisms/navbar/MobileNavUser';
-import UserFeed from '../../components/organisms/user/UserFeed';
-import UserProfile from '../../components/organisms/user/UserProfile';
-import { serviceData } from '../../data/service';
-import { getUserById } from '../../data/users';
-import { selectAllServices } from '../../data/usersServicesRelations';
+import MobileNavUser from '../../../components/organisms/navbar/MobileNavUser';
+import UserFeed from '../../../components/organisms/user/UserFeed';
+import UserProfile from '../../../components/organisms/user/UserProfile';
+import { serviceData } from '../../../data/service';
+import { getUserById } from '../../../data/users';
+import { selectAllServices } from '../../../data/usersServicesRelations';
 
 export type User = {
   id: number;
@@ -23,6 +23,8 @@ const UserHomePage = (props: any) => {
   const [district, setDistrict] = useState('');
   const [price, setPrice] = useState('15');
 
+  console.log('user id', props.userId);
+
   console.log('serviceData', serviceData);
 
   if (!props.foundUser) {
@@ -31,22 +33,20 @@ const UserHomePage = (props: any) => {
 
   return (
     <div className="h-[100vh]">
-      {page === 'home' && (
-        <UserFeed
-          serviceData={serviceData}
-          serviceDataFromDB={props.serviceArr}
-          user={props.foundUser}
-          setShowFilter={setShowFilter}
-          showFilter={showFilter}
-          setServiceData={setServiceData}
-          price={price}
-          setPrice={setPrice}
-          district={district}
-          setDistrict={setDistrict}
-        />
-      )}
-      {page === 'profile' && <UserProfile user={props.foundUser} />}
-      <MobileNav page={page} setPage={setPage} />
+      <UserFeed
+        serviceData={serviceData}
+        serviceDataFromDB={props.serviceArr}
+        user={props.foundUser}
+        setShowFilter={setShowFilter}
+        showFilter={showFilter}
+        setServiceData={setServiceData}
+        price={price}
+        setPrice={setPrice}
+        district={district}
+        setDistrict={setDistrict}
+      />
+
+      <MobileNavUser page={page} setPage={setPage} userId={props.userId} />
     </div>
   );
 };
@@ -54,7 +54,7 @@ const UserHomePage = (props: any) => {
 export default UserHomePage;
 
 export async function getServerSideProps(context: any) {
-  const userId = context.query.userId;
+  const userId = context.query.id;
 
   const foundUser = JSON.stringify(await getUserById(userId));
 
@@ -71,6 +71,7 @@ export async function getServerSideProps(context: any) {
     props: {
       foundUser: JSON.parse(foundUser),
       serviceArr: serviceArr,
+      userId,
     },
   };
 }

@@ -40,3 +40,11 @@ export function handleDeleteAvailabilities(
       console.log(data);
     });
 }
+
+export function handleRequestAvailabilities(serviceId: number, userId: number) {
+  fetch(`/api/availabilities/request/${serviceId}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    });
+}

@@ -10,8 +10,7 @@ const CurrentAvailabilities = (props: any) => {
       .then((res) => res.json())
       .then((data) => {
         setAvailabilities(data.availabilities);
-        console.log(data);
-        console.log(availabilities);
+        // console.log(data);
       });
   }, []);
 
@@ -31,7 +30,7 @@ const CurrentAvailabilities = (props: any) => {
                     key={Math.random()}
                     day={availability.day}
                     timeslot={timeslot}
-                    chosenTimeslotsArray={undefined}
+                    chosenTimeslotsArray={props.chosenTimeslotsArray}
                     // groupedTimeslots={groupedTimeslots}
                   />
                 ))}

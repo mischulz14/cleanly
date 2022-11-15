@@ -31,19 +31,6 @@ export async function createNewAvailability(
   }
 }
 
-export async function createNewTimeslot(
-  start_time: string,
-  end_time: string,
-  availability_id: number,
-) {
-  const newTimeslot = await sql`
-INSERT INTO timeslots (start_time, end_time, availability_id)
-VALUES (${start_time}, ${end_time}, ${availability_id})
-RETURNING *
-`;
-  return newTimeslot;
-}
-
 export async function getAllAvailabilitiesById(id: number | string) {
   const availabilities = await sql`
 SELECT * FROM availabilities

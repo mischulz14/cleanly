@@ -9,7 +9,7 @@ const UserFeed = (props: any) => {
   return (
     <Appear>
       <div className="flex bg-[#DBCBD8] h-[100vh]">
-        <ul className="flex flex-col items-center justify-center w-full gap-12 px-8 mx-auto mt-32 mb-28">
+        <ul className="flex flex-col items-center justify-center w-full gap-12 px-8 mx-auto mt-24 mb-28">
           <div className="fixed flex justify-center items-center top-0 z-20 pt-4 pb-6 w-full bg-[#101935]">
             <button
               onClick={() => props.setShowFilter(true)}
