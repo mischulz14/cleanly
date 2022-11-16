@@ -1,7 +1,13 @@
 import ClickAnimation from '../../animation/ClickAnimation';
 
-const TimeSlotListItem = (props: any) => {
-  const requestedTimeslot = {
+const TimeSlotListItem = (props: {
+  day: string;
+  timeslot: any;
+  chosenTimeslotsArray: any;
+  toDelete: boolean;
+  showStatus: boolean;
+}) => {
+  const chosenTimeslotByService = {
     day: props.day,
     timeslot: props.timeslot,
   };
@@ -14,15 +20,15 @@ const TimeSlotListItem = (props: any) => {
           if (!props.chosenTimeslotsArray) {
             return;
           }
-          e.currentTarget.classList.toggle('bg-slate-500');
+          e.currentTarget.classList.toggle('bg-[#101935]');
           e.currentTarget.classList.toggle('text-white');
-          if (props.chosenTimeslotsArray.includes(requestedTimeslot)) {
+          if (props.chosenTimeslotsArray.includes(chosenTimeslotByService)) {
             props.chosenTimeslotsArray.splice(
-              props.chosenTimeslotsArray.indexOf(requestedTimeslot),
+              props.chosenTimeslotsArray.indexOf(chosenTimeslotByService),
               1,
             );
           } else {
-            props.chosenTimeslotsArray.push(requestedTimeslot);
+            props.chosenTimeslotsArray.push(chosenTimeslotByService);
           }
           console.log(props.chosenTimeslotsArray);
           // props.groupedTimeslots = myFunc(props.requestedTimeslots, 'day');
@@ -37,7 +43,7 @@ const TimeSlotListItem = (props: any) => {
             className={
               props.timeslot.status === 'booked'
                 ? 'bg-red-400 rounded-xl mt-2'
-                : 'bg-green-300 rounded-xl mt-2'
+                : 'bg-green-400 rounded-xl mt-2'
             }
           >
             {props.timeslot.status}

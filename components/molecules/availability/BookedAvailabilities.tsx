@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import TimeSlotListItem from './TimeslotListItem';
 
-const CurrentAvailabilities = (props: any) => {
+const BookedAvailabilities = (props: any) => {
   const [availabilities, setAvailabilities] = useState([]);
 
   useEffect(() => {
@@ -25,17 +25,20 @@ const CurrentAvailabilities = (props: any) => {
                 <div className="text-center ">
                   {availability.day.toString().slice(0, 10)}
                 </div>
-                {availability.timeslots.map((timeslot: any) => (
-                  <TimeSlotListItem
-                    key={Math.random()}
-                    day={availability.day}
-                    timeslot={timeslot}
-                    chosenTimeslotsArray={props.chosenTimeslotsArray}
-                    toDelete={false}
-                    // groupedTimeslots={groupedTimeslots}
-                    showStatus={true}
-                  />
-                ))}
+                {availability.timeslots.map(
+                  (timeslot: any) =>
+                    timeslot.status === 'booked' && (
+                      <TimeSlotListItem
+                        key={Math.random()}
+                        day={availability.day}
+                        timeslot={timeslot}
+                        chosenTimeslotsArray={props.chosenTimeslotsArray}
+                        toDelete={false}
+                        // groupedTimeslots={groupedTimeslots}
+                        showStatus={false}
+                      />
+                    ),
+                )}
               </ul>
             </li>
           ))}
@@ -44,4 +47,4 @@ const CurrentAvailabilities = (props: any) => {
   );
 };
 
-export default CurrentAvailabilities;
+export default BookedAvailabilities;

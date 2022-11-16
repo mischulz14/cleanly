@@ -23,12 +23,16 @@ const UserHomePage = (props: any) => {
   const [district, setDistrict] = useState('');
   const [price, setPrice] = useState('15');
 
+  console.log('service Array from backend', props.serviceArr);
+
+  console.log('serviceData that should show', serviceData);
+
   if (!props.foundUser) {
     return <div>404</div>;
   }
 
   return (
-    <div className="h-[100vh]">
+    <div className="h-[100vh] overflow-y-scroll">
       <UserFeed
         serviceData={serviceData}
         serviceDataFromDB={props.serviceArr}

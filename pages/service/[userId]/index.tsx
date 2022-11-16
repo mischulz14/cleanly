@@ -3,17 +3,14 @@ import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
 import CalendarIcon from '../../../components/atoms/icons/CalendarIcon';
 import ClockIcon from '../../../components/atoms/icons/ClockIcon';
 import RequestsIcon from '../../../components/atoms/icons/RequestsIcon';
-import TimeSlotListItem from '../../../components/molecules/availability/TimeslotListItem';
 import MobileNavService from '../../../components/organisms/navbar/MobileNavService';
-import AvailabilityComponent from '../../../components/organisms/service/AvailabilityPage';
-import { getAllAvailabilitiesById } from '../../../data/availabilities';
 import { getRequestByServiceId } from '../../../data/requests';
-import { getServiceById, getServicesByUserId } from '../../../data/services';
-import { handleSetNewAvailabilities } from '../../../utils/availabilities';
+import { getServicesByUserId } from '../../../data/services';
 
 const ServiceHomepage = (props: any) => {
   const [page, setPage] = useState('home');
   const [requests, setRequests] = useState([]);
+  const [render, setRender] = useState(false);
 
   // console.log(props.userId);
   useEffect(() => {
@@ -39,7 +36,7 @@ const ServiceHomepage = (props: any) => {
 
   return (
     <div className="bg-[#DBCBD8] h-[100vh] overflow-y-scroll relative">
-      <div className="pl-20 mb-6 text-xl flex items-center gap-2 text-[#564787] bg-white rounded-b-xl p-4 fixed top-0 left-0 z-[10000] w-full border-b-2">
+      <div className="shadow-secondaryModified pl-20 mb-6 text-xl flex items-center gap-2 text-[#564787] bg-white rounded-b-xl p-4 fixed top-0 left-0 z-[10000] w-full border-b-2">
         <RequestsIcon />
         <span className="font-semibold ">Your Requests</span>
       </div>
@@ -51,7 +48,7 @@ const ServiceHomepage = (props: any) => {
                 return (
                   <li
                     key={request.id}
-                    className="px-10 py-6 mx-10 mb-6 relative flex flex-col items-center text-[#564787] text-center bg-white  rounded-xl shadow-secondaryModified gap-5"
+                    className="px-10 py-6 mx-10 mb-6 relative flex flex-col items-center text-[#564787] text-center bg-white  rounded-xl shadow-secondaryModified gap-5 relative"
                   >
                     <div>{request.userName}</div>
                     <div className="flex flex-col gap-3 p-4 border-2 shadow-secondaryModified rounded-xl">
@@ -82,9 +79,11 @@ const ServiceHomepage = (props: any) => {
                     {request.status === 'pending' && (
                       <>
                         <button
-                          onClick={() =>
-                            handleRequestAccept(request.id, 'accepted')
-                          }
+                          onClick={() => {
+                            handleRequestAccept(request.id, 'accepted');
+                            request.status = 'accepted';
+                            setRender((prev) => !prev);
+                          }}
                           className="btn-secondary"
                         >
                           Accept

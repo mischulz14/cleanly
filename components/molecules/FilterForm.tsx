@@ -5,28 +5,22 @@ import SlideInFromTop from '../animation/SlideInFromTop';
 import CloseButton from '../atoms/buttons/CloseBtn';
 
 export default function FilterForm(props: any) {
+  console.log('serviceData from Db', props.serviceDataFromDB);
   function handleFilter() {
-    const arrayCopy = [...props.serviceDataFromDB].map((service: any) => {
-      console.log('service', service);
-      if (props.district !== '') {
-        const priceAndDistrictFilteredArray = service
-          .filter((service: any) => service.price <= parseInt(props.price))
-          .filter((service: any) => service.district == props.district);
-
-        props.setServiceData(priceAndDistrictFilteredArray);
-        return priceAndDistrictFilteredArray;
+    const arrayCopy = [...props.serviceDataFromDB].filter((service) => {
+      if (props.district === 'All') {
+        return service.price <= props.price;
       } else {
-        console.log('price', props.price);
-        console.log('service price', service[0].price);
-        const priceFilteredArray = service.filter(
-          (service: any) => service.price <= parseInt(props.price),
+        return (
+          service.district
+            .toLowerCase()
+            .includes(props.district.toLowerCase()) &&
+          service.price <= props.price
         );
-
-        console.log('priceFilteredArray', priceFilteredArray);
-
-        return priceFilteredArray;
       }
     });
+
+    console.log('arrayCopy', arrayCopy);
 
     props.setShowFilter(false);
     props.setServiceData(arrayCopy);
@@ -37,7 +31,7 @@ export default function FilterForm(props: any) {
   }
 
   return (
-    <form className="px-10 pt-16 filter-form flex flex-col gap-8  h-[100vh] w-full bg-white z-[1000000000000000000000000000000000000000] absolute left-0 top-0">
+    <form className="px-10 pt-16 filter-form flex flex-col gap-8  h-[100vh] w-full bg-white z-[1000000000000000000000000000000000000000] absolute left-0 top-0 overflow-y-scroll">
       <div className="relative flex flex-col justify-center gap-10 px-8 py-10 border-2 border-gray-300 rounded-lg">
         <CloseButton handleGoBackAction={handleGoBackAction} />
         <div className="">
@@ -70,7 +64,7 @@ export default function FilterForm(props: any) {
             </label>
           </div>
           <select
-            className="district-select"
+            className="w-full h-12 border-2 border-gray-300 rounded-lg  district-select"
             value={props.district}
             onChange={(event) => props.setDistrict(event.target.value)}
           >

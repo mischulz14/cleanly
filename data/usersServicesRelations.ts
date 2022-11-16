@@ -22,7 +22,7 @@ export async function selectAllServices() {
   // join users and services by mapping through users and selecting all services that match the user id
   const servicesWithUsers = await Promise.all(
     users.map(async (user) => {
-      const services = await sql`
+      const [services] = await sql`
         SELECT * FROM services
         JOIN services_users_relations ON services.id = services_users_relations.service_id
         JOIN users ON users.id = services_users_relations.user_id

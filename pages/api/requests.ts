@@ -19,22 +19,35 @@ export default async function handler(
   if (req.method === 'POST') {
     console.log(req.body);
 
-    req.body.chosenTimeslots.forEach(async (timeslot: any) => {
-      const createdRequest = await createNewRequest(
-        req.body.userId,
-        req.body.serviceId,
-        timeslot.timeslot,
-        timeslot.day,
-        req.body.serviceName,
-        req.body.serviceEmail,
-        req.body.userName,
-        'pending',
-      );
+    if (
+      req.body.chosenAvailabilities === undefined ||
+      req.body.chosenAvailabilities.length === 0
+    ) {
+      return res.status(401).json({
+        errors: [
+          {
+            message: 'Please choose at least one availability',
+          },
+        ],
+      });
+    } else {
+      req.body.chosenTimeslots.forEach(async (timeslot: any) => {
+        const createdRequest = await createNewRequest(
+          req.body.userId,
+          req.body.serviceId,
+          timeslot.timeslot,
+          timeslot.day,
+          req.body.serviceName,
+          req.body.serviceEmail,
+          req.body.userName,
+          'pending',
+        );
 
-      console.log(createdRequest);
-    });
+        console.log(createdRequest);
+      });
 
-    res.status(200).json({ requests: 'created' });
+      res.status(200).json({ requests: 'created' });
+    }
   } else {
     return res.status(401).json({
       errors: [

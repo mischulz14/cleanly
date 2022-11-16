@@ -22,9 +22,11 @@ const UserProfile = (props: any) => {
           {/* <div>Description</div> */}
           {/* <div>Location</div> */}
           <Link href={props.settingsLink}>
-            <li className="flex items-center px-3 py-2 border-2 gap-14 rounded-xl">
-              <span className="block">Settings</span>
-              <Image src="/images/settings.svg" height="30" width="30" />
+            <li className="">
+              <button className="flex items-center px-3 py-2 transition-all duration-300 border-2 hover:scale-105 active:scale-95 gap-14 rounded-xl">
+                <span className="block">Settings</span>
+                <Image src="/images/settings.svg" height="30" width="30" />
+              </button>
             </li>
           </Link>
           <Link href="/logout">

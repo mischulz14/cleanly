@@ -4,7 +4,7 @@ import { groupObjectByProperties } from '../../../utils/groupObjects';
 import ClickAnimation from '../../animation/ClickAnimation';
 import TimeSlotListItem from './TimeslotListItem';
 
-const CurrentAvailabilities = (props: any) => {
+const DeleteAvailabilities = (props: any) => {
   const [availabilities, setAvailabilities] = useState([]);
   const [chosenTimeslotsArray, setChosenTimeslotsArray] = useState([]);
   const [toDelete, setToDelete] = useState(true);
@@ -38,6 +38,7 @@ const CurrentAvailabilities = (props: any) => {
                       timeslot={timeslot}
                       chosenTimeslotsArray={chosenTimeslotsArray}
                       toDelete={toDelete}
+                      showStatus={true}
 
                       // groupedTimeslots={groupedTimeslots}
                     />
@@ -61,4 +62,4 @@ const CurrentAvailabilities = (props: any) => {
   );
 };
 
-export default CurrentAvailabilities;
+export default DeleteAvailabilities;

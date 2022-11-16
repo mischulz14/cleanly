@@ -21,7 +21,7 @@ const UserRequests = (props: any) => {
   return (
     <div className="flex flex-col w-full text-center bg-[#DBCBD8] relative">
       <SlideInFromLeft>
-        <div className="py-4 rounded-b-xl pl-20 text-xl flex items-center gap-2 text-[#564787] fixed bg-white top-0 left-0 z-[1000000] w-full">
+        <div className=" shadow-secondaryModified py-4 rounded-b-xl pl-20 text-xl flex items-center gap-2 text-[#564787] fixed bg-white top-0 left-0 z-[1000000] w-full">
           <RequestsIcon />
           <span className="font-semibold">Your Requests</span>
         </div>

@@ -11,7 +11,7 @@ const AvailabilityServicePage = (props: any) => {
   return (
     <>
       <div className="bg-[#DBCBD8] pt-24 pb-24 overflow-y-scroll h-[100vh] relative">
-        <div className="pl-20 mb-6 text-xl flex items-center gap-2 text-[#564787] bg-white rounded-b-xl p-4 fixed top-0 left-0 z-[10000] w-full border-b-2">
+        <div className=" mb-6 text-xl flex items-center justify-center gap-2 text-[#564787] shadow-secondaryModified bg-white rounded-b-xl p-4 fixed top-0 left-0 z-[10000] w-full border-b-2">
           <CalendarIcon />
           <span className="font-semibold ">Your Availabilities</span>
         </div>

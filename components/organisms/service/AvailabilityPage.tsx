@@ -5,6 +5,7 @@ import ClickAnimation from '../../animation/ClickAnimation';
 import SlideInFromLeft from '../../animation/SlideInFromLeft';
 import SlideInFromTop from '../../animation/SlideInFromTop';
 import AvailabilitiesCalendar from '../../molecules/availability/AvailabilitiesCalendar';
+import BookedAvailabilities from '../../molecules/availability/BookedAvailabilities';
 import CurrentAvailabilities from '../../molecules/availability/CurrentAvailabilities';
 import DeleteAvailabilities from '../../molecules/availability/DeleteAvailabilities';
 
@@ -13,6 +14,7 @@ const AvailabilityPage = (props: any) => {
   const [deleteAvailabilities, setDeleteAvailabilities] = useState(false);
   const [newAvailabilities, setNewAvailabilities] = useState(false);
   const [currentAvailabilities, setCurrentAvailabilities] = useState(false);
+  const [bookedAvailabilities, setBookedAvailabilities] = useState(false);
 
   return (
     <SlideInFromLeft>
@@ -25,6 +27,7 @@ const AvailabilityPage = (props: any) => {
                   setNewAvailabilities((prevState) => !prevState);
                   setCurrentAvailabilities(false);
                   setDeleteAvailabilities(false);
+                  setBookedAvailabilities(false);
                   setChosenTimeslotsArray([]);
                 }}
                 className="bg-[#564787] text-white px-8 py-6 rounded-lg w-full text-center cursor-pointer z-[99] shadow-secondary"
@@ -54,6 +57,7 @@ const AvailabilityPage = (props: any) => {
                   setDeleteAvailabilities((prevState) => !prevState);
                   setCurrentAvailabilities(false);
                   setNewAvailabilities(false);
+                  setBookedAvailabilities(false);
                   setChosenTimeslotsArray([]);
                 }}
               >
@@ -78,15 +82,41 @@ const AvailabilityPage = (props: any) => {
                   setCurrentAvailabilities((prevState) => !prevState);
                   setNewAvailabilities(false);
                   setDeleteAvailabilities(false);
+                  setBookedAvailabilities(false);
                 }}
                 className="bg-[#564787] text-white px-8 py-6 rounded-lg w-full text-center cursor-pointer z-[99] shadow-secondary"
               >
-                See Current Availabilities
+                See All Current Availabilities
               </button>
             </ClickAnimation>
             {currentAvailabilities && (
               <SlideInFromTop>
                 <CurrentAvailabilities
+                  availabilities={props.availabilities}
+                  serviceId={props.serviceId}
+                  chosenTimeslotsArray={undefined}
+                />
+              </SlideInFromTop>
+            )}
+          </li>
+
+          <li className="w-full rounded-lg">
+            <ClickAnimation>
+              <button
+                onClick={() => {
+                  setCurrentAvailabilities(false);
+                  setNewAvailabilities(false);
+                  setDeleteAvailabilities(false);
+                  setBookedAvailabilities((prevState) => !prevState);
+                }}
+                className="bg-[#564787] text-white px-8 py-6 rounded-lg w-full text-center cursor-pointer z-[99] shadow-secondary"
+              >
+                See Booked Availabilities
+              </button>
+            </ClickAnimation>
+            {bookedAvailabilities && (
+              <SlideInFromTop>
+                <BookedAvailabilities
                   availabilities={props.availabilities}
                   serviceId={props.serviceId}
                   chosenTimeslotsArray={undefined}
