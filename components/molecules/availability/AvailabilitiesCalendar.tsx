@@ -26,7 +26,7 @@ const AvailabilitiesCalendar = (props: {
                   day={day.day}
                   timeslot={timeslot}
                   chosenTimeslotsArray={props.chosenTimeslotsArray}
-                  // groupedTimeslots={groupedTimeslots}
+                  showStatus={false}
                 />
               ))}
             </ul>

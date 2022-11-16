@@ -63,6 +63,51 @@ WHERE day = ${day} AND service_id = ${id} AND timeslots = ${timeslots}
   }
 }
 
+export async function findAvailabilityByDayAndServiceId(
+  day: string,
+  id: string,
+) {
+  const [availability] = await sql`
+SELECT * FROM availabilities
+WHERE day = ${day} AND service_id = ${id}
+`;
+  return availability!;
+}
+
+export async function updateTimeslotStatus(
+  availabilityId: number, // this is the availability object
+  timeslot: any,
+) {
+  const [availability] = await sql`
+SELECT * FROM availabilities
+WHERE id = ${availabilityId}
+`;
+
+  console.log('availabilityId', availabilityId);
+  console.log('availability', availability);
+  console.log('timeslotID', timeslot.id);
+
+  const newTimeslots = availability?.timeslots.map((ts: any) => {
+    console.log('ts', ts);
+    if (ts.id === timeslot.id) {
+      timeslot.status = 'booked';
+      console.log('timeslot', timeslot);
+      return timeslot;
+    } else {
+      return ts;
+    }
+  });
+
+  console.log('newTimeslots', newTimeslots);
+
+  const [updatedAvailability] = await sql`
+    UPDATE availabilities SET timeslots = ${newTimeslots} WHERE id = ${availabilityId}
+    `;
+
+  console.log('updatedAvailability', updatedAvailability);
+  return updatedAvailability;
+}
+
 //=============================
 //SECTION === 'PROCESS A USER REQUEST TO DELETE AN AVAILABILITY' === SECTION
 //=============================

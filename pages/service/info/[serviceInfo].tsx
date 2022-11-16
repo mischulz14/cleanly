@@ -53,11 +53,11 @@ const ServiceInfo = (props: any) => {
   return (
     <SlideInFromLeft>
       <div
-        className={`flex  items-center flex-col bg-[${colors.secondary}] relative py-20  h-[100vh]`}
+        className={`flex flex-col bg-[${colors.secondary}] relative py-20  h-[100vh]`}
       >
         <GoBackButton />
 
-        <div className="flex flex-col items-center w-full px-4">
+        <div className="flex flex-col w-full px-4">
           <ClickAnimation>
             <button
               onClick={() => {
@@ -69,24 +69,26 @@ const ServiceInfo = (props: any) => {
             </button>
           </ClickAnimation>
           {currentAvailabilities && (
-            <SlideInFromTop>
-              <div className="flex flex-col items-center justify-center">
-                <CurrentAvailabilities
-                  availabilities={availabilities}
-                  serviceId={props.serviceId}
-                  toDelete={toDelete}
-                  chosenTimeslotsArray={chosenTimeslotsArray}
-                />
-                <button
-                  onClick={() => {
-                    handleUserRequest();
-                  }}
-                  className="mx-auto mt-4 btn-secondary"
-                >
-                  Request Availabilities
-                </button>
-              </div>
-            </SlideInFromTop>
+            <div className="">
+              <SlideInFromTop>
+                <div className="flex flex-col grow">
+                  <CurrentAvailabilities
+                    availabilities={availabilities}
+                    serviceId={props.serviceId}
+                    toDelete={toDelete}
+                    chosenTimeslotsArray={chosenTimeslotsArray}
+                  />
+                  <button
+                    onClick={() => {
+                      handleUserRequest();
+                    }}
+                    className="mx-auto mt-4 btn-secondary"
+                  >
+                    Request Availabilities
+                  </button>
+                </div>
+              </SlideInFromTop>
+            </div>
           )}
         </div>
       </div>

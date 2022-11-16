@@ -45,3 +45,14 @@ export async function getRequestByServiceId(serviceId: number) {
 
   return request;
 }
+
+export async function updateRequest(status: string, id: number) {
+  const [request] = await sql`
+    UPDATE requests
+    SET status = ${status}
+    WHERE id = ${id}
+    RETURNING *
+  `;
+
+  return request;
+}

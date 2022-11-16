@@ -4,6 +4,7 @@ import CalendarIcon from '../../atoms/icons/CalendarIcon';
 import CleaningMop from '../../atoms/icons/CleaningMop';
 import HomeIcon from '../../atoms/icons/HomeIcon';
 import PersonIcon from '../../atoms/icons/PersonIcon';
+import RequestsIcon from '../../atoms/icons/RequestsIcon';
 
 const MobileNavService = (props: {
   page: string;
@@ -35,7 +36,7 @@ const MobileNavService = (props: {
              mobile-nav__button
         `}
         >
-          <CleaningMop />
+          <RequestsIcon />
         </button>
       </Link>
       <Link href={`/service/${props.serviceId}/profile`}>

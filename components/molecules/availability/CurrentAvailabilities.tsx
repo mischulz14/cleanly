@@ -17,7 +17,7 @@ const CurrentAvailabilities = (props: any) => {
   return (
     <>
       {' '}
-      <ul className="flex flex-col justify-center items-center overflow-x-scroll w-[95vw] gap-2 border-2 p-2 rounded-xl mx-auto mt-4">
+      <ul className="flex flex-col items-center justify-center gap-2 p-2 mt-4 overflow-x-scroll border-2 rounded-xl">
         {availabilities &&
           availabilities?.map((availability: any) => (
             <li key={Math.random()}>
@@ -32,6 +32,7 @@ const CurrentAvailabilities = (props: any) => {
                     timeslot={timeslot}
                     chosenTimeslotsArray={props.chosenTimeslotsArray}
                     // groupedTimeslots={groupedTimeslots}
+                    showStatus={true}
                   />
                 ))}
               </ul>

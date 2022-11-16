@@ -16,16 +16,16 @@ import { getUserById } from '../../../data/users';
 
 const UserRequests = (props: any) => {
   const [page, setPage] = useState('requests');
-  console.log(props.foundRequests);
+  // console.log(props.foundRequests);
 
   return (
-    <div className="flex flex-col w-full text-center bg-[#DBCBD8] ">
+    <div className="flex flex-col w-full text-center bg-[#DBCBD8] relative">
       <SlideInFromLeft>
-        <div className="py-6 pl-20 text-xl flex items-center gap-2 text-[#564787]">
+        <div className="py-4 rounded-b-xl pl-20 text-xl flex items-center gap-2 text-[#564787] fixed bg-white top-0 left-0 z-[1000000] w-full">
           <RequestsIcon />
           <span className="font-semibold">Your Requests</span>
         </div>
-        <ul className="mb-20 overflow-y-scroll">
+        <ul className="pt-24 mb-20 overflow-y-scroll">
           {props.foundRequests &&
             props.foundRequests.map((request: any) => {
               return (
@@ -60,7 +60,7 @@ const UserRequests = (props: any) => {
                     )}
                   </div>
                   {request.status === 'accepted' && (
-                    <button className="button-secondary">Contact</button>
+                    <button className="btn-secondary">Contact</button>
                   )}
                 </li>
               );

@@ -7,8 +7,9 @@ const TimeSlotListItem = (props: any) => {
   };
 
   return (
-    <li className="mt-3 bg-white text-md rounded-xl relative">
+    <li className="relative mt-3 bg-white text-md rounded-xl">
       <button
+        disabled={props.timeslot.status === 'booked' ? true : false}
         onClick={(e) => {
           if (!props.chosenTimeslotsArray) {
             return;
@@ -26,11 +27,22 @@ const TimeSlotListItem = (props: any) => {
           console.log(props.chosenTimeslotsArray);
           // props.groupedTimeslots = myFunc(props.requestedTimeslots, 'day');
         }}
-        className="px-4 py-2 text-md rounded-xl relative overflow-visible w-full"
+        className="relative w-full px-4 py-2 overflow-visible text-md rounded-xl"
       >
         <div>
           {props.timeslot.start} - {props.timeslot.end}
         </div>
+        {props.showStatus && (
+          <div
+            className={
+              props.timeslot.status === 'booked'
+                ? 'bg-red-400 rounded-xl mt-2'
+                : 'bg-green-300 rounded-xl mt-2'
+            }
+          >
+            {props.timeslot.status}
+          </div>
+        )}
         {props.toDelete && (
           <div className="btn-secondary  p-2 absolute top-[-10px] right-[-15px] w-7 h-7 flex justify-center items-center rounded-full hover:scale-105 active:scale-95">
             X

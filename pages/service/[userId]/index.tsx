@@ -13,33 +13,22 @@ import { handleSetNewAvailabilities } from '../../../utils/availabilities';
 
 const ServiceHomepage = (props: any) => {
   const [page, setPage] = useState('home');
+  const [requests, setRequests] = useState([]);
 
   // console.log(props.userId);
+  useEffect(() => {
+    setRequests(props.foundRequests);
+  }, []);
 
-  function handleRequestAccept() {
-    fetch(`/api/request/${props.requestId}`, {
+  function handleRequestAccept(requestId: string, status: string) {
+    fetch(`/api/request/${requestId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        status: 'accepted',
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
-  }
-
-  function handleRejectAccept() {
-    fetch(`/api/request/${props.requestId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        status: 'accepted',
+        status: status,
+        requestId: requestId,
       }),
     })
       .then((res) => res.json())
@@ -49,16 +38,16 @@ const ServiceHomepage = (props: any) => {
   }
 
   return (
-    <div className="bg-[#DBCBD8] pt-8 h-[100vh] overflow-y-scroll">
-      <div className="flex flex-col w-full text-center bg-[#DBCBD8] ">
-        <SlideInFromLeft>
-          <div className="pl-20 mb-6 text-xl flex items-center gap-2 text-[#564787]">
-            <RequestsIcon />
-            <span className="font-semibold">Your Requests</span>
-          </div>
+    <div className="bg-[#DBCBD8] h-[100vh] overflow-y-scroll relative">
+      <div className="pl-20 mb-6 text-xl flex items-center gap-2 text-[#564787] bg-white rounded-b-xl p-4 fixed top-0 left-0 z-[10000] w-full border-b-2">
+        <RequestsIcon />
+        <span className="font-semibold ">Your Requests</span>
+      </div>
+      <SlideInFromLeft>
+        <div className="flex flex-col w-full text-center bg-[#DBCBD8] pt-24">
           <ul className="mb-20 overflow-y-scroll">
-            {props.foundRequests &&
-              props.foundRequests.map((request: any) => {
+            {requests &&
+              requests.map((request: any) => {
                 return (
                   <li
                     key={request.id}
@@ -90,14 +79,35 @@ const ServiceHomepage = (props: any) => {
                         <span className="text-[#F95E5A]">Rejected</span>
                       )}
                     </div>
-                    <button className="btn-secondary">Accept</button>
-                    <button className="border-2 btn-primary">Decline</button>
+                    {request.status === 'pending' && (
+                      <>
+                        <button
+                          onClick={() =>
+                            handleRequestAccept(request.id, 'accepted')
+                          }
+                          className="btn-secondary"
+                        >
+                          Accept
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleRequestAccept(request.id, 'rejected')
+                          }
+                          className="border-2 btn-primary"
+                        >
+                          Decline
+                        </button>
+                      </>
+                    )}
+                    {request.status === 'accepted' && (
+                      <button className="btn-secondary">Contact</button>
+                    )}
                   </li>
                 );
               })}
           </ul>
-        </SlideInFromLeft>
-      </div>
+        </div>
+      </SlideInFromLeft>
       <MobileNavService
         page={page}
         setPage={setPage}

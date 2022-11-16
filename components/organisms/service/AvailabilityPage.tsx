@@ -17,10 +17,6 @@ const AvailabilityPage = (props: any) => {
   return (
     <SlideInFromLeft>
       <div className="flex flex-col items-center mx-auto">
-        <div className="mb-6 text-xl text-center text-[#564787]">
-          Availability
-        </div>
-
         <ul className="w-[95vw] sm:w-[60vw] flex flex-col justify-center items-center gap-4">
           <li className="w-full rounded-lg">
             <ClickAnimation>
