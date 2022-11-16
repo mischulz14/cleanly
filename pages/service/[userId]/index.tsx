@@ -13,18 +13,28 @@ import { handleSetNewAvailabilities } from '../../../utils/availabilities';
 
 const ServiceHomepage = (props: any) => {
   const [page, setPage] = useState('home');
-  const [availabilities, setAvailabilities] = useState([]);
-  const [render, setRender] = useState(false);
 
-  console.log(props.userId);
-
-  useEffect(() => {
-    setAvailabilities(props.availabilities);
-  }, [render]);
+  // console.log(props.userId);
 
   function handleRequestAccept() {
-    fetch(`/api/requests/${props.requestId}`, {
-      method: 'PATCH',
+    fetch(`/api/request/${props.requestId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        status: 'accepted',
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
+
+  function handleRejectAccept() {
+    fetch(`/api/request/${props.requestId}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -107,8 +117,8 @@ export async function getServerSideProps(context: any) {
   const foundService = await getServicesByUserId(userId);
   const foundRequests = await getRequestByServiceId(foundService?.serviceId);
 
-  console.log('found service', foundService);
-  console.log('found requests', foundRequests);
+  // console.log('found service', foundService);
+  // console.log('found requests', foundRequests);
 
   return {
     props: {
