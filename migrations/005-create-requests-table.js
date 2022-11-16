@@ -6,9 +6,12 @@ CREATE TABLE requests (
   FOREIGN KEY (user_id) REFERENCES users(id),
   service_id integer,
   FOREIGN KEY (service_id) REFERENCES services(id),
-  starts date NOT NULL,
-  ends date NOT NULL,
-  status varchar(50) NOT NULL
+  timeslots jsonb,
+  status varchar(255),
+  service_name varchar(255),
+  service_email varchar(255),
+  user_name varchar(255),
+  day varchar(50)
 )`;
 };
 

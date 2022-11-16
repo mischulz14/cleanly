@@ -1,17 +1,11 @@
-import { filterProps } from 'framer-motion';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ClickAnimation from '../../../components/animation/ClickAnimation';
 import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
 import SlideInFromTop from '../../../components/animation/SlideInFromTop';
 import GoBackButton from '../../../components/atoms/buttons/GoBackButton';
-import GoBackIcon from '../../../components/atoms/buttons/GoBackButton';
 import CurrentAvailabilities from '../../../components/molecules/availability/CurrentAvailabilities';
-import AvailabilityComponent from '../../../components/organisms/service/AvailabilityPage';
-import { getAllAvailabilitiesById } from '../../../data/availabilities';
-import { serviceData } from '../../../data/service';
-import { getServiceById } from '../../../data/services';
-import { selectAllServicesWithSpecificUserId } from '../../../data/usersServicesRelations';
+import { getServiceById, getUserInfoByServiceId } from '../../../data/services';
+import { getUserById } from '../../../data/users';
 import { colors } from '../../../utils/colors';
 
 const ServiceInfo = (props: any) => {
@@ -20,7 +14,10 @@ const ServiceInfo = (props: any) => {
   const [availabilities, setAvailabilities] = useState([]);
   const chosenTimeslotsArray: any = [];
 
+  // console.log(props.userIdCookie, 'props.userIdCookie');
+
   useEffect(() => {
+    // this useEffect fetches the availabilities of the service
     fetch(`/api/availabilities/${props.serviceId}`)
       .then((res) => res.json())
       .then((data) => {
@@ -29,15 +26,38 @@ const ServiceInfo = (props: any) => {
       });
   }, []);
 
+  function handleUserRequest() {
+    fetch(`/api/requests`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        serviceId: props.serviceId,
+        userId: props.userIdCookie,
+        chosenTimeslots: chosenTimeslotsArray,
+        serviceName:
+          props.completeService.firstName +
+          ' ' +
+          props.completeService.lastName,
+        serviceEmail: props.completeService.email,
+        userName: props.user.firstName + ' ' + props.user.lastName,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
+
   return (
     <SlideInFromLeft>
       <div
         className={`flex  items-center flex-col bg-[${colors.secondary}] relative py-20  h-[100vh]`}
       >
         <GoBackButton />
-        {/* <div>{props.serviceId}</div> */}
-        {/* <div>{props.foundService.price}</div> */}
-        <div className="w-full px-4 flex flex-col items-center">
+
+        <div className="flex flex-col items-center w-full px-4">
           <ClickAnimation>
             <button
               onClick={() => {
@@ -57,7 +77,12 @@ const ServiceInfo = (props: any) => {
                   toDelete={toDelete}
                   chosenTimeslotsArray={chosenTimeslotsArray}
                 />
-                <button className="btn-secondary mt-4 mx-auto">
+                <button
+                  onClick={() => {
+                    handleUserRequest();
+                  }}
+                  className="mx-auto mt-4 btn-secondary"
+                >
                   Request Availabilities
                 </button>
               </div>
@@ -76,23 +101,21 @@ export async function getServerSideProps(context: any) {
 
   const foundService = await getServiceById(serviceId);
 
-  // const foundAvailabilities = JSON.stringify(
-  //   // @ts-ignore
-  //   await getAllAvailabilitiesById(foundService.id),
-  // );
+  const completeService = await getUserInfoByServiceId(serviceId);
 
-  if (!(await getServiceById(serviceId))) {
-    context.res.statusCode = 404;
-    return {
-      props: {},
-    };
-  }
+  // console.log(completeService, 'completeService');
+
+  const userIdCookie = JSON.parse(context.req.cookies.userId);
+
+  const user = JSON.stringify(await getUserById(userIdCookie));
 
   return {
     props: {
       foundService,
       serviceId,
-      // foundAvailabilities: JSON.parse(foundAvailabilities),
+      userIdCookie,
+      completeService,
+      user: JSON.parse(user),
     },
   };
 }

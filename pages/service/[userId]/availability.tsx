@@ -25,17 +25,24 @@ export default AvailabilityServicePage;
 export async function getServerSideProps(context: any) {
   const userId = context.query.userId;
 
-  const availabilities = await getAllAvailabilitiesById(userId);
+  const service = JSON.stringify(await getServicesByUserId(userId));
 
   const foundService = JSON.stringify(await getServicesByUserId(userId));
 
-  // console.log('found service', foundService);
+  console.log('serviceId', JSON.parse(service).serviceId);
+
+  const availabilities = await getAllAvailabilitiesById(1);
+
+  console.log('availabilities', availabilities);
+
+  console.log('found service', foundService);
 
   return {
     props: {
       userId: userId,
       availabilities: availabilities,
       foundService: JSON.parse(foundService),
+      serviceId: JSON.parse(service).serviceId,
     },
   };
 }

@@ -36,6 +36,24 @@ export async function getSessionByToken(token: string) {
   return session;
 }
 
+export async function getValidSessionByToken(token: Session['token']) {
+  if (!token) return undefined;
+
+  const [session] = await sql<Session[]>`
+    SELECT
+      sessions.id,
+      sessions.token,
+      sessions.user_id
+    FROM
+      sessions
+    WHERE
+      sessions.token = ${token}
+    AND
+      sessions.expires > NOW()
+  `;
+  return session;
+}
+
 export async function deleteExpiredSessions() {
   const sessions = await sql<Session[]>`
     DELETE FROM sessions

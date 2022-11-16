@@ -11,7 +11,7 @@ const MobileNavService = (props: {
   serviceId: number;
 }) => {
   return (
-    <nav className="fixed bottom-0 left-0 flex items-center justify-between w-full px-10 pb-2 bg-white mobile-nav border-t-[1px] border-[rgba(0,0,0,0.1)]">
+    <nav className="z-[100000] fixed bottom-0 left-0 flex items-center justify-between w-full px-10 pb-2 bg-white mobile-nav border-t-[1px] border-[rgba(0,0,0,0.1)]">
       <Link href={`/service/${props.serviceId}/availability`}>
         <button
           onClick={() => {

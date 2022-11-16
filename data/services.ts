@@ -36,6 +36,20 @@ export async function getServicesByUserId(userId: number) {
   return services;
 }
 
+export async function getUserInfoByServiceId(serviceId: number) {
+  if (!serviceId) {
+    return null;
+  }
+  // join the services table with the services_users_relations table to get the user id
+  const [user] = await sql`
+  SELECT * FROM users
+  JOIN services_users_relations ON users.id = services_users_relations.user_id
+  JOIN services ON services.id = services_users_relations.service_id
+  WHERE services.id = ${serviceId}
+  `;
+  return user;
+}
+
 export async function createService(
   companyName: string,
   description: string,

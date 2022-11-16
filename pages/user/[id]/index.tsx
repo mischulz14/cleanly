@@ -4,6 +4,7 @@ import UserFeed from '../../../components/organisms/user/UserFeed';
 import UserProfile from '../../../components/organisms/user/UserProfile';
 import { getUserById } from '../../../data/users';
 import { selectAllServices } from '../../../data/usersServicesRelations';
+import { getParsedCookie } from '../../../utils/cookies';
 
 export type User = {
   id: number;
@@ -21,10 +22,6 @@ const UserHomePage = (props: any) => {
   const [showFilter, setShowFilter] = useState(false);
   const [district, setDistrict] = useState('');
   const [price, setPrice] = useState('15');
-
-  console.log('user id', props.userId);
-
-  console.log('serviceData', serviceData);
 
   if (!props.foundUser) {
     return <div>404</div>;
@@ -54,7 +51,7 @@ export default UserHomePage;
 
 export async function getServerSideProps(context: any) {
   const userId = context.query.id;
-
+  const userIdCookie = JSON.parse(context.req.cookies.userId);
   const foundUser = JSON.stringify(await getUserById(userId));
 
   if (!(await getUserById(userId))) {
@@ -71,6 +68,7 @@ export async function getServerSideProps(context: any) {
       foundUser: JSON.parse(foundUser),
       serviceArr: serviceArr,
       userId,
+      userIdCookie,
     },
   };
 }

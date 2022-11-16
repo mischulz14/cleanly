@@ -21,6 +21,7 @@ export default async function handler(
     //=============================
     //SECTION === 'Process a GET request to get all availabilities' === SECTION
     //=============================
+
     const availabilities = await getAllAvailabilitiesById(
       req.query.serviceId as string,
     );

@@ -7,6 +7,7 @@ import GoBackIcon from '../../components/atoms/buttons/GoBackButton';
 // import GoBackIcon from '../../components/atoms/icons/GoBackIcon';
 import EmailInput from '../../components/atoms/inputs/EmailInput';
 import PasswordInput from '../../components/atoms/inputs/PasswordInput';
+import { getValidSessionByToken } from '../../data/sessions';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -80,3 +81,20 @@ const Login = () => {
 };
 
 export default Login;
+
+export async function getServerSideProps(context: any) {
+  const token = context.req.cookies.sessionToken;
+
+  if (token && (await getValidSessionByToken(token))) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}

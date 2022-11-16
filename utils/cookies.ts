@@ -1,4 +1,5 @@
 import cookie from 'cookie';
+import Cookies from 'js-cookie';
 
 export function createSerializedRegisterSessionTokenCookie(token: string) {
   // check if we are in production
@@ -28,4 +29,18 @@ export function createUserIdCookie(userId: string) {
     secure: isProduction,
     sameSite: 'lax',
   });
+}
+
+export function getParsedCookie(key: string) {
+  const cookieValue = Cookies.get(key);
+
+  if (!cookieValue) {
+    return undefined;
+  }
+
+  try {
+    return JSON.parse(cookieValue);
+  } catch (err) {
+    return undefined;
+  }
 }

@@ -20,13 +20,13 @@ const CurrentAvailabilities = (props: any) => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col items-center justify-center">
       {' '}
       <ul className="flex flex-col justify-center items-center w-[95vw] gap-2 border-2 p-2 rounded-xl mx-auto mt-4">
         {availabilities &&
           availabilities?.map((availability: any) => (
             <li key={Math.random()} className="relative">
-              <ul className=" flex flex-col gap-2 py-8 relative px-4">
+              <ul className="relative flex flex-col gap-2 px-4 py-8 ">
                 <div className="text-center ">
                   {availability.day.toString().slice(0, 10)}
                 </div>

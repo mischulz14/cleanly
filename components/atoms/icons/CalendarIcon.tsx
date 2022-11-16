@@ -11,6 +11,8 @@ const CalendarIcon = () => {
         viewBox="0 0 489.2 489.2"
         xmlSpace="preserve"
         fill="#564787"
+        width="40px"
+        height="40px"
       >
         <g>
           <g>
