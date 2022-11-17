@@ -7,6 +7,7 @@ exports.up = async (sql) => {
   email varchar(50) UNIQUE,
   password_hash varchar(500) UNIQUE,
   created_at timestamp,
+  image varchar(500),
   role varchar(50)
     );
   `;

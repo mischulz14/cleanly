@@ -17,8 +17,8 @@ const ServiceHomepage = (props: any) => {
     setRequests(props.foundRequests);
   }, []);
 
-  function handleRequestAccept(requestId: string, status: string) {
-    fetch(`/api/request/${requestId}`, {
+  function handleRequestSatusUpdate(requestId: string, status: string) {
+    fetch(`/api/requests/updateRequest`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const ServiceHomepage = (props: any) => {
                 return (
                   <li
                     key={request.id}
-                    className="px-10 py-6 mx-10 mb-6 relative flex flex-col items-center text-[#564787] text-center bg-white  rounded-xl shadow-secondaryModified gap-5 relative"
+                    className="px-10 py-6 mx-10 mb-6  flex flex-col items-center text-[#564787] text-center bg-white  rounded-xl shadow-secondaryModified gap-5 relative"
                   >
                     <div>{request.userName}</div>
                     <div className="flex flex-col gap-3 p-4 border-2 shadow-secondaryModified rounded-xl">
@@ -80,7 +80,7 @@ const ServiceHomepage = (props: any) => {
                       <>
                         <button
                           onClick={() => {
-                            handleRequestAccept(request.id, 'accepted');
+                            handleRequestSatusUpdate(request.id, 'accepted');
                             request.status = 'accepted';
                             setRender((prev) => !prev);
                           }}
@@ -90,7 +90,7 @@ const ServiceHomepage = (props: any) => {
                         </button>
                         <button
                           onClick={() =>
-                            handleRequestAccept(request.id, 'rejected')
+                            handleRequestSatusUpdate(request.id, 'rejected')
                           }
                           className="border-2 btn-primary"
                         >

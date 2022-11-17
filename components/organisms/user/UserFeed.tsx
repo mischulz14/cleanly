@@ -6,36 +6,36 @@ import FilterForm from '../../molecules/FilterForm';
 
 const UserFeed = (props: any) => {
   return (
-    <SlideInFromLeft>
-      <div className="flex bg-[#DBCBD8] pt-6 pb-2">
-        <ul className="flex flex-col items-center justify-center w-full gap-12 px-8 mx-auto mt-24 mb-28 ">
-          <div className="fixed flex justify-center items-center top-0 z-20 rounded-b-xl pt-4 pb-6 w-full bg-[#101935]">
-            <button
-              onClick={() => props.setShowFilter(true)}
-              className="btn-primary"
-            >
-              Filter
-            </button>
-            {props.showFilter && (
-              <FilterForm
-                price={props.price}
-                district={props.district}
-                setDistrict={props.setDistrict}
-                setPrice={props.setPrice}
-                showFilter={props.showFilter}
-                serviceData={props.serviceData}
-                setServiceData={props.setServiceData}
-                setShowFilter={props.setShowFilter}
-                serviceDataFromDB={props.serviceDataFromDB}
-              />
-            )}
-          </div>
+    <div className="flex justify-around bg-[#DBCBD8] pt-6 pb-2">
+      <div className="fixed flex justify-center items-center top-0 z-20 rounded-b-xl pt-4 pb-6 w-full bg-[#101935]">
+        <button
+          onClick={() => props.setShowFilter(true)}
+          className="btn-primary"
+        >
+          Filter
+        </button>
+        {props.showFilter && (
+          <FilterForm
+            price={props.price}
+            district={props.district}
+            setDistrict={props.setDistrict}
+            setPrice={props.setPrice}
+            showFilter={props.showFilter}
+            serviceData={props.serviceData}
+            setServiceData={props.setServiceData}
+            setShowFilter={props.setShowFilter}
+            serviceDataFromDB={props.serviceDataFromDB}
+          />
+        )}
+      </div>
+      <SlideInFromLeft>
+        <ul className="flex flex-col items-center justify-center w-full gap-12 mt-24 grow mb-28 ">
           {props.serviceData &&
             props.serviceData.map((service: any) => {
               return (
                 <li
                   key={service.id}
-                  className="relative flex flex-col items-center w-full gap-6 p-4 text-[#564787] text-center bg-white  rounded-xl shadow-secondaryModified"
+                  className="relative grow flex flex-col items-center w-[80vw] gap-6 p-4 text-[#564787] text-center bg-white  rounded-xl shadow-secondaryModified"
                 >
                   <div className="absolute p-6 bg-white rounded-full shadow-secondaryModified -top-8 left-2 ">
                     <PersonIcon />
@@ -71,8 +71,8 @@ const UserFeed = (props: any) => {
               );
             })}
         </ul>
-      </div>
-    </SlideInFromLeft>
+      </SlideInFromLeft>
+    </div>
   );
 };
 

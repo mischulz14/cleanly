@@ -56,3 +56,22 @@ export async function updateRequest(status: string, id: number) {
 
   return request;
 }
+
+export async function findRequestByUserIdDayAndTimeslot(
+  userId: string,
+  day: string,
+  timeslots: any,
+) {
+  const [request] = await sql`
+    SELECT
+      *
+    FROM
+      requests
+    WHERE
+      requests.user_id = ${userId} AND requests.day = ${day} AND requests.timeslots = ${timeslots}
+  `;
+
+  console.log('request', request);
+
+  return request;
+}

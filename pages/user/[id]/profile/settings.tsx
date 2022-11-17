@@ -37,7 +37,7 @@ const UserProfileSettings = (props: any) => {
   }
 
   return (
-    <div className="h-[100vh] overflow-hidden">
+    <div className="h-[100vh] overflow-hidden bg-white">
       <SlideInFromLeft>
         <GoBackButton />
 

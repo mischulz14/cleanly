@@ -9,7 +9,7 @@ const UserProfile = (props: any) => {
     <SlideInFromLeft>
       {/* <UserAvatar />
     <UserDetails /> */}
-      <div className="flex flex-col h-[100vh] items-center pt-14">
+      <div className="flex flex-col h-[100vh] items-center pt-14 bg-white">
         <div className="p-4 mb-4 border-2 rounded-full">
           <PersonIcon />
         </div>

@@ -4,7 +4,6 @@ CREATE TABLE services (
  id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   company_name varchar(50),
   description varchar(50),
-  picture varchar(50),
   price integer,
   district varchar(5)
 );

@@ -7,8 +7,9 @@ import CloseButton from '../atoms/buttons/CloseBtn';
 export default function FilterForm(props: any) {
   console.log('serviceData from Db', props.serviceDataFromDB);
   function handleFilter() {
+    console.log('district', props.district);
     const arrayCopy = [...props.serviceDataFromDB].filter((service) => {
-      if (props.district === 'All') {
+      if (props.district === 'all') {
         return service.price <= props.price;
       } else {
         return (
@@ -64,7 +65,7 @@ export default function FilterForm(props: any) {
             </label>
           </div>
           <select
-            className="w-full h-12 border-2 border-gray-300 rounded-lg  district-select"
+            className="w-full h-12 border-2 border-gray-300 rounded-lg district-select"
             value={props.district}
             onChange={(event) => props.setDistrict(event.target.value)}
           >

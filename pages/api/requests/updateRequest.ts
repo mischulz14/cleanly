@@ -39,7 +39,7 @@ export default async function handler(
       console.log('updatedTimeslot', updatedTimeslot);
     }
 
-    res.status(200).json({ requests: 'created' });
+    res.status(200).json({ requests: 'updated' });
   } else {
     // Handle any other HTTP method
     res.status(401).json({ errors: [{ message: 'Method not allowed' }] });

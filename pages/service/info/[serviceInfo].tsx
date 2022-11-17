@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import ClickAnimation from '../../../components/animation/ClickAnimation';
+import ConfirmationAnimation from '../../../components/animation/ConfirmationAnimation';
 import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
 import SlideInFromTop from '../../../components/animation/SlideInFromTop';
+import XAnimation from '../../../components/animation/XAnimation';
 import GoBackButton from '../../../components/atoms/buttons/GoBackButton';
 import CurrentAvailabilities from '../../../components/molecules/availability/CurrentAvailabilities';
 import { getServiceById, getUserInfoByServiceId } from '../../../data/services';
@@ -30,7 +32,7 @@ const ServiceInfo = (props: any) => {
   }, []);
 
   function handleUserRequest() {
-    fetch(`/api/requests`, {
+    fetch(`/api/requests/newRequest`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,8 +52,8 @@ const ServiceInfo = (props: any) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.errors) {
-          setErrors(data.errors);
+        if (data.error) {
+          setErrors(data.error);
         }
       });
   }
@@ -78,30 +80,10 @@ const ServiceInfo = (props: any) => {
           </ClickAnimation>
           {sentRequest && (
             <div className="shadow-secondary flex flex-col items-center justify-center rounded-xl mt-6 py-12 bg-[#564787]">
-              <svg
-                version="1.1"
-                height={100}
-                width={100}
-                id="Layer_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                viewBox="0 0 98.5 98.5"
-                enableBackground="new 0 0 98.5 98.5"
-                xmlSpace="preserve"
-              >
-                <path
-                  className="checkmark"
-                  fill="none"
-                  strokeWidth="8"
-                  strokeMiterlimit="10"
-                  d="M81.7,17.8C73.5,9.3,62,4,49.2,4
-	C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3"
-                />
-              </svg>
+              {errors ? <XAnimation /> : <ConfirmationAnimation />}
+
               <span className="block pt-8 text-white">
-                Request has been sent!
+                {errors ? errors : 'Request sent!'}
               </span>
             </div>
           )}

@@ -6,7 +6,26 @@ import { getUserById } from '../../../../data/users';
 
 const UserProfilePage = (props: any) => {
   const [page, setPage] = useState('profile');
+  const [picture, setPicture] = useState('');
+
   // console.log('user id', props.userId);
+
+  async function uploadPicture(event: any) {
+    const files = event.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'cleanly_images');
+
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${props.cloudinaryAPI}/image/upload`,
+      {
+        method: 'POST',
+        body: data,
+      },
+    );
+    const file = await response.json();
+    setPicture(file.secure_url);
+  }
 
   return (
     <>
@@ -25,6 +44,8 @@ export default UserProfilePage;
 export async function getServerSideProps(context: any) {
   const userId = context.query.id;
 
+  const cloudinaryAPI = process.env.CLOUDINARY_NAME;
+
   const foundUser = JSON.stringify(await getUserById(userId));
 
   // console.log('found service', foundService);
@@ -33,6 +54,7 @@ export async function getServerSideProps(context: any) {
     props: {
       userId: userId,
       user: JSON.parse(foundUser),
+      cloudinaryAPI,
     },
   };
 }

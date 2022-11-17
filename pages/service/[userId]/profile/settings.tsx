@@ -49,7 +49,7 @@ const ProfileSettings = (props: any) => {
   }
 
   return (
-    <div className="pb-10 ">
+    <div className="pb-10 bg-white">
       <SlideInFromLeft>
         <GoBackButton />
 
