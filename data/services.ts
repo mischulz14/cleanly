@@ -54,12 +54,11 @@ export async function createService(
   companyName: string,
   description: string,
   price: number,
-  picture: string,
   district: string,
 ) {
   const [service] = await sql<Service[]>`
-    INSERT INTO services (company_name, description, price, picture, district)
-    VALUES (${companyName}, ${description}, ${price}, ${picture}, ${district})
+    INSERT INTO services (company_name, description, price, district)
+    VALUES (${companyName}, ${description}, ${price}, ${district})
     RETURNING *
   `;
   return service!;

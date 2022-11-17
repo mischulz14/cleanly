@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Appear from '../../animation/Appear';
 import SlideInFromLeft from '../../animation/SlideInFromLeft';
+import EditIcon from '../../atoms/icons/EditIcon';
 import PersonIcon from '../../atoms/icons/PersonIcon';
 
 const UserProfile = (props: any) => {
@@ -10,8 +11,11 @@ const UserProfile = (props: any) => {
       {/* <UserAvatar />
     <UserDetails /> */}
       <div className="flex flex-col h-[100vh] items-center pt-14 bg-white">
-        <div className="p-4 mb-4 border-2 rounded-full">
+        <div className="relative p-4 mb-4 border-2 rounded-full">
           <PersonIcon />
+          <button className="absolute flex items-center justify-center object-contain w-10 h-10 border-2 rounded-full -right-2 -bottom-3 bg-slate-300">
+            <EditIcon width={20} height={20} />
+          </button>
         </div>
         <ul className="flex flex-col items-center justify-center gap-8 pt-8 user__info">
           <li className="text-xl">

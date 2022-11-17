@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-const EditIcon = () => {
+const EditIcon = (props: any) => {
   return (
     <svg
       version="1.1"
@@ -9,6 +9,8 @@ const EditIcon = () => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
+      width={props.width}
+      height={props.height}
       viewBox="0 0 217.855 217.855"
       xmlSpace="preserve"
       fill="#564787"

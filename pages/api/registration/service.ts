@@ -53,6 +53,7 @@ export default async function handler(
       req.body.lastName,
       req.body.email,
       passwordHash,
+      '',
       'service',
     );
 
@@ -61,7 +62,6 @@ export default async function handler(
       req.body.companyName,
       req.body.description,
       req.body.price,
-      req.body.picture,
       req.body.district,
     );
 

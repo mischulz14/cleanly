@@ -50,6 +50,7 @@ export default async function handler(
       req.body.lastName,
       req.body.email,
       passwordHash,
+      "",
       'user',
     );
 

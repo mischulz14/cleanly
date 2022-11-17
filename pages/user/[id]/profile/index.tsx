@@ -6,11 +6,11 @@ import { getUserById } from '../../../../data/users';
 
 const UserProfilePage = (props: any) => {
   const [page, setPage] = useState('profile');
-  const [picture, setPicture] = useState('');
+  const [image, setImage] = useState('');
 
   // console.log('user id', props.userId);
 
-  async function uploadPicture(event: any) {
+  async function uploadImage(event: any) {
     const files = event.target.files;
     const data = new FormData();
     data.append('file', files[0]);
@@ -24,7 +24,7 @@ const UserProfilePage = (props: any) => {
       },
     );
     const file = await response.json();
-    setPicture(file.secure_url);
+    setImage(file.secure_url);
   }
 
   return (
@@ -33,6 +33,8 @@ const UserProfilePage = (props: any) => {
         settingsLink={`/user/${props.userId}/profile/settings`}
         user={props.user}
         userId={props.userId}
+        image={image}
+        uploadImage={uploadImage}
       />
       <MobileNavUser page={page} setPage={setPage} userId={props.userId} />
     </>
