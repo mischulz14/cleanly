@@ -1,13 +1,8 @@
 import Image from 'next/image';
-import { useState } from 'react';
-import SlideInFromLeft from '../animation/SlideInFromLeft';
-import SlideInFromTop from '../animation/SlideInFromTop';
 import CloseButton from '../atoms/buttons/CloseBtn';
 
 export default function FilterForm(props: any) {
-  console.log('serviceData from Db', props.serviceDataFromDB);
   function handleFilter() {
-    console.log('district', props.district);
     const arrayCopy = [...props.serviceDataFromDB].filter((service) => {
       if (props.district === 'all') {
         return service.price <= props.price;
@@ -20,9 +15,6 @@ export default function FilterForm(props: any) {
         );
       }
     });
-
-    console.log('arrayCopy', arrayCopy);
-
     props.setShowFilter(false);
     props.setServiceData(arrayCopy);
   }

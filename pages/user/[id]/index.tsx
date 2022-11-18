@@ -23,9 +23,9 @@ const UserHomePage = (props: any) => {
   const [district, setDistrict] = useState('');
   const [price, setPrice] = useState('15');
 
-  console.log('service Array from backend', props.serviceArr);
+  // console.log('service Array from backend', props.serviceArr);
 
-  console.log('serviceData that should show', serviceData);
+  // console.log('serviceData that should show', serviceData);
 
   if (!props.foundUser) {
     return <div>404</div>;

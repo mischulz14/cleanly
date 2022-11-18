@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["homescreen", "tailwindcss", "timeslot"]
+  "cSpell.words": ["homescreen", "tailwindcss", "timeslot"],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

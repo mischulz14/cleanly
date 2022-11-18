@@ -1,19 +1,65 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import Appear from '../../animation/Appear';
+import { useState } from 'react';
 import SlideInFromLeft from '../../animation/SlideInFromLeft';
 import EditIcon from '../../atoms/icons/EditIcon';
 import PersonIcon from '../../atoms/icons/PersonIcon';
+import PictureUploadModal from '../../molecules/PictureUploadModal';
 
 const UserProfile = (props: any) => {
+  const [showPictureUploadModal, setShowPictureUploadModal] = useState(false);
+
+  async function handleUpdateUserImage() {
+    await fetch('/api/user/updateUserImage', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: props.userId,
+        image: props.image,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+
+    setShowPictureUploadModal(false);
+  }
   return (
     <SlideInFromLeft>
       {/* <UserAvatar />
     <UserDetails /> */}
-      <div className="flex flex-col h-[100vh] items-center pt-14 bg-white">
-        <div className="relative p-4 mb-4 border-2 rounded-full">
-          <PersonIcon />
-          <button className="absolute flex items-center justify-center object-contain w-10 h-10 border-2 rounded-full -right-2 -bottom-3 bg-slate-300">
+      <div className="flex flex-col h-[100vh] items-center pt-14 bg-white relative">
+        {showPictureUploadModal && (
+          <PictureUploadModal
+            setShowPictureModal={setShowPictureUploadModal}
+            uploadImage={props.uploadImage}
+            image={props.image}
+            handleUpdateUserImage={handleUpdateUserImage}
+          />
+        )}
+        <div
+          className={
+            props.image ? 'relative' : 'relative p-4 border-2 rounded-full'
+          }
+        >
+          {props.image ? (
+            <div className="">
+              <img
+                src={props.image}
+                className="object-cover w-20 h-20 rounded-full"
+              />
+            </div>
+          ) : (
+            <PersonIcon />
+          )}
+
+          <button
+            onClick={() => setShowPictureUploadModal(true)}
+            className="absolute flex items-center justify-center object-contain w-10 h-10 border-2 rounded-full -right-2 -bottom-3 bg-slate-300"
+          >
             <EditIcon width={20} height={20} />
           </button>
         </div>

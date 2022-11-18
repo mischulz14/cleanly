@@ -1,6 +1,6 @@
 import ClickAnimation from '../../animation/ClickAnimation';
 
-const CloseButton = (props: any) => {
+const CloseButton = (props: { handleGoBackAction: any }) => {
   return (
     <button
       onClick={() => props.handleGoBackAction()}

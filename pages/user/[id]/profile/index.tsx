@@ -6,7 +6,7 @@ import { getUserById } from '../../../../data/users';
 
 const UserProfilePage = (props: any) => {
   const [page, setPage] = useState('profile');
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(props.user.image);
 
   // console.log('user id', props.userId);
 
