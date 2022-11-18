@@ -2,6 +2,7 @@ import { useState } from 'react';
 import MobileNavService from '../../../../components/organisms/navbar/MobileNavService';
 import UserProfile from '../../../../components/organisms/user/UserProfile';
 import { getServicesByUserId } from '../../../../data/services';
+import { getValidSessionByToken } from '../../../../data/sessions';
 import { getUserById } from '../../../../data/users';
 import {
   selectAllServicesWithSpecificUserId,
@@ -53,6 +54,17 @@ export default serviceProfile;
 
 export async function getServerSideProps(context: any) {
   const userId = context.query.userId;
+
+  const token = context.req.cookies.sessionToken;
+
+  if (!token || !(await getValidSessionByToken(token))) {
+    return {
+      redirect: {
+        destination: `/login?returnTo=/service/${userId}/profile`,
+        permanent: false,
+      },
+    };
+  }
 
   const cloudinaryAPI = process.env.CLOUDINARY_NAME;
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import MobileNavUser from '../../../components/organisms/navbar/MobileNavUser';
 import UserFeed from '../../../components/organisms/user/UserFeed';
+import { getValidSessionByToken } from '../../../data/sessions';
 import { getUserById } from '../../../data/users';
 import { selectAllServices } from '../../../data/usersServicesRelations';
 
@@ -60,6 +61,17 @@ export async function getServerSideProps(context: any) {
     context.res.statusCode = 404;
     return {
       props: {},
+    };
+  }
+
+  const token = context.req.cookies.sessionToken;
+
+  if (!token ||!(await getValidSessionByToken(token))) {
+    return {
+      redirect: {
+        destination: `/login?returnTo=/user/${userId}`,
+        permanent: false,
+      },
     };
   }
 

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import MobileNavUser from '../../../../components/organisms/navbar/MobileNavUser';
 import UserProfile from '../../../../components/organisms/user/UserProfile';
 import { getServicesByUserId } from '../../../../data/services';
+import { getValidSessionByToken } from '../../../../data/sessions';
 import { getUserById } from '../../../../data/users';
 
 const UserProfilePage = (props: any) => {
@@ -51,6 +52,17 @@ export async function getServerSideProps(context: any) {
   const foundUser = JSON.stringify(await getUserById(userId));
 
   // console.log('found service', foundService);
+
+  const token = context.req.cookies.sessionToken;
+
+  if (!token || !(await getValidSessionByToken(token))) {
+    return {
+      redirect: {
+        destination: `/login?returnTo=/user/${userId}/profile`,
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {

@@ -10,7 +10,7 @@ const CurrentAvailabilities = (props: any) => {
       .then((res) => res.json())
       .then((data) => {
         setAvailabilities(data.availabilities);
-        console.log(data);
+        // console.log(data);
       });
   }, []);
 

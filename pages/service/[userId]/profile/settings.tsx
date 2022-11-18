@@ -5,6 +5,7 @@ import SlideInFromTop from '../../../../components/animation/SlideInFromTop';
 import GoBackButton from '../../../../components/atoms/buttons/GoBackButton';
 import MobileNavService from '../../../../components/organisms/navbar/MobileNavService';
 import { getServicesByUserId } from '../../../../data/services';
+import { getValidSessionByToken } from '../../../../data/sessions';
 import { getUserById } from '../../../../data/users';
 
 const ProfileSettings = (props: any) => {
@@ -233,6 +234,17 @@ export async function getServerSideProps(context: any) {
   const user = await getUserById(userId);
 
   const foundService = JSON.stringify(await getServicesByUserId(userId));
+
+  const token = context.req.cookies.sessionToken;
+
+  if (!token || !(await getValidSessionByToken(token))) {
+    return {
+      redirect: {
+        destination: `/login?returnTo=/service/${userId}/profile/settings`,
+        permanent: false,
+      },
+    };
+  }
 
   // console.log('found service', foundService);
 

@@ -39,7 +39,7 @@ export default async function handler(
       return res.status(401).json({
         errors: [
           {
-            message: 'User not found',
+            message: 'Email not correct',
           },
         ],
       });

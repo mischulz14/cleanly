@@ -48,7 +48,7 @@ const UserFeed = (props: any) => {
                       <img
                         src={service.image}
                         alt=""
-                        className="object-cover w-20 h-20 border-2 rounded-full"
+                        className="object-cover w-20 h-20 border-2 rounded-full shadow-secondaryModified"
                       />
                     ) : (
                       <PersonIcon />

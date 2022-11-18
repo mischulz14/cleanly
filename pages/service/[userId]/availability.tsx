@@ -4,6 +4,7 @@ import MobileNav from '../../../components/organisms/navbar/MobileNavService';
 import AvailabilityPage from '../../../components/organisms/service/AvailabilityPage';
 import { getAllAvailabilitiesById } from '../../../data/availabilities';
 import { getServiceById, getServicesByUserId } from '../../../data/services';
+import { getValidSessionByToken } from '../../../data/sessions';
 
 const AvailabilityServicePage = (props: any) => {
   const [page, setPage] = useState('availability');
@@ -34,13 +35,24 @@ export async function getServerSideProps(context: any) {
 
   const foundService = JSON.stringify(await getServicesByUserId(userId));
 
-  console.log('serviceId', JSON.parse(service).serviceId);
+  // console.log('serviceId', JSON.parse(service).serviceId);
 
   const availabilities = await getAllAvailabilitiesById(1);
 
-  console.log('availabilities', availabilities);
+  // console.log('availabilities', availabilities);
 
-  console.log('found service', foundService);
+  // console.log('found service', foundService);
+
+  const token = context.req.cookies.sessionToken;
+
+  if (!token || !(await getValidSessionByToken(token))) {
+    return {
+      redirect: {
+        destination: `/login?returnTo=/service/${userId}/availability`,
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {

@@ -27,28 +27,6 @@ export default function FilterForm(props: any) {
     <form className="px-10 pt-16 filter-form flex flex-col gap-8  h-[100vh] w-full bg-white z-[1000000000000000000000000000000000000000] absolute left-0 top-0 overflow-y-scroll">
       <div className="relative flex flex-col justify-center gap-10 px-8 py-10 border-2 border-gray-300 rounded-lg">
         <CloseButton handleGoBackAction={handleGoBackAction} />
-        <div className="">
-          <label
-            htmlFor="price"
-            className="block mb-2 font-semibold text-[#564787] text-center relative"
-          >
-            <div className="flex items-center gap-3 ">
-              <Image src="/images/euro.svg" height="30" width="30" />
-              <span>Price/h: {props.price}</span>
-            </div>
-          </label>
-          <input
-            className="mb-8 w-[250px]"
-            id="price"
-            type="range"
-            min="0"
-            max="30"
-            onChange={(event) => {
-              props.setPrice(event.currentTarget.value);
-            }}
-            value={props.price}
-          />
-        </div>
         <div className="flex flex-col">
           <div className="flex items-end gap-3 pb-4">
             <Image src="/images/location.svg" height="30" width="30" />
@@ -57,11 +35,13 @@ export default function FilterForm(props: any) {
             </label>
           </div>
           <select
-            className="w-full h-12 border-2 border-gray-300 rounded-lg district-select"
+            className="overflow-visible border-2 border-gray-300 rounded-lg  district-select"
             value={props.district}
             onChange={(event) => props.setDistrict(event.target.value)}
           >
-            <option value="all">All</option>
+            <option className="h-[300px]" value="all">
+              All
+            </option>
             <option value="1010">1010</option>
             <option value="1020">1020</option>
             <option value="1030">1030</option>
@@ -87,6 +67,29 @@ export default function FilterForm(props: any) {
             <option value="1230">1230</option>
           </select>
         </div>
+        <div className="">
+          <label
+            htmlFor="price"
+            className="block mb-2 font-semibold text-[#564787] text-center relative"
+          >
+            <div className="flex items-center gap-3 ">
+              <Image src="/images/euro.svg" height="30" width="30" />
+              <span>Price/h: {props.price}</span>
+            </div>
+          </label>
+          <input
+            className="mb-8 w-[250px]"
+            id="price"
+            type="range"
+            min="0"
+            max="30"
+            onChange={(event) => {
+              props.setPrice(event.currentTarget.value);
+            }}
+            value={props.price}
+          />
+        </div>
+
         <button
           className="mx-auto btn-secondary bg-[#564787]"
           onClick={(event) => {

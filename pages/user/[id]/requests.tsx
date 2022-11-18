@@ -6,11 +6,6 @@ import ClockIcon from '../../../components/atoms/icons/ClockIcon';
 import RequestsIcon from '../../../components/atoms/icons/RequestsIcon';
 import MobileNavUser from '../../../components/organisms/navbar/MobileNavUser';
 import { getRequestByUserId } from '../../../data/requests';
-import {
-  getServiceById,
-  getServicesByUserId,
-  getUserInfoByServiceId,
-} from '../../../data/services';
 import { getValidSessionByToken } from '../../../data/sessions';
 import { getUserById } from '../../../data/users';
 
@@ -60,7 +55,9 @@ const UserRequests = (props: any) => {
                     )}
                   </div>
                   {request.status === 'accepted' && (
-                    <button className="btn-secondary">Contact</button>
+                    <a href={`mailto:${request.serviceEmail}`}>
+                      <button className="btn-secondary">Contact</button>
+                    </a>
                   )}
                 </li>
               );
@@ -80,6 +77,15 @@ export async function getServerSideProps(context: any) {
   const foundRequests = JSON.stringify(await getRequestByUserId(userId));
 
   const foundUser = await getUserById(userId);
+
+  if (!token || !(await getValidSessionByToken(token))) {
+    return {
+      redirect: {
+        destination: `/login?returnTo=/user/${userId}/requests`,
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {

@@ -29,14 +29,16 @@ export function days() {
   for (let i = 1; i <= 30; i++) {
     if (i === 1) {
       let first = curr.getDate();
-      let day = new Date(curr.setDate(first)).toString().slice(0, 10);
+      let day = new Date(curr.setDate(first)).toString().slice(0, 15);
       daysOfTheMonth.push({ day: day });
     } else {
       let date = curr.getDate() + 1;
-      let day = new Date(curr.setDate(date)).toString().slice(0, 10);
+      let day = new Date(curr.setDate(date)).toString().slice(0, 15);
       daysOfTheMonth.push({ day: day });
     }
   }
+
+  console.log(daysOfTheMonth);
 
   return daysOfTheMonth;
 }

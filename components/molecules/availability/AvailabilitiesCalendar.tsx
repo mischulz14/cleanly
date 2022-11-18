@@ -19,7 +19,7 @@ const AvailabilitiesCalendar = (props: {
         {props.days().map((day: any) => (
           <li key={Math.random()}>
             <ul className="h-[400px] w-[180px] overflow-y-scroll flex flex-col gap-1 pt-4 relative px-4">
-              <div className="text-center ">{day.day}</div>
+              <div className="text-center ">{day.day.slice(0, 10)}</div>
               {props.timeslots.map((timeslot: any) => (
                 <TimeSlotListItem
                   key={Math.random()}

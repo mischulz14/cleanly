@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useState } from 'react';
 import SlideInFromTop from '../animation/SlideInFromTop';
 import CloseButton from '../atoms/buttons/CloseBtn';
@@ -22,9 +23,10 @@ const PictureUploadModal = (props: {
             <CloseButton handleGoBackAction={handleGoBackAction} />
             <label
               htmlFor="file"
-              className="block p-4 mt-10 text-black border-2 rounded-xl"
+              className="flex items-center gap-5 p-4 mt-10 text-black transition-all duration-300 border-2 cursor-pointer rounded-xl hover:scale-105 active:scale-95"
             >
-              Choose an image
+              <div>Choose an image</div>
+              <Image src="/images/upload.svg" height="30" width="30" />
             </label>
             <input
               type="file"
@@ -34,6 +36,7 @@ const PictureUploadModal = (props: {
                 setShowPreview(true);
               }}
               className="w-[300px] flex items-center mb-4 border-2 border-gray-300 rounded-lg"
+              style={{ display: 'none' }}
             />
             {showPreview && (
               <div className="object-contain">

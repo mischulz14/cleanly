@@ -6,11 +6,15 @@ import RequestsIcon from '../../../components/atoms/icons/RequestsIcon';
 import MobileNavService from '../../../components/organisms/navbar/MobileNavService';
 import { getRequestByServiceId } from '../../../data/requests';
 import { getServicesByUserId } from '../../../data/services';
+import { getValidSessionByToken } from '../../../data/sessions';
 
 const ServiceHomepage = (props: any) => {
   const [page, setPage] = useState('home');
   const [requests, setRequests] = useState([]);
   const [render, setRender] = useState(false);
+
+  // q: how to get the current date out of a string like "Thu Nov 17"?
+  // a: use the Date constructor
 
   // console.log(props.userId);
   useEffect(() => {
@@ -89,9 +93,11 @@ const ServiceHomepage = (props: any) => {
                           Accept
                         </button>
                         <button
-                          onClick={() =>
-                            handleRequestSatusUpdate(request.id, 'rejected')
-                          }
+                          onClick={() => {
+                            handleRequestSatusUpdate(request.id, 'rejected');
+                            request.status = 'rejected';
+                            setRender((prev) => !prev);
+                          }}
                           className="border-2 btn-primary"
                         >
                           Decline
@@ -128,6 +134,18 @@ export async function getServerSideProps(context: any) {
 
   // console.log('found service', foundService);
   // console.log('found requests', foundRequests);
+
+  const token = context.req.cookies.sessionToken;
+
+  if (!token || !(await getValidSessionByToken(token))) {
+    return {
+      redirect: {
+        destination: `/login?returnTo=/service/${userId}`,
+        permanent: false,
+      },
+    };
+  }
+
 
   return {
     props: {

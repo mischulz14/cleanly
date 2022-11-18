@@ -13,7 +13,6 @@ import { colors } from '../../../utils/colors';
 const ServiceInfo = (props: any) => {
   const [showCurrentAvailabilities, setShowCurrentAvailabilities] =
     useState(false);
-  const [toDelete, setToDelete] = useState(false);
   const [availabilities, setAvailabilities] = useState([]);
   const [errors, setErrors] = useState('');
   const chosenTimeslotsArray: any = [];
@@ -61,11 +60,23 @@ const ServiceInfo = (props: any) => {
   return (
     <SlideInFromLeft>
       <div
-        className={`flex flex-col bg-[${colors.secondary}] relative py-20  h-[100vh] overflow-y-scroll`}
+        className={`text-center flex flex-col bg-[${colors.secondary}] relative py-10  min-h-[100vh] overflow-y-scroll`}
       >
         <GoBackButton />
 
-        <div className="flex flex-col w-full px-4">
+        <div className="flex flex-col w-full gap-3 px-4">
+          {props.completeService && (
+            <img
+              src={props.completeService.image}
+              alt="service"
+              className="object-cover w-32 h-32 mx-auto mb-4 border-2 rounded-full"
+            />
+          )}
+          {props.completeService.description && (
+            <div className="p-4 mx-auto mb-4 text-center bg-white rounded-xl">
+              {props.completeService.description}
+            </div>
+          )}
           <ClickAnimation>
             <button
               onClick={() => {
@@ -73,7 +84,7 @@ const ServiceInfo = (props: any) => {
                 setErrors('');
                 setSentRequest(false);
               }}
-              className="bg-[#564787] text-white px-8 py-6 rounded-lg w-full text-center cursor-pointer z-[99] shadow-secondary"
+              className="bg-[#564787] text-white px-8 py-6 rounded-lg mx-auto w-full text-center cursor-pointer z-[99] shadow-secondary"
             >
               See/Request Availabilities
             </button>
@@ -90,11 +101,11 @@ const ServiceInfo = (props: any) => {
           {showCurrentAvailabilities && (
             <div className="">
               <SlideInFromTop>
-                <div className="flex flex-col grow">
+                <div>
                   <CurrentAvailabilities
                     availabilities={availabilities}
                     serviceId={props.serviceId}
-                    toDelete={toDelete}
+                    toDelete={false}
                     chosenTimeslotsArray={chosenTimeslotsArray}
                   />
                   {errors && (
@@ -105,14 +116,16 @@ const ServiceInfo = (props: any) => {
                   <button
                     onClick={() => {
                       if (chosenTimeslotsArray.length === 0) {
-                        setErrors('Please select at least one timeslot');
+                        setErrors(
+                          "Either this service doesn't have any availabilities or you haven't selected any",
+                        );
                       } else {
                         handleUserRequest();
                         setSentRequest(true);
                         setShowCurrentAvailabilities(false);
                       }
                     }}
-                    className="mx-auto mt-4 btn-secondary"
+                    className="mx-auto mt-8 btn-secondary"
                   >
                     Request Availabilities
                   </button>
