@@ -12,7 +12,7 @@ export default async function handler(
   if (req.method === 'PUT') {
     if (typeof req.body.image !== 'string') {
       return res.status(400).json({
-        errors: [{ message: 'Email is not a string' }],
+        errors: [{ message: 'Image is not a string' }],
       });
     } else {
       // update the user

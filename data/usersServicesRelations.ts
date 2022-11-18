@@ -43,3 +43,16 @@ export async function selectAllServicesWithSpecificUserId(serviceId: number) {
   `;
   return services;
 }
+
+export async function selectAllServicesWithSpecificUserIdAndServiceId(
+  userId: number,
+  serviceId: number,
+) {
+  const services = await sql`
+    SELECT * FROM users
+    JOIN services_users_relations ON users.id = services_users_relations.user_id
+    JOIN services ON services.id = services_users_relations.service_id
+    WHERE users.id = ${userId} AND services.id = ${serviceId}
+  `;
+  return services;
+}

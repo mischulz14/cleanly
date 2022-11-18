@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import MobileNavUser from '../../../components/organisms/navbar/MobileNavUser';
 import UserFeed from '../../../components/organisms/user/UserFeed';
-import UserProfile from '../../../components/organisms/user/UserProfile';
 import { getUserById } from '../../../data/users';
 import { selectAllServices } from '../../../data/usersServicesRelations';
-import { getParsedCookie } from '../../../utils/cookies';
 
 export type User = {
   id: number;
@@ -66,6 +64,8 @@ export async function getServerSideProps(context: any) {
   }
 
   const serviceArr = await selectAllServices();
+
+  // console.log('serviceArr', serviceArr);
 
   return {
     props: {
