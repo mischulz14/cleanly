@@ -105,7 +105,9 @@ const ServiceHomepage = (props: any) => {
                       </>
                     )}
                     {request.status === 'accepted' && (
-                      <button className="btn-secondary">Contact</button>
+                      <a href={`mailto:${request.userEmail}`}>
+                        <button className="btn-secondary">Contact</button>
+                      </a>
                     )}
                   </li>
                 );
