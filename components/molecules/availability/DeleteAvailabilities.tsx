@@ -22,7 +22,7 @@ const DeleteAvailabilities = (props: any) => {
   return (
     <div className="flex flex-col items-center justify-center">
       {' '}
-      <ul className="flex flex-col justify-center items-center w-[95vw] gap-2 border-2 p-2 rounded-xl mx-auto mt-4">
+      <ul className="sm:max-w-[100%]  flex flex-col justify-center items-center w-[95vw] gap-2 border-2 p-2 rounded-xl mx-auto mt-4">
         {availabilities &&
           availabilities?.map((availability: any) => (
             <li key={Math.random()} className="relative">

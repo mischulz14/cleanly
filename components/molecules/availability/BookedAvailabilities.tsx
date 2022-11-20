@@ -17,11 +17,11 @@ const BookedAvailabilities = (props: any) => {
   return (
     <>
       {' '}
-      <ul className="flex flex-col items-center justify-center gap-2 p-2 mt-4 overflow-x-scroll border-2 rounded-xl">
+      <ul className="flex flex-col items-center justify-center gap-2 p-2 mt-4 overflow-x-scroll border-2 hide-scrollbar rounded-xl">
         {availabilities &&
           availabilities?.map((availability: any) => (
             <li key={Math.random()}>
-              <ul className=" w-[180px] overflow-y-scroll flex flex-col gap-1 py-8 relative px-4">
+              <ul className="hide-scrollbar w-[180px] overflow-y-scroll flex flex-col gap-1 py-8 relative px-4">
                 <div className="text-center ">
                   {availability.day.toString().slice(0, 10)}
                 </div>
@@ -34,7 +34,6 @@ const BookedAvailabilities = (props: any) => {
                         timeslot={timeslot}
                         chosenTimeslotsArray={props.chosenTimeslotsArray}
                         toDelete={false}
-                        // groupedTimeslots={groupedTimeslots}
                         showStatus={false}
                       />
                     ),

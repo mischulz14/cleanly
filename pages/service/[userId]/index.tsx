@@ -3,6 +3,8 @@ import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
 import CalendarIcon from '../../../components/atoms/icons/CalendarIcon';
 import ClockIcon from '../../../components/atoms/icons/ClockIcon';
 import RequestsIcon from '../../../components/atoms/icons/RequestsIcon';
+import RequestHeader from '../../../components/molecules/RequestHeader';
+import DesktopNavService from '../../../components/organisms/navbar/DesktopNavService';
 import MobileNavService from '../../../components/organisms/navbar/MobileNavService';
 import { getRequestByServiceId } from '../../../data/requests';
 import { getServicesByUserId } from '../../../data/services';
@@ -40,13 +42,11 @@ const ServiceHomepage = (props: any) => {
 
   return (
     <div className="bg-[#DBCBD8] h-[100vh] overflow-y-scroll relative">
-      <div className="shadow-secondaryModified pl-20 mb-6 text-xl flex items-center gap-2 text-[#564787] bg-white rounded-b-xl p-4 fixed top-0 left-0 z-[10000] w-full border-b-2">
-        <RequestsIcon />
-        <span className="font-semibold ">Your Requests</span>
-      </div>
+      <DesktopNavService page={page} setPage={setPage} userId={props.userId} />
+      <RequestHeader />
       <SlideInFromLeft>
         <div className="flex flex-col w-full text-center bg-[#DBCBD8] pt-24">
-          <ul className="mb-20 overflow-y-scroll">
+          <ul className="mb-20 overflow-y-auto sm:w-[500px] sm:mx-auto sm:border-2 sm:pt-8 rounded-xl sm:h-[750px] hide-scrollbar">
             {requests &&
               requests.map((request: any) => {
                 return (
@@ -145,7 +145,6 @@ export async function getServerSideProps(context: any) {
       },
     };
   }
-
 
   return {
     props: {

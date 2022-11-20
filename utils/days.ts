@@ -38,7 +38,7 @@ export function days() {
     }
   }
 
-  console.log(daysOfTheMonth);
+  // console.log(daysOfTheMonth);
 
   return daysOfTheMonth;
 }

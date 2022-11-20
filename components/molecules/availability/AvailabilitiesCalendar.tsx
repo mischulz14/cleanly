@@ -15,7 +15,7 @@ const AvailabilitiesCalendar = (props: {
 }) => {
   return (
     <div className="flex flex-col items-center justify-center mt-2 availabilities-calendar">
-      <ul className="flex overflow-x-scroll w-[95vw] gap-2 border-2 p-2 rounded-xl mx-auto mt-4">
+      <ul className="sm:max-w-[100%]  flex overflow-x-scroll w-[95vw] gap-2 border-2 p-2 rounded-xl mx-auto mt-4">
         {props.days().map((day: any) => (
           <li key={Math.random()}>
             <ul className="h-[400px] w-[180px] overflow-y-scroll flex flex-col gap-1 pt-4 relative px-4">

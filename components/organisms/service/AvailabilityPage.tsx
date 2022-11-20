@@ -19,7 +19,7 @@ const AvailabilityPage = (props: any) => {
   return (
     <SlideInFromLeft>
       <div className="flex flex-col items-center mx-auto">
-        <ul className="w-[95vw] sm:w-[60vw] flex flex-col justify-center items-center gap-4">
+        <ul className="w-[95vw] sm:max-w-[50%] flex flex-col justify-center items-center gap-4 mx-auto ">
           <li className="w-full rounded-lg">
             <ClickAnimation>
               <button

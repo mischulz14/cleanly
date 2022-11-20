@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import CalendarIcon from '../../../components/atoms/icons/CalendarIcon';
+import DesktopNavService from '../../../components/organisms/navbar/DesktopNavService';
 import MobileNav from '../../../components/organisms/navbar/MobileNavService';
 import AvailabilityPage from '../../../components/organisms/service/AvailabilityPage';
 import { getAllAvailabilitiesById } from '../../../data/availabilities';
@@ -11,8 +12,9 @@ const AvailabilityServicePage = (props: any) => {
 
   return (
     <>
-      <div className="bg-[#DBCBD8] pt-24 pb-24 overflow-y-scroll h-[100vh] relative">
-        <div className=" mb-6 text-xl flex items-center justify-center gap-2 text-[#564787] shadow-secondaryModified bg-white rounded-b-xl p-4 fixed top-0 left-0 z-[10000] w-full border-b-2">
+      <DesktopNavService page={page} setPage={setPage} userId={props.userId} />
+      <div className="bg-[#DBCBD8] pt-24 pb-24 overflow-y-auto hide-scrollbar max-h-[100vh] relative">
+        <div className="sm:absolute shadow-secondaryModified py-4 rounded-b-xl text-xl flex items-center gap-2 text-[#564787] fixed bg-white top-0 left-0 z-[1000000] w-full justify-center sm:pl-0 sm:left-[50%] sm:bg-transparent sm:shadow-none sm:pt-6 sm:translate-x-[-50%] sm:top-2">
           <CalendarIcon />
           <span className="font-semibold ">Your Availabilities</span>
         </div>
