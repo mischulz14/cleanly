@@ -24,9 +24,15 @@ export default function FilterForm(props: any) {
   }
 
   return (
-    <form className="px-10 pt-16 filter-form flex flex-col gap-8  h-[100vh] w-full bg-white z-[1000000000000000000000000000000000000000] absolute left-0 top-0 overflow-y-scroll">
-      <div className="relative flex flex-col justify-center gap-10 px-8 py-10 border-2 border-gray-300 rounded-lg">
-        <CloseButton handleGoBackAction={handleGoBackAction} />
+    <form
+      className={`${
+        props.showFilter === false ? 'hidden' : ''
+      } px-10 pt-16 filter-form flex flex-col sm:w-[450px] sm:border-r-4 overflow-auto hide-scrollbar sm:pt-32 sm:items-center gap-8  h-[100vh]  w-full bg-white z-[1000000000000000000000000000000000000000] fixed left-0 top-0 overflow-y-auto `}
+    >
+      <div className="relative flex flex-col justify-center gap-10 px-8 py-10 border-2 border-gray-300 rounded-lg sm:w-[400px]">
+        <div className="">
+          <CloseButton handleGoBackAction={handleGoBackAction} />
+        </div>
         <div className="flex flex-col">
           <div className="flex items-end gap-3 pb-4">
             <Image src="/images/location.svg" height="30" width="30" />
@@ -35,7 +41,7 @@ export default function FilterForm(props: any) {
             </label>
           </div>
           <select
-            className="overflow-visible border-2 border-gray-300 rounded-lg  district-select"
+            className="overflow-visible border-2 border-gray-300 rounded-lg district-select"
             value={props.district}
             onChange={(event) => props.setDistrict(event.target.value)}
           >

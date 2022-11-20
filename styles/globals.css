@@ -124,3 +124,31 @@ SECTION === 'ERROR ANIMATION' === SECTION
     stroke-dasharray: 400;
   }
 }
+
+@media screen and (min-width: 645px) {
+  /* body {
+    width: 60vw;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    padding-bottom: 1rem;
+  }
+
+  html {
+    background-color: #f2fdff;
+  } */
+}
+
+/* =======================
+SECTION === 'SCROLLBAR' === SECTION
+======================= */
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

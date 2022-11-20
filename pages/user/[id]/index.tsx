@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import FilterForm from '../../../components/molecules/FilterForm';
+import DesktopNavUser from '../../../components/organisms/navbar/DesktopNavUser';
 import MobileNavUser from '../../../components/organisms/navbar/MobileNavUser';
 import UserFeed from '../../../components/organisms/user/UserFeed';
 import { getValidSessionByToken } from '../../../data/sessions';
@@ -31,22 +33,26 @@ const UserHomePage = (props: any) => {
   }
 
   return (
-    <div className="h-[100vh] overflow-y-scroll">
-      <UserFeed
-        serviceData={serviceData}
-        serviceDataFromDB={props.serviceArr}
-        user={props.foundUser}
-        setShowFilter={setShowFilter}
-        showFilter={showFilter}
-        setServiceData={setServiceData}
-        price={price}
-        setPrice={setPrice}
-        district={district}
-        setDistrict={setDistrict}
-      />
+    <>
+      <DesktopNavUser page={page} setPage={setPage} userId={props.userId} />
+      <div className="flex flex-col justify-center items-center pt-40 sm:pt-8 h-[100vh] overflow-y-scroll sm:flex sm:gap-8 sm:justify-center hide-scrollbar">
+        <h2 className="block">Find the best services:</h2>
+        <UserFeed
+          serviceData={serviceData}
+          serviceDataFromDB={props.serviceArr}
+          user={props.foundUser}
+          setShowFilter={setShowFilter}
+          showFilter={showFilter}
+          setServiceData={setServiceData}
+          price={price}
+          setPrice={setPrice}
+          district={district}
+          setDistrict={setDistrict}
+        />
 
-      <MobileNavUser page={page} setPage={setPage} userId={props.userId} />
-    </div>
+        <MobileNavUser page={page} setPage={setPage} userId={props.userId} />
+      </div>
+    </>
   );
 };
 
@@ -66,7 +72,7 @@ export async function getServerSideProps(context: any) {
 
   const token = context.req.cookies.sessionToken;
 
-  if (!token ||!(await getValidSessionByToken(token))) {
+  if (!token || !(await getValidSessionByToken(token))) {
     return {
       redirect: {
         destination: `/login?returnTo=/user/${userId}`,

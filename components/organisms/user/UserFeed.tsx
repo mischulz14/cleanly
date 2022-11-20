@@ -6,14 +6,15 @@ import FilterForm from '../../molecules/FilterForm';
 
 const UserFeed = (props: any) => {
   return (
-    <div className="flex justify-around bg-[#DBCBD8] pt-6 pb-2">
-      <div className="fixed flex justify-center items-center top-0 z-20 rounded-b-xl pt-4 pb-6 w-full bg-[#101935]">
+    <div className=" sm:h-[75%] sm:w-[80vw] justify-center hide-scrollbar flex bg-[#DBCBD8] pt-6 pb-2 sm:overflow-y-auto sm: px-6   sm:rounded-xl sm:pt-0 sm:mb-10 ">
+      <div className="sm:top-20 sm:absolute fixed flex justify-center items-center top-0 left-0 py-4 z-20 rounded-b-xl w-full bg-[#101935]">
         <button
           onClick={() => props.setShowFilter(true)}
           className="btn-primary"
         >
           Filter
         </button>
+
         {props.showFilter && (
           <FilterForm
             price={props.price}
@@ -29,13 +30,13 @@ const UserFeed = (props: any) => {
         )}
       </div>
       <SlideInFromLeft>
-        <ul className="flex flex-col items-center justify-center w-full gap-12 mt-28 grow mb-28 ">
+        <ul className="flex flex-col items-center justify-center w-full gap-12 pb-10 mx-auto sm:flex-row sm:flex-wrap mt-28 sm:mt-12 grow mb-28">
           {props.serviceData &&
             props.serviceData.map((service: any) => {
               return (
                 <li
                   key={service.id}
-                  className="relative grow flex flex-col items-center w-[80vw] gap-6 p-4 text-[#564787] text-center bg-white  rounded-xl shadow-secondaryModified"
+                  className="sm:w-[300px] relative grow flex flex-col items-center w-[80vw] gap-6 p-4 text-[#564787] text-center bg-white  rounded-xl shadow-secondaryModified"
                 >
                   <div
                     className={

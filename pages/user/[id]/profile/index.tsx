@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import DesktopNavUser from '../../../../components/organisms/navbar/DesktopNavUser';
 import MobileNavUser from '../../../../components/organisms/navbar/MobileNavUser';
 import UserProfile from '../../../../components/organisms/user/UserProfile';
 import { getServicesByUserId } from '../../../../data/services';
@@ -30,6 +31,7 @@ const UserProfilePage = (props: any) => {
 
   return (
     <>
+      <DesktopNavUser page={page} setPage={setPage} userId={props.userId} />
       <UserProfile
         settingsLink={`/user/${props.userId}/profile/settings`}
         user={props.user}

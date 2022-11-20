@@ -31,7 +31,7 @@ const UserProfile = (props: any) => {
     <SlideInFromLeft>
       {/* <UserAvatar />
     <UserDetails /> */}
-      <div className="flex flex-col h-[100vh] items-center pt-14 bg-white relative">
+      <div className="flex flex-col h-[100vh] items-center pt-14 bg-white relative sm:pt-20">
         {showPictureUploadModal && (
           <PictureUploadModal
             setShowPictureModal={setShowPictureUploadModal}

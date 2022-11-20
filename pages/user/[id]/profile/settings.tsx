@@ -9,10 +9,8 @@ import { getUserById } from '../../../../data/users';
 
 const UserProfileSettings = (props: any) => {
   const [email, setEmail] = useState(props.user.email);
-  const [firstName, setFirstName] = useState(props.user.firstName);
   const [lastName, setLastName] = useState(props.user.lastName);
   const [showEmail, setShowEmail] = useState(false);
-  const [showFirstName, setShowFirstName] = useState(false);
   const [showLastName, setShowLastName] = useState(false);
 
   function handleUserChange(e: any) {
@@ -38,7 +36,7 @@ const UserProfileSettings = (props: any) => {
   }
 
   return (
-    <div className="h-[100vh] overflow-hidden bg-white">
+    <div className="h-[100vh] overflow-hidden bg-white sm:flex justify-center ">
       <SlideInFromLeft>
         <GoBackButton />
 
@@ -46,7 +44,7 @@ const UserProfileSettings = (props: any) => {
           <div className="flex flex-col items-center gap-6">
             <div className="flex items-center">
               <div className="flex flex-col items-center justify-center gap-2">
-                <div className="flex items-center justify-between w-[70vw] gap-20 p-4 border-2 rounded-xl">
+                <div className="flex items-center justify-between w-[70vw] sm:w-[400px] gap-20 p-4 border-2 rounded-xl">
                   <div>Email</div>
                   <button
                     className="flex items-center justify-center p-4 transition-all duration-300 border-2 rounded-full hover:scale-105 active:scale-95"
@@ -77,7 +75,7 @@ const UserProfileSettings = (props: any) => {
             </div>
             <div className="flex items-center">
               <div className="flex flex-col items-center justify-center gap-2">
-                <div className="flex items-center justify-between w-[70vw] gap-20 p-4 border-2 rounded-xl">
+                <div className="flex items-center justify-between w-[70vw] sm:w-[400px]  gap-20 p-4 border-2 rounded-xl">
                   <div>Last Name</div>
                   <button
                     className="flex items-center justify-center p-4 transition-all duration-300 border-2 rounded-full hover:scale-105 active:scale-95"

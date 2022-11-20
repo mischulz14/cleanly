@@ -4,6 +4,8 @@ import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
 import CalendarIcon from '../../../components/atoms/icons/CalendarIcon';
 import ClockIcon from '../../../components/atoms/icons/ClockIcon';
 import RequestsIcon from '../../../components/atoms/icons/RequestsIcon';
+import RequestHeader from '../../../components/molecules/RequestHeader';
+import DesktopNavUser from '../../../components/organisms/navbar/DesktopNavUser';
 import MobileNavUser from '../../../components/organisms/navbar/MobileNavUser';
 import { getRequestByUserId } from '../../../data/requests';
 import { getValidSessionByToken } from '../../../data/sessions';
@@ -14,13 +16,11 @@ const UserRequests = (props: any) => {
   // console.log(props.foundRequests);
 
   return (
-    <div className="flex flex-col w-full text-center bg-[#DBCBD8] relative">
-      <div className=" shadow-secondaryModified py-4 rounded-b-xl pl-20 text-xl flex items-center gap-2 text-[#564787] fixed bg-white top-0 left-0 z-[1000000] w-full">
-        <RequestsIcon />
-        <span className="font-semibold">Your Requests</span>
-      </div>
+    <div className="relative flex flex-col w-full text-center rounded-xl">
+      <DesktopNavUser page={page} setPage={setPage} userId={props.userId} />
+      <RequestHeader />
       <SlideInFromLeft>
-        <ul className="pt-24 mb-20 overflow-y-scroll">
+        <ul className="flex-wrap justify-center pt-24 mb-20 overflow-y-auto sm:mx-auto sm:flex hide-scrollbar">
           {props.foundRequests &&
             props.foundRequests.map((request: any) => {
               return (

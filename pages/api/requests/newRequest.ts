@@ -43,7 +43,7 @@ export default async function handler(
           'pending',
         );
 
-        console.log(createdRequest);
+        // console.log(createdRequest);
       }
       return res.status(200).json({ requests: 'created' });
     });
