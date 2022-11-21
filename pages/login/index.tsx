@@ -49,11 +49,6 @@ const Login = () => {
     }
   }
 
-  // q: how do i merge a branch into another branch?
-  // a: git checkout branch-to-merge-into
-  // git merge branch-to-merge
-  // git push
-
   return (
     <SlideInFromLeft>
       <GoBackButton />

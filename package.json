@@ -10,15 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@devexpress/dx-react-core": "^3.0.6",
-    "@devexpress/dx-react-scheduler": "^3.0.6",
-    "@devexpress/dx-react-scheduler-material-ui": "^3.0.6",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mooncake-dev/react-day-time-picker": "^1.0.5",
-    "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.10.13",
-    "@mui/x-date-pickers": "^5.0.7",
     "@types/cookie": "^0.5.1",
     "@types/js-cookie": "^3.0.2",
     "@types/react-big-calendar": "^0.38.2",
@@ -37,12 +28,8 @@
     "next-pwa": "^5.6.0",
     "postgres": "^3.3.1",
     "react": "18.2.0",
-    "react-big-calendar": "^1.5.0",
-    "react-calendar": "^3.9.0",
-    "react-datepicker": "^4.8.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.6.0",
-    "react-timeslot-calendar": "^0.2.0",
     "sharp": "^0.31.1"
   },
   "devDependencies": {

@@ -50,7 +50,7 @@ const ProfileSettings = (props: any) => {
   }
 
   return (
-    <div className="pb-10 bg-white sm:min-h-[100vh]">
+    <div className="pb-10 bg-white min-h-[100vh]">
       <SlideInFromLeft>
         <GoBackButton />
 

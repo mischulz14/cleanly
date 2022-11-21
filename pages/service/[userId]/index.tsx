@@ -23,8 +23,8 @@ const ServiceHomepage = (props: any) => {
   useEffect(() => {
     // sort requests by day
     const sortedRequests = props.foundRequests.sort((a: any, b: any) => {
-      const aDate = new Date(a.chosenTimeslots.day);
-      const bDate = new Date(b.chosenTimeslots.day);
+      const aDate = new Date(a.timeslots.day);
+      const bDate = new Date(b.timeslots.day);
       return aDate.getTime() - bDate.getTime();
     });
     setRequests(sortedRequests);

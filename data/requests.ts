@@ -60,7 +60,7 @@ export async function updateRequest(status: string, id: number) {
 export async function findRequestByUserIdDayAndTimeslot(
   userId: string,
   day: string,
-  timeslots: any,
+  timeslot: any,
 ) {
   const [request] = await sql`
     SELECT
@@ -68,10 +68,10 @@ export async function findRequestByUserIdDayAndTimeslot(
     FROM
       requests
     WHERE
-      requests.user_id = ${userId} AND requests.day = ${day} AND requests.timeslots = ${timeslots}
+      requests.user_id = ${userId} AND requests.day = ${day} AND requests.timeslots = ${timeslot}
   `;
 
-  console.log('request', request);
+  // console.log('found request', request);
 
   return request;
 }

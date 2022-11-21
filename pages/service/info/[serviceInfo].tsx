@@ -37,7 +37,7 @@ const ServiceInfo = (props: any) => {
       });
   }, []);
 
-  async function handleUserRequest() {
+  function handleUserRequest() {
     fetch(`/api/requests/newRequest`, {
       method: 'POST',
       headers: {
@@ -57,7 +57,7 @@ const ServiceInfo = (props: any) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.error) {
           setErrors(data.error);
         }

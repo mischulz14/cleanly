@@ -18,7 +18,7 @@ export default async function handler(
   res: NextApiResponse<RegisterResponseBody>,
 ) {
   if (req.method === 'POST') {
-    console.log(req.body);
+    // console.log(req.body.chosenTimeslots, 'request chosentimeslots');
 
     req.body.chosenTimeslots.forEach(async (timeslot: any) => {
       const requestAlreadyExists = await findRequestByUserIdDayAndTimeslot(
@@ -28,9 +28,7 @@ export default async function handler(
       );
 
       if (requestAlreadyExists) {
-        return res.status(401).json({
-          error: 'Request already sent!',
-        });
+        return;
       } else {
         const createdRequest = await createNewRequest(
           req.body.userId,
@@ -42,11 +40,10 @@ export default async function handler(
           req.body.userName,
           'pending',
         );
-
-        // console.log(createdRequest);
       }
-      return res.status(200).json({ requests: 'created' });
     });
+
+    return res.status(200).json({ requests: 'created' });
   } else {
     return res.status(401).json({
       error: 'Method not allowed',
