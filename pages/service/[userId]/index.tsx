@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
-import CalendarIcon from '../../../components/atoms/icons/CalendarIcon';
-import ClockIcon from '../../../components/atoms/icons/ClockIcon';
-import RequestsIcon from '../../../components/atoms/icons/RequestsIcon';
+import RequestCard from '../../../components/molecules/RequestCard';
 import RequestHeader from '../../../components/molecules/RequestHeader';
 import DesktopNavService from '../../../components/organisms/navbar/DesktopNavService';
 import MobileNavService from '../../../components/organisms/navbar/MobileNavService';
@@ -16,10 +14,6 @@ const ServiceHomepage = (props: any) => {
   const [render, setRender] = useState(false);
   const [requestsTimeframe, setRequestsTimeframe] = useState('upcoming');
 
-  // q: how to get the current date out of a string like "Thu Nov 17"?
-  // a: use the Date constructor
-
-  // console.log(props.userId);
   useEffect(() => {
     // sort requests by day
     const sortedRequests = props.foundRequests.sort((a: any, b: any) => {
@@ -39,7 +33,13 @@ const ServiceHomepage = (props: any) => {
     });
     const data = await response.json();
 
-    setRequests(data.requests);
+    const sortedRequests = data.requests.sort((a: any, b: any) => {
+      const aDate = new Date(a.timeslots.day);
+      const bDate = new Date(b.timeslots.day);
+      return aDate.getTime() - bDate.getTime();
+    });
+
+    setRequests(sortedRequests);
 
     return data.requests;
   }
@@ -82,28 +82,7 @@ const ServiceHomepage = (props: any) => {
       });
   }
 
-  function handleDeleteRequest(requestId: string) {
-    fetch(`/api/requests/deleteRequest`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        requestId: requestId,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
-
-    const updatedRequests = requests.filter((request: any) => {
-      return request.id !== requestId;
-    });
-
-    setRequests(updatedRequests);
-  }
-
+  // JSX body starts here
   return (
     <div className="bg-[#DBCBD8] h-[100vh] overflow-y-scroll relative">
       <DesktopNavService page={page} setPage={setPage} userId={props.userId} />
@@ -150,96 +129,14 @@ const ServiceHomepage = (props: any) => {
               requests.map((request: any) => {
                 const date = new Date(request.day);
                 return (
-                  <li
+                  <RequestCard
                     key={request.id}
-                    className={`z-1 px-10 py-6 mx-10 mb-6 relative flex flex-col items-center text-[#564787] text-center bg-white  rounded-xl shadow-secondaryModified gap-5 ${
-                      date < new Date() || request.status === 'rejected'
-                        ? 'bg-gray-300'
-                        : ''
-                    }`}
-                  >
-                    {(date < new Date() && request.status === 'pending') ||
-                    request.status === 'rejected' ? (
-                      <div className="p-4 absolute top-3 left-[50%] translate-x-[-50%] w-[70%] h-[90%] bg-white z-[100]  rounded-xl">
-                        <div className="flex flex-col items-center justify-between h-full gap-2 text-sm">
-                          <div className="flex flex-col text-sm">
-                            <span>{request.day}</span>
-                            <span>
-                              {request.timeslots.start}- {request.timeslots.end}
-                            </span>
-                            <span> with {request.userName}</span>
-                          </div>
-
-                          <span className="">
-                            This Request is either expired or has been rejected
-                            by you.
-                          </span>
-
-                          <span>
-                            You have to wait for the user to delete this
-                            request.
-                          </span>
-                        </div>
-                      </div>
-                    ) : (
-                      ''
-                    )}
-                    <div>{request.userName}</div>
-                    <div className="flex flex-col gap-3 p-4 border-2 shadow-secondaryModified rounded-xl">
-                      <div className="flex items-center justify-start w-full gap-2">
-                        <CalendarIcon />
-
-                        <div className="font-bold">{request.day}</div>
-                      </div>
-                      <div className="flex items-center w-full gap-4">
-                        <ClockIcon />
-                        <div className="text-center ">
-                          {request.timeslots.start} - {request.timeslots.end}
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <span className="mr-2">Status:</span>
-                      {request.status === 'pending' && (
-                        <span className="text-[#F9A826]">Pending</span>
-                      )}
-                      {request.status === 'accepted' && (
-                        <span className="text-[#4BB543]">Accepted</span>
-                      )}
-                      {request.status === 'rejected' && (
-                        <span className="text-[#F95E5A]">Rejected</span>
-                      )}
-                    </div>
-                    {request.status === 'pending' && (
-                      <>
-                        <button
-                          onClick={() => {
-                            handleRequestStatusUpdate(request.id, 'accepted');
-                            request.status = 'accepted';
-                            setRender((prev) => !prev);
-                          }}
-                          className="btn-secondary"
-                        >
-                          Accept
-                        </button>
-                        <button
-                          onClick={() => {
-                            handleRequestStatusUpdate(request.id, 'rejected');
-                            request.status = 'rejected';
-                            setRender((prev) => !prev);
-                          }}
-                          className="border-2 btn-primary"
-                        >
-                          Decline
-                        </button>
-                      </>
-                    )}
-                    {request.status === 'accepted' && (
-                      <a href={`mailto:${request.userEmail}`}>
-                        <button className="btn-secondary">Contact</button>
-                      </a>
-                    )}
-                  </li>
+                    date={date}
+                    request={request}
+                    setRender={setRender}
+                    handleRequestStatusUpdate={handleRequestStatusUpdate}
+                    name={request.userName}
+                  />
                 );
               })}
           </ul>
