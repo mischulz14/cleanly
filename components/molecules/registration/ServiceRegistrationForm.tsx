@@ -1,11 +1,8 @@
-import Link from 'next/link';
 import Router from 'next/router';
 import { useState } from 'react';
 import SlideInFromLeft from '../../animation/SlideInFromLeft';
 import GoBackButton from '../../atoms/buttons/GoBackButton';
-import GoBackIcon from '../../atoms/buttons/GoBackButton';
 import RegisterButton from '../../atoms/buttons/RegisterButton';
-import BirthdayInput from '../../atoms/inputs/BirthdayInput';
 import CompanyNameInput from '../../atoms/inputs/CompanyNameInput';
 import DistrictInput from '../../atoms/inputs/DistrictInput';
 import EmailInput from '../../atoms/inputs/EmailInput';

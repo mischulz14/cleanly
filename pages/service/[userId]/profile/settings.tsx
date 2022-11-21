@@ -3,13 +3,11 @@ import { useState } from 'react';
 import SlideInFromLeft from '../../../../components/animation/SlideInFromLeft';
 import SlideInFromTop from '../../../../components/animation/SlideInFromTop';
 import GoBackButton from '../../../../components/atoms/buttons/GoBackButton';
-import MobileNavService from '../../../../components/organisms/navbar/MobileNavService';
 import { getServicesByUserId } from '../../../../data/services';
 import { getValidSessionByToken } from '../../../../data/sessions';
 import { getUserById } from '../../../../data/users';
 
 const ProfileSettings = (props: any) => {
-  const [page, setPage] = useState('settings');
   const [email, setEmail] = useState(props.user.email);
   const [lastName, setLastName] = useState(props.user.lastName);
   const [district, setDistrict] = useState(props.foundService.district);

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import DesktopNavUser from '../../../../components/organisms/navbar/DesktopNavUser';
 import MobileNavUser from '../../../../components/organisms/navbar/MobileNavUser';
 import UserProfile from '../../../../components/organisms/user/UserProfile';
-import { getServicesByUserId } from '../../../../data/services';
 import { getValidSessionByToken } from '../../../../data/sessions';
 import { getUserById } from '../../../../data/users';
 

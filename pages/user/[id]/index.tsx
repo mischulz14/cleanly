@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import FilterForm from '../../../components/molecules/FilterForm';
 import DesktopNavUser from '../../../components/organisms/navbar/DesktopNavUser';
 import MobileNavUser from '../../../components/organisms/navbar/MobileNavUser';
 import UserFeed from '../../../components/organisms/user/UserFeed';

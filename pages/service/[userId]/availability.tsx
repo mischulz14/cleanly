@@ -37,13 +37,7 @@ export async function getServerSideProps(context: any) {
 
   const foundService = JSON.stringify(await getServicesByUserId(userId));
 
-  // console.log('serviceId', JSON.parse(service).serviceId);
-
   const availabilities = await getAllAvailabilitiesById(1);
-
-  // console.log('availabilities', availabilities);
-
-  // console.log('found service', foundService);
 
   const token = context.req.cookies.sessionToken;
 

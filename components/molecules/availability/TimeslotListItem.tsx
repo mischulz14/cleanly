@@ -1,5 +1,3 @@
-import ClickAnimation from '../../animation/ClickAnimation';
-
 const TimeSlotListItem = (props: {
   day: string;
   timeslot: any;
@@ -30,8 +28,6 @@ const TimeSlotListItem = (props: {
           } else {
             props.chosenTimeslotsArray.push(chosenTimeslotByService);
           }
-          console.log(props.chosenTimeslotsArray);
-          // props.groupedTimeslots = myFunc(props.requestedTimeslots, 'day');
         }}
         className="relative w-full px-4 py-2 overflow-visible text-md rounded-xl"
       >

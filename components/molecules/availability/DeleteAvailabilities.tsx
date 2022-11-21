@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { handleDeleteAvailabilities } from '../../../utils/availabilities';
-import { groupObjectByProperties } from '../../../utils/groupObjects';
-import ClickAnimation from '../../animation/ClickAnimation';
 import TimeSlotListItem from './TimeslotListItem';
 
 const DeleteAvailabilities = (props: any) => {
