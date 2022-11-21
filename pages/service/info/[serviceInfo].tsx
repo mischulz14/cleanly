@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { FaStar } from 'react-icons/fa';
 import ClickAnimation from '../../../components/animation/ClickAnimation';
 import ConfirmationAnimation from '../../../components/animation/ConfirmationAnimation';
 import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
@@ -6,9 +7,11 @@ import SlideInFromTop from '../../../components/animation/SlideInFromTop';
 import XAnimation from '../../../components/animation/XAnimation';
 import GoBackButton from '../../../components/atoms/buttons/GoBackButton';
 import CurrentAvailabilities from '../../../components/molecules/availability/CurrentAvailabilities';
+import { getRatingsByServiceId } from '../../../data/ratings';
 import { getServiceById, getUserInfoByServiceId } from '../../../data/services';
 import { getUserById } from '../../../data/users';
 import { colors } from '../../../utils/colors';
+import { getAverageRating } from '../../../utils/getAverageRating';
 
 const ServiceInfo = (props: any) => {
   const [showCurrentAvailabilities, setShowCurrentAvailabilities] =
@@ -17,6 +20,10 @@ const ServiceInfo = (props: any) => {
   const [errors, setErrors] = useState('');
   const chosenTimeslotsArray: any = [];
   const [sentRequest, setSentRequest] = useState(false);
+
+  const rating = getAverageRating(props.ratings);
+
+  console.log('rating', rating);
 
   // console.log(props.userIdCookie, 'props.userIdCookie');
 
@@ -30,7 +37,7 @@ const ServiceInfo = (props: any) => {
       });
   }, []);
 
-  function handleUserRequest() {
+  async function handleUserRequest() {
     fetch(`/api/requests/newRequest`, {
       method: 'POST',
       headers: {
@@ -72,11 +79,18 @@ const ServiceInfo = (props: any) => {
               className="object-cover w-32 h-32 mx-auto mb-4 border-2 rounded-full"
             />
           )}
+          {!Number.isNaN(rating) && (
+            <div className="text-[#564787] flex items-center justify-center mb-2 w-full gap-1 ">
+              <FaStar size={30} />{' '}
+              <span className="translate-y-[2px]">{rating}</span>
+            </div>
+          )}
           {props.completeService.description && (
             <div className="p-4 mx-auto mb-4 text-center bg-white rounded-xl">
               {props.completeService.description}
             </div>
           )}
+
           <ClickAnimation>
             <button
               onClick={() => {
@@ -148,6 +162,10 @@ export async function getServerSideProps(context: any) {
 
   const completeService = await getUserInfoByServiceId(serviceId);
 
+  const ratings = JSON.stringify(await getRatingsByServiceId(serviceId));
+
+  console.log('ratings', ratings);
+
   // console.log(completeService, 'completeService');
 
   const userIdCookie = JSON.parse(context.req.cookies.userId);
@@ -161,6 +179,7 @@ export async function getServerSideProps(context: any) {
       userIdCookie,
       completeService,
       user: JSON.parse(user),
+      ratings: JSON.parse(ratings),
     },
   };
 }

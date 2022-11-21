@@ -1,23 +1,28 @@
-import { es } from 'date-fns/locale';
 import { sql } from './connect';
-import { timeslots } from './timeslots';
 
 export async function createNewAvailability(
   service_id: number,
   day: string,
   timeslots: any,
 ) {
-  // 1. check if the day already exists in the database
-  const availabilities = await sql`
+  const [availabilities] = await sql`
   SELECT * FROM availabilities WHERE service_id = ${service_id} AND day = ${day}
   `;
+  // 1. check if the day already exists in the database
+  const availabilityExists = await availabilityAlreadyExists(day, service_id);
 
-  // 2. if the day exists, update the timeslots
-  if (availabilities.length > 0) {
-    const availability = availabilities[0];
-    const newTimeslots = availability?.timeslots.concat(timeslots);
-    const updatedAvailability = await sql`
-      UPDATE availabilities SET timeslots = ${newTimeslots} WHERE id = ${availability?.id}
+  if (availabilityExists) {
+    // 2. if the availability exists filter the chosen timeslots with the existing timeslots
+    const existingTimeslots = availabilities?.timeslots;
+    // this filter always returns all of the chosen timeslots as the new timeslots (even if they are already in the database) because the chosen timeslots are not in the same format as the existing timeslots thats why the timeslots always get updated to the newly chosen timeslots
+    const newTimeslots = timeslots.filter(
+      (timeslot: any) => !existingTimeslots.includes(timeslot),
+    );
+
+    // 3. update the availabilities table with the new timeslots
+    const [updatedAvailability] = await sql`
+    UPDATE availabilities SET timeslots = ${newTimeslots} WHERE service_id = ${service_id} AND day = ${day}
+    RETURNING *
     `;
     return updatedAvailability;
   } else {
@@ -47,17 +52,13 @@ WHERE service_id = ${id} AND day = ${day}
   return availabilities;
 }
 
-export async function availabilityAlreadyExists(
-  day: string,
-  id: number,
-  timeslots: any,
-) {
+export async function availabilityAlreadyExists(day: string, id: number) {
   const availability = await sql`
 SELECT * FROM availabilities
-WHERE day = ${day} AND service_id = ${id} AND timeslots = ${timeslots}
+WHERE day = ${day} AND service_id = ${id}
 `;
   if (availability.length > 0) {
-    return true;
+    return availability;
   } else {
     return false;
   }

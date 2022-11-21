@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction } from 'react';
 import { handleSetNewAvailabilities } from '../../../utils/availabilities';
 import { groupObjectByProperties } from '../../../utils/groupObjects';
 import ClickAnimation from '../../animation/ClickAnimation';
-import SlideInFromTop from '../../animation/SlideInFromTop';
 import TimeSlotListItem from './TimeslotListItem';
 
 const AvailabilitiesCalendar = (props: {

@@ -9,6 +9,10 @@ const CurrentAvailabilities = (props: any) => {
     fetch(`/api/availabilities/${props.serviceId}`)
       .then((res) => res.json())
       .then((data) => {
+        // sort the array by day
+        data.availabilities.sort((a: any, b: any) => {
+          return new Date(a.day).getTime() - new Date(b.day).getTime();
+        });
         setAvailabilities(data.availabilities);
         // console.log(data);
       });

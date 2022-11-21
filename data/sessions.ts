@@ -75,3 +75,28 @@ export async function deleteSessionByToken(token: string) {
   `;
   return session!;
 }
+
+export async function getUserBySessionToken(token: string) {
+  if (!token) return undefined;
+  const [user] = await sql`
+    SELECT
+      users.id,
+      users.first_name,
+      users.last_name,
+      users.email,
+      users.image,
+      users.description,
+      users.district
+    FROM
+      users
+    JOIN
+      sessions
+    ON
+      users.id = sessions.user_id
+    WHERE
+      sessions.token = ${token}
+    AND
+      sessions.expires > NOW()
+  `;
+  return user;
+}

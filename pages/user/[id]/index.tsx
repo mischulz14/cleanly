@@ -36,7 +36,7 @@ const UserHomePage = (props: any) => {
     <>
       <DesktopNavUser page={page} setPage={setPage} userId={props.userId} />
       <div className="flex flex-col justify-center items-center pt-40 sm:pt-8 h-[100vh] overflow-y-scroll sm:flex sm:gap-8 sm:justify-center hide-scrollbar">
-        <h2 className="block">Find the best services:</h2>
+        <h2 className="hidden sm:block">Find the best services:</h2>
         <UserFeed
           serviceData={serviceData}
           serviceDataFromDB={props.serviceArr}

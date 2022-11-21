@@ -4,11 +4,6 @@ import MobileNavService from '../../../../components/organisms/navbar/MobileNavS
 import UserProfile from '../../../../components/organisms/user/UserProfile';
 import { getServicesByUserId } from '../../../../data/services';
 import { getValidSessionByToken } from '../../../../data/sessions';
-import { getUserById } from '../../../../data/users';
-import {
-  selectAllServicesWithSpecificUserId,
-  selectAllServicesWithSpecificUserIdAndServiceId,
-} from '../../../../data/usersServicesRelations';
 
 const serviceProfile = (props: any) => {
   const [page, setPage] = useState('profile');

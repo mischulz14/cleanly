@@ -26,7 +26,7 @@ const Login = () => {
       }),
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
 
     if ('errors' in data) {
       setErrors(data.errors);
@@ -48,6 +48,11 @@ const Login = () => {
       await Router.push(`/service/${data.user.id}`);
     }
   }
+
+  // q: how do i merge a branch into another branch?
+  // a: git checkout branch-to-merge-into
+  // git merge branch-to-merge
+  // git push
 
   return (
     <SlideInFromLeft>

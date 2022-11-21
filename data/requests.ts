@@ -20,7 +20,7 @@ export async function createNewRequest(
   return request!;
 }
 
-export async function getRequestByUserId(userId: number) {
+export async function getRequestsByUserId(userId: any) {
   const request = await sql`
     SELECT
       *
@@ -33,7 +33,7 @@ export async function getRequestByUserId(userId: number) {
   return request;
 }
 
-export async function getRequestByServiceId(serviceId: number) {
+export async function getRequestsByServiceId(serviceId: any) {
   const request = await sql`
     SELECT
       *
@@ -72,6 +72,16 @@ export async function findRequestByUserIdDayAndTimeslot(
   `;
 
   console.log('request', request);
+
+  return request;
+}
+
+export async function deleteRequest(requestId: number) {
+  const [request] = await sql`
+    DELETE FROM requests
+    WHERE id = ${requestId}
+    RETURNING *
+  `;
 
   return request;
 }

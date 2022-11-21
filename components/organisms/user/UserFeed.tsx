@@ -6,7 +6,7 @@ import FilterForm from '../../molecules/FilterForm';
 
 const UserFeed = (props: any) => {
   return (
-    <div className=" sm:h-[75%] sm:w-[80vw] justify-center hide-scrollbar flex bg-[#DBCBD8] pt-6 pb-2 sm:overflow-y-auto sm: px-6   sm:rounded-xl sm:pt-0 sm:mb-10 ">
+    <div className=" sm:h-[75%] sm:w-[80vw] justify-center hide-scrollbar flex bg-[#DBCBD8] sm:pt-6 pb-2 sm:overflow-y-auto sm: px-6 min-h-[100vh]  sm:rounded-xl  sm:mb-10 ">
       <div className="sm:top-20 sm:absolute fixed flex justify-center items-center top-0 left-0 py-4 z-20 rounded-b-xl w-full bg-[#101935]">
         <button
           onClick={() => props.setShowFilter(true)}
@@ -30,7 +30,7 @@ const UserFeed = (props: any) => {
         )}
       </div>
       <SlideInFromLeft>
-        <ul className="flex flex-col items-center justify-center w-full gap-12 pb-10 mx-auto sm:flex-row sm:flex-wrap mt-28 sm:mt-12 grow mb-28">
+        <ul className="flex flex-col items-center justify-center w-full gap-12 pb-32 mx-auto mt-10 mb-32 sm:pb-10 sm:flex-row sm:flex-wrap sm:mt-12 grow ">
           {props.serviceData &&
             props.serviceData.map((service: any) => {
               return (
