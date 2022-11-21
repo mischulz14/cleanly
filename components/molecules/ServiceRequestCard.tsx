@@ -3,7 +3,7 @@ import CalendarIcon from '../atoms/icons/CalendarIcon';
 import ClockIcon from '../atoms/icons/ClockIcon';
 import RequestRejectionCard from './RequestRejectionCard';
 
-export default function RequestCard(props: any) {
+export default function ServiceRequestCard(props: any) {
   return (
     <li
       className={`z-1 px-10 py-6 mx-10 mb-6 relative flex flex-col items-center text-[#564787] text-center bg-white  rounded-xl shadow-secondaryModified gap-5 ${

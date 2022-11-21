@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
-import RequestCard from '../../../components/molecules/RequestCard';
 import RequestHeader from '../../../components/molecules/RequestHeader';
+import RequestsFilter from '../../../components/molecules/RequestsFilter';
+import ServiceRequestCard from '../../../components/molecules/ServiceRequestCard';
 import DesktopNavService from '../../../components/organisms/navbar/DesktopNavService';
 import MobileNavService from '../../../components/organisms/navbar/MobileNavService';
 import { getRequestsByServiceId } from '../../../data/requests';
@@ -89,47 +90,20 @@ const ServiceHomepage = (props: any) => {
       <RequestHeader />
       <SlideInFromLeft>
         <div className="flex flex-col w-full text-center bg-[#DBCBD8]">
-          <div className="flex items-center justify-center gap-4 px-2 mt-24 mb-6">
-            <button
-              onClick={() => {
-                getAllRequests(props.foundService.serviceId);
-                setRequestsTimeframe('all');
-              }}
-              className={`px-8 py-2 bg-white border-2 rounded-xl ${
-                requestsTimeframe === 'all' && 'bg-[#101935] text-white'
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => {
-                handleShowUpcomingRequests();
-                setRequestsTimeframe('upcoming');
-              }}
-              className={`px-8 py-2 bg-white border-2 rounded-xl ${
-                requestsTimeframe === 'upcoming' && 'bg-[#101935] text-white'
-              }`}
-            >
-              Upcoming
-            </button>
-            <button
-              onClick={() => {
-                handleShowPastRequests();
-                setRequestsTimeframe('past');
-              }}
-              className={`px-8 py-2 bg-white border-2 rounded-xl ${
-                requestsTimeframe === 'past' && 'bg-[#101935] text-white'
-              }`}
-            >
-              Past
-            </button>
-          </div>
+          <RequestsFilter
+            handleShowUpcomingRequests={handleShowUpcomingRequests}
+            handleShowPastRequests={handleShowPastRequests}
+            getAllRequests={getAllRequests}
+            id={props.foundService.serviceId}
+            requestsTimeframe={requestsTimeframe}
+            setRequestsTimeframe={setRequestsTimeframe}
+          />
           <ul className="mb-20 overflow-y-auto sm:w-[500px] sm:mx-auto sm:border-2 sm:pt-8 rounded-xl sm:h-[750px] hide-scrollbar">
             {requests &&
               requests.map((request: any) => {
                 const date = new Date(request.day);
                 return (
-                  <RequestCard
+                  <ServiceRequestCard
                     key={request.id}
                     date={date}
                     request={request}
