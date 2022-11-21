@@ -14,7 +14,11 @@ export default function ServiceRequestCard(props: any) {
     >
       {(props.date < new Date() && props.request.status === 'pending') ||
       props.request.status === 'rejected' ? (
-        <RequestRejectionCard request={props.request} />
+        <RequestRejectionCard
+          request={props.request}
+          name={props.request.userName}
+          isUser={false}
+        />
       ) : (
         ''
       )}

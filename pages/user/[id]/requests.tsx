@@ -1,9 +1,5 @@
-import { request } from 'http';
 import { useEffect, useState } from 'react';
-import { FaStar } from 'react-icons/fa';
 import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
-import CalendarIcon from '../../../components/atoms/icons/CalendarIcon';
-import ClockIcon from '../../../components/atoms/icons/ClockIcon';
 import RequestHeader from '../../../components/molecules/RequestHeader';
 import RequestsFilter from '../../../components/molecules/RequestsFilter';
 import UserRequestCard from '../../../components/molecules/UserRequestCard';

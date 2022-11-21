@@ -2,6 +2,7 @@ import React from 'react';
 import { FaStar } from 'react-icons/fa';
 import CalendarIcon from '../atoms/icons/CalendarIcon';
 import ClockIcon from '../atoms/icons/ClockIcon';
+import RequestRejectionCard from './RequestRejectionCard';
 
 export default function UserRequestCard(props: any) {
   return (
@@ -59,29 +60,12 @@ export default function UserRequestCard(props: any) {
 
       {(props.date < new Date() && props.request.status === 'pending') ||
       props.request.status === 'rejected' ? (
-        <div className="overflow-y-auto p-4 absolute top-4 left-[50%] translate-x-[-50%] w-[70%] h-[90%] bg-white z-[100]  rounded-xl">
-          <div className="flex flex-col items-center justify-between h-full">
-            <div className="flex flex-col text-sm">
-              <span>{props.request.day}</span>
-              <span>
-                {props.request.timeslots.start}- {props.request.timeslots.end}
-              </span>
-              <span> with {props.request.serviceName}</span>
-            </div>
-            <span className="">
-              This Request is expired or has been rejected.
-            </span>
-
-            <button
-              onClick={() => {
-                props.handleDeleteRequest(props.request.id);
-              }}
-              className="mt-3 text-sm btn-secondary"
-            >
-              Delete Request
-            </button>
-          </div>
-        </div>
+        <RequestRejectionCard
+          request={props.request}
+          name={props.request.serviceName}
+          isUser={true}
+          handleDeleteRequest={props.handleDeleteRequest}
+        />
       ) : (
         ''
       )}
