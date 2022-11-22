@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
+import SlideInFromRight from '../../../components/animation/SlideInFromRight';
 import RequestHeader from '../../../components/molecules/RequestHeader';
 import RequestsFilter from '../../../components/molecules/RequestsFilter';
 import UserRequestCard from '../../../components/molecules/UserRequestCard';
@@ -128,10 +129,10 @@ const UserRequests = (props: any) => {
   }
 
   return (
-    <div className="relative flex flex-col w-full text-center rounded-xl">
+    <div className="relative flex flex-col w-full h-full overflow-hidden text-center rounded-xl">
       <DesktopNavUser page={page} setPage={setPage} userId={props.userId} />
       <RequestHeader />
-      <SlideInFromLeft>
+      <SlideInFromRight>
         <RequestsFilter
           handleShowUpcomingRequests={handleShowUpcomingRequests}
           handleShowPastRequests={handleShowPastRequests}
@@ -163,7 +164,7 @@ const UserRequests = (props: any) => {
               );
             })}
         </ul>
-      </SlideInFromLeft>
+      </SlideInFromRight>
       <MobileNavUser page={page} setPage={setPage} userId={props.userId} />
     </div>
   );
