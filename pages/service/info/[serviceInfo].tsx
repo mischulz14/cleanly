@@ -6,6 +6,7 @@ import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
 import SlideInFromTop from '../../../components/animation/SlideInFromTop';
 import XAnimation from '../../../components/animation/XAnimation';
 import GoBackButton from '../../../components/atoms/buttons/GoBackButton';
+import PersonIcon from '../../../components/atoms/icons/PersonIcon';
 import CurrentAvailabilities from '../../../components/molecules/availability/CurrentAvailabilities';
 import { getRatingsByServiceId } from '../../../data/ratings';
 import { getServiceById, getUserInfoByServiceId } from '../../../data/services';
@@ -23,7 +24,7 @@ const ServiceInfo = (props: any) => {
 
   const rating = getAverageRating(props.ratings);
 
-  console.log('rating', rating);
+  // console.log('rating', rating);
 
   // console.log(props.userIdCookie, 'props.userIdCookie');
 
@@ -72,12 +73,16 @@ const ServiceInfo = (props: any) => {
         <GoBackButton />
 
         <div className="flex flex-col w-full gap-3 px-4">
-          {props.completeService && (
+          {props.completeService.image ? (
             <img
               src={props.completeService.image}
               alt="service"
               className="object-cover w-32 h-32 mx-auto mb-4 border-2 rounded-full"
             />
+          ) : (
+            <div className="p-4 mx-auto mb-8 bg-white rounded-full">
+              <PersonIcon />
+            </div>
           )}
           {!Number.isNaN(rating) && (
             <div className="text-[#564787] flex items-center justify-center mb-2 w-full gap-1 ">
@@ -164,7 +169,7 @@ export async function getServerSideProps(context: any) {
 
   const ratings = JSON.stringify(await getRatingsByServiceId(serviceId));
 
-  console.log('ratings', ratings);
+  // console.log('ratings', ratings);
 
   // console.log(completeService, 'completeService');
 

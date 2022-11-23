@@ -7,7 +7,9 @@ import { getValidSessionByToken } from '../../../../data/sessions';
 
 const serviceProfile = (props: any) => {
   const [page, setPage] = useState('profile');
-  const [image, setImage] = useState(props.foundService.image);
+  const [image, setImage] = useState(
+    props.foundService.image === null ? '' : props.foundService.image,
+  );
 
   async function uploadImage(event: any) {
     const files = event.target.files;
