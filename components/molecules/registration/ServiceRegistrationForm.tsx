@@ -80,29 +80,34 @@ const ServiceRegistrationForm = () => {
               e.preventDefault();
             }}
             className="relative user__registration bg-[#564787] flex flex-col py-20 px-10 overflow-y-scroll
-          scrollbar-hide"
+          scrollbar-hide min-h-[100vh]"
           >
-            <GoBackButton />
-            <FirstNameInput firstName={firstName} setFirstName={setFirstName} />
-            <LastNameInput lastName={lastName} setLastName={setLastName} />
-            <CompanyNameInput
-              companyName={companyName}
-              setCompanyName={setCompanyName}
-            />
+            <div className="flex flex-col w-[300px] mx-auto">
+              <GoBackButton />
+              <FirstNameInput
+                firstName={firstName}
+                setFirstName={setFirstName}
+              />
+              <LastNameInput lastName={lastName} setLastName={setLastName} />
+              <CompanyNameInput
+                companyName={companyName}
+                setCompanyName={setCompanyName}
+              />
 
-            <EmailInput email={email} setEmail={setEmail} />
-            {/* <BirthdayInput birthday={birthday} setBirthday={setBirthday} /> */}
-            <DistrictInput district={district} setDistrict={setDistrict} />
-            <PriceInput price={price} setPrice={setPrice} />
-            <PasswordInput password={password} setPassword={setPassword} />
-            <RepeatPasswordInput
-              repeatPassword={repeatPassword}
-              setRepeatPassword={setRepeatPassword}
-            />
-            <RegisterButton
-              registerHandler={registerHandler}
-              setConfirmation={setConfirmation}
-            />
+              <EmailInput email={email} setEmail={setEmail} />
+              {/* <BirthdayInput birthday={birthday} setBirthday={setBirthday} /> */}
+              <DistrictInput district={district} setDistrict={setDistrict} />
+              <PriceInput price={price} setPrice={setPrice} />
+              <PasswordInput password={password} setPassword={setPassword} />
+              <RepeatPasswordInput
+                repeatPassword={repeatPassword}
+                setRepeatPassword={setRepeatPassword}
+              />
+              <RegisterButton
+                registerHandler={registerHandler}
+                setConfirmation={setConfirmation}
+              />
+            </div>
           </form>
         </SlideInFromLeft>
       )}

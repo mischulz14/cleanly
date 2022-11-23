@@ -72,22 +72,27 @@ const UserRegistrationForm = () => {
             onSubmit={(e) => {
               e.preventDefault();
             }}
-            className="relative user__registration bg-[#564787] h-[100vh] flex flex-col pt-20 px-10"
+            className="relative user__registration bg-[#564787] min-h-[100vh] flex flex-col pt-20 px-10"
           >
-            <GoBackButton />
-            <FirstNameInput firstName={firstName} setFirstName={setFirstName} />
-            <LastNameInput lastName={lastName} setLastName={setLastName} />
-            <EmailInput email={email} setEmail={setEmail} />
-            {/* <BirthdayInput birthday={birthday} setBirthday={setBirthday} /> */}
-            <PasswordInput password={password} setPassword={setPassword} />
-            <RepeatPasswordInput
-              repeatPassword={repeatPassword}
-              setRepeatPassword={setRepeatPassword}
-            />
-            <RegisterButton
-              registerHandler={registerHandler}
-              setConfirmation={setConfirmation}
-            />
+            <div className="flex flex-col w-[300px] mx-auto">
+              <GoBackButton />
+              <FirstNameInput
+                firstName={firstName}
+                setFirstName={setFirstName}
+              />
+              <LastNameInput lastName={lastName} setLastName={setLastName} />
+              <EmailInput email={email} setEmail={setEmail} />
+              {/* <BirthdayInput birthday={birthday} setBirthday={setBirthday} /> */}
+              <PasswordInput password={password} setPassword={setPassword} />
+              <RepeatPasswordInput
+                repeatPassword={repeatPassword}
+                setRepeatPassword={setRepeatPassword}
+              />
+              <RegisterButton
+                registerHandler={registerHandler}
+                setConfirmation={setConfirmation}
+              />
+            </div>
           </form>
         </SlideInFromLeft>
       )}
