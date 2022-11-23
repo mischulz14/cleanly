@@ -8,19 +8,6 @@ import FilterForm from '../../molecules/FilterForm';
 import ServiceInfoCard from '../../molecules/ServiceInfoCard';
 
 const UserFeed = (props: any) => {
-  const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch(`/api/service/getAllServices`)
-      .then((res) => res.json())
-      .then((data) => {
-        setServices(data.services);
-        setLoading(false);
-      });
-  }, []);
-
   return (
     <div className=" sm:h-[75%] sm:w-[80vw] justify-center hide-scrollbar flex bg-[#DBCBD8] sm:pt-6 pb-2 sm:overflow-y-auto sm: px-6 min-h-[100vh]  sm:rounded-xl  sm:mb-10 ">
       <div className="sm:top-20 sm:absolute fixed flex justify-center items-center top-0 left-0 py-4 z-20 rounded-b-xl w-full bg-[#101935]">
@@ -47,13 +34,13 @@ const UserFeed = (props: any) => {
       </div>
       <SlideInFromLeft>
         <ul className="relative flex flex-col items-center justify-center w-full gap-12 pb-32 mx-auto mt-10 mb-32 sm:pb-10 sm:flex-row sm:flex-wrap sm:mt-12 grow ">
-          {loading && (
+          {props.loading && (
             <div className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full">
               <LoadingAnimation />
             </div>
           )}
-          {!loading &&
-            services.map((service: any) => {
+          {!props.loading &&
+            props.serviceData.map((service: any) => {
               return <ServiceInfoCard key={service.id} service={service} />;
             })}
         </ul>

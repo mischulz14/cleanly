@@ -3,6 +3,8 @@ import CloseButton from '../atoms/buttons/CloseBtn';
 
 export default function FilterForm(props: any) {
   function handleFilter() {
+    console.log('filtering');
+    console.log('serviceDataFromDB', props.serviceDataFromDB);
     const arrayCopy = [...props.serviceDataFromDB].filter((service) => {
       if (props.district === 'all') {
         return service.price <= props.price;

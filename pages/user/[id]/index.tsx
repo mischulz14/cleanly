@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DesktopNavUser from '../../../components/organisms/navbar/DesktopNavUser';
 import MobileNavUser from '../../../components/organisms/navbar/MobileNavUser';
 import UserFeed from '../../../components/organisms/user/UserFeed';
@@ -22,6 +22,17 @@ const UserHomePage = (props: any) => {
   const [showFilter, setShowFilter] = useState(false);
   const [district, setDistrict] = useState('');
   const [price, setPrice] = useState('15');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`/api/service/getAllServices`)
+      .then((res) => res.json())
+      .then((data) => {
+        setServiceData(data.services);
+        setLoading(false);
+      });
+  }, []);
 
   // console.log('service Array from backend', props.serviceArr);
 
@@ -47,6 +58,7 @@ const UserHomePage = (props: any) => {
           setPrice={setPrice}
           district={district}
           setDistrict={setDistrict}
+          loading={loading}
         />
 
         <MobileNavUser page={page} setPage={setPage} userId={props.userId} />
