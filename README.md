@@ -37,3 +37,5 @@ Both services and Users have a request page, where they can see their sent reque
 #### service side requests:
 
 ![Alt text](./public/images/cleanly-requests-service.jpg?raw=true 'Cleanly User Feed')
+
+## Now that you know everything you need to know, enjoy the app! (:
