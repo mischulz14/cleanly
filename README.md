@@ -19,9 +19,11 @@ As a registered client you have access to all cleaning services, which you can f
 ## Availabilities
 
 As a service you have to set your availabilities to show clients when you can work. You can do this on your individual availability page. setting new availabilities is easy with the built-in timeslot calendar:
+
 ![Alt text](./public/images/cleanly-service-availibility.jpg?raw=true 'Cleanly User Feed')
 
 you can also delete availabilities:
+
 ![Alt text](./public/images/cleanly-delete-av.jpg?raw=true 'Cleanly User Feed')
 
 ## Requests
