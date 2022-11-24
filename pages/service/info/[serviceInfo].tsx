@@ -87,7 +87,7 @@ const ServiceInfo = (props: any) => {
           {!Number.isNaN(rating) && (
             <div className="text-[#564787] flex items-center justify-center mb-2 w-full gap-1 ">
               <FaStar size={30} />{' '}
-              <span className="translate-y-[2px]">{rating}</span>
+              <span className="translate-y-[2px]">{rating.toFixed(1)}</span>
             </div>
           )}
           {props.completeService.description && (
