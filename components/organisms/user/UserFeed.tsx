@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Appear from '../../animation/Appear';
 import LoadingAnimation from '../../animation/LoadingAnimation';
 import SlideInFromLeft from '../../animation/SlideInFromLeft';
 import PersonIcon from '../../atoms/icons/PersonIcon';
@@ -32,7 +33,7 @@ const UserFeed = (props: any) => {
           />
         )}
       </div>
-      <SlideInFromLeft>
+      <Appear>
         <ul className="relative flex flex-col items-center justify-center w-full gap-12 pb-32 mx-auto mt-10 mb-32 sm:pb-10 sm:flex-row sm:flex-wrap sm:mt-12 grow ">
           {props.loading && (
             <div className="absolute top-0 left-0 flex flex-col items-center justify-center w-full h-full">
@@ -44,7 +45,7 @@ const UserFeed = (props: any) => {
               return <ServiceInfoCard key={service.id} service={service} />;
             })}
         </ul>
-      </SlideInFromLeft>
+      </Appear>
     </div>
   );
 };

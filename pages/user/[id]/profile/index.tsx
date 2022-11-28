@@ -8,7 +8,7 @@ import { getUserById } from '../../../../data/users';
 const UserProfilePage = (props: any) => {
   const [page, setPage] = useState('profile');
   const [image, setImage] = useState(props.user.image);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   // console.log('user id', props.userId);
 
