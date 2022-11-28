@@ -43,7 +43,7 @@ const PictureUploadModal = (props: {
               className="w-[300px] flex items-center mb-4 border-2 border-gray-300 rounded-lg"
               style={{ display: 'none' }}
             />
-            {props.isLoading && <LoadingAnimation color="black" />}
+            {props.isLoading && <LoadingAnimation color="#564787" />}
             {showPreview && (
               <div className="object-contain">
                 <img
@@ -54,7 +54,7 @@ const PictureUploadModal = (props: {
                 <button
                   onClick={() => {
                     props.handleUpdateUserImage();
-                    handleGoBackAction();
+                    props.setShowPictureModal(false);
                   }}
                   className="mt-16 border-2 btn-primary"
                 >

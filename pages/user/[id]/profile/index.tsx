@@ -8,28 +8,29 @@ import { getUserById } from '../../../../data/users';
 const UserProfilePage = (props: any) => {
   const [page, setPage] = useState('profile');
   const [image, setImage] = useState(props.user.image);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // console.log('user id', props.userId);
+
   async function uploadImage(event: any) {
-    setIsLoading(true);
     const files = event.target.files;
     const data = new FormData();
     data.append('file', files[0]);
     data.append('upload_preset', 'cleanly_images');
+    setIsLoading(true);
 
-    await fetch(
+    const response = await fetch(
       `https://api.cloudinary.com/v1_1/${props.cloudinaryAPI}/image/upload`,
       {
         method: 'POST',
         body: data,
       },
-    )
-      .then((response) => response.json())
-      .then((file) => {
-        setImage(file.secure_url);
-        setIsLoading(false);
-      });
+    );
+    const file = await response.json();
+    setImage(file.secure_url);
+    if (file) {
+      setIsLoading(false);
+    }
   }
 
   return (
