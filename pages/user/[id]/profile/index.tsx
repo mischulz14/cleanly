@@ -8,24 +8,28 @@ import { getUserById } from '../../../../data/users';
 const UserProfilePage = (props: any) => {
   const [page, setPage] = useState('profile');
   const [image, setImage] = useState(props.user.image);
+  const [isLoading, setIsLoading] = useState(false);
 
   // console.log('user id', props.userId);
-
   async function uploadImage(event: any) {
+    setIsLoading(true);
     const files = event.target.files;
     const data = new FormData();
     data.append('file', files[0]);
     data.append('upload_preset', 'cleanly_images');
 
-    const response = await fetch(
+    await fetch(
       `https://api.cloudinary.com/v1_1/${props.cloudinaryAPI}/image/upload`,
       {
         method: 'POST',
         body: data,
       },
-    );
-    const file = await response.json();
-    setImage(file.secure_url);
+    )
+      .then((response) => response.json())
+      .then((file) => {
+        setImage(file.secure_url);
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -37,6 +41,8 @@ const UserProfilePage = (props: any) => {
         userId={props.userId}
         image={image}
         uploadImage={uploadImage}
+        setImage={setImage}
+        isLoading={isLoading}
       />
       <MobileNavUser page={page} setPage={setPage} userId={props.userId} />
     </>

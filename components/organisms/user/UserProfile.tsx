@@ -27,6 +27,8 @@ const UserProfile = (props: any) => {
 
     setShowPictureUploadModal(false);
   }
+
+  console.log(props.isLoading);
   return (
     <SlideInFromLeft>
       {/* <UserAvatar />
@@ -37,7 +39,10 @@ const UserProfile = (props: any) => {
             setShowPictureModal={setShowPictureUploadModal}
             uploadImage={props.uploadImage}
             image={props.image}
+            setImage={props.setImage}
             handleUpdateUserImage={handleUpdateUserImage}
+            isLoading={props.isLoading}
+            user={props.user}
           />
         )}
         <div

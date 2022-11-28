@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import SlideInFromLeft from '../../../components/animation/SlideInFromLeft';
 import SlideInFromRight from '../../../components/animation/SlideInFromRight';
@@ -101,7 +102,7 @@ const UserRequests = (props: any) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
       });
 
     const updatedRequests = requests.filter((request: any) => {
@@ -124,7 +125,7 @@ const UserRequests = (props: any) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
       });
   }
 
@@ -146,21 +147,28 @@ const UserRequests = (props: any) => {
             requests.map((request: any) => {
               const date = new Date(request.day);
               return (
-                <UserRequestCard
-                  key={request.id}
-                  request={request}
-                  date={date}
-                  handleDeleteRequest={handleDeleteRequest}
-                  handleCreateNewRating={handleCreateNewRating}
-                  stars={stars}
-                  rating={rating}
-                  setRating={setRating}
-                  currentValue={currentValue}
-                  hoverValue={hoverValue}
-                  handleClickStars={handleClickStars}
-                  handleHoverStars={handleHoverStars}
-                  handleLeaveStars={handleLeaveStars}
-                />
+                <AnimatePresence>
+                  <motion.li
+                    key={request.id}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <UserRequestCard
+                      request={request}
+                      date={date}
+                      handleDeleteRequest={handleDeleteRequest}
+                      handleCreateNewRating={handleCreateNewRating}
+                      stars={stars}
+                      rating={rating}
+                      setRating={setRating}
+                      currentValue={currentValue}
+                      hoverValue={hoverValue}
+                      handleClickStars={handleClickStars}
+                      handleHoverStars={handleHoverStars}
+                      handleLeaveStars={handleLeaveStars}
+                    />
+                  </motion.li>
+                </AnimatePresence>
               );
             })}
         </ul>

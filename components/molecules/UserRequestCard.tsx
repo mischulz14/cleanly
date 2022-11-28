@@ -6,7 +6,7 @@ import RequestRejectionCard from './RequestRejectionCard';
 
 export default function UserRequestCard(props: any) {
   return (
-    <li
+    <div
       className={`z-1 px-10 py-6 mx-10 mb-6 relative flex flex-col items-center text-[#564787] text-center bg-white  rounded-xl shadow-secondaryModified gap-5 ${
         props.date < new Date() || props.request.status === 'rejected'
           ? 'bg-gray-300'
@@ -100,6 +100,6 @@ export default function UserRequestCard(props: any) {
           <button className="btn-secondary">Contact</button>
         </a>
       )}
-    </li>
+    </div>
   );
 }

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
+import LoadingAnimation from '../animation/LoadingAnimation';
 import SlideInFromTop from '../animation/SlideInFromTop';
 import CloseButton from '../atoms/buttons/CloseBtn';
 
@@ -7,12 +8,16 @@ const PictureUploadModal = (props: {
   setShowPictureModal: React.Dispatch<React.SetStateAction<boolean>>;
   uploadImage(event: any): Promise<void>;
   image: string;
+  setImage: React.Dispatch<React.SetStateAction<string>>;
   handleUpdateUserImage(): Promise<void>;
+  isLoading: boolean;
+  user: any;
 }) => {
   const [showPreview, setShowPreview] = useState(false);
   function handleGoBackAction() {
     props.setShowPictureModal(false);
     setShowPreview(false);
+    props.setImage(props.user.image);
   }
 
   return (
@@ -38,6 +43,7 @@ const PictureUploadModal = (props: {
               className="w-[300px] flex items-center mb-4 border-2 border-gray-300 rounded-lg"
               style={{ display: 'none' }}
             />
+            {props.isLoading && <LoadingAnimation color="black" />}
             {showPreview && (
               <div className="object-contain">
                 <img

@@ -10,23 +10,27 @@ const serviceProfile = (props: any) => {
   const [image, setImage] = useState(
     props.foundService.image === null ? '' : props.foundService.image,
   );
+  const [isLoading, setIsLoading] = useState(true);
 
   async function uploadImage(event: any) {
+    setIsLoading(true);
     const files = event.target.files;
     const data = new FormData();
     data.append('file', files[0]);
     data.append('upload_preset', 'cleanly_images');
 
-    const response = await fetch(
+    await fetch(
       `https://api.cloudinary.com/v1_1/${props.cloudinaryAPI}/image/upload`,
       {
         method: 'POST',
         body: data,
       },
-    );
-    const file = await response.json();
-    console.log(file.secure_url, 'file');
-    setImage(file.secure_url);
+    )
+      .then((response) => response.json())
+      .then((file) => {
+        setImage(file.secure_url);
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -39,6 +43,7 @@ const serviceProfile = (props: any) => {
         image={image}
         uploadImage={uploadImage}
         setImage={setImage}
+        isLoading={isLoading}
       />
       <MobileNavService
         page={page}
